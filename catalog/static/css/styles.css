@@ -215,11 +215,12 @@ input[type="submit"] {
     padding: 5px;
     border-radius: 10px;
     width: 700px;
+    height: 15px;
 }
 
 p span {
     float: left;
-    width: 240px;
+    width: 230px;
 }
 
 .grab {
