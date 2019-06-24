@@ -129,8 +129,8 @@
           type: 'GET',
           // dataType: 'json',
           success: function(cafeteria_instance) {
-            console.log(cafeteria_instance)
-            console.log($(cafeteria_instance).find('#c4').text())
+            // console.log(cafeteria_instance)
+            // console.log($(cafeteria_instance).find('#c4').text())
             // console.log($('#4').text())
             $('#c1').text($(cafeteria_instance).find('#c1').text().replace('None', ''));
             $('#c2').text($(cafeteria_instance).find('#c2').text().replace('None', ''));
@@ -150,7 +150,7 @@
           type: 'GET',
           // dataType: 'json',
           success: function(east_lobby_instance) {
-              console.log($(cafeteria_instance).find('#e4').text())
+              // console.log($(cafeteria_instance).find('#e4').text())
             $('#e1').text($(east_lobby_instance).find('#e1').text().replace('None', ''));
             $('#e2').text($(east_lobby_instance).find('#e2').text().replace('None', ''));
             $('#e3').text($(east_lobby_instance).find('#e3').text().replace('None', ''));
