@@ -6,7 +6,7 @@
 </br> <h1 class="banner">Live List of Assigned Staff</h1>
 
 <h4>Date of Current Event: {{cafeteria.c_date}}</h4>
-<p><em>Names will appear in real-time below, as the staff pool coordinators populate the forms. Page refresh unnecessary!</em></p>
+<p><em>Names will appear in real-time below, as the Staff Pool coordinators populate the forms. Page refresh unnecessary!</em></p>
 
 </br>
 
@@ -18,18 +18,18 @@
 
   {% if cafeteria %}
     {% for cafeteria in cafeteria %}
-
-        <p class="labels2"><span>Time (24 hr.):<span class="site_color_list" id="c1">{{cafeteria.c_time}}</span></p>
-        <p class="labels2"><span>Staff Pool Coordinator:<<span class="site_color_list" id="c2">{{cafeteria.c_coordinator}}</span></p>
-        <p class="labels2"><span>Main Doors:<span class="site_color_list" id="c3">{{cafeteria.c_main_doors}}</span></p>
-        <p class="labels2"><span>South Patio Doors:<span class="site_color_list" id="c4">{{cafeteria.c_south_patio_doors}}</span></p>
-        <p class="labels2"><span>North Patio Doors (1):<span class="site_color_list" id="c5">{{cafeteria.c_north_patio_doors_1}}</span></p>
-        <p class="labels2"><span>North Patio Doors (2):<span class="site_color_list" id="c6">{{cafeteria.c_north_patio_doors_2}}</span></p>
-        <p class="labels2"><span>Telephone Monitor:<span class="site_color_list" id="c7">{{cafeteria.c_monitor}}</span></p>
-        <p class="labels2"><span>Patient/Visitor Director(s):<span class="site_color_list" id="c8">{{cafeteria.c_directors}}</span><</p>
-        <p class="labels2"><span>Command Centre Runner(s):<span class="site_color_list" id="c9">{{cafeteria.c_runners}}</span></p>
-        <p class="labels2"><span>Instructed Participants:<span class="site_color_list" id="c10">{{c_explainval}}</span></p>
-
+    <ul>
+        <li class="labels"><span>Time (24 hr.):</span><span class="site_color_list" id="c1">{{cafeteria.c_time}}</span></li>
+        <li class="labels"><span>Staff Pool Coordinator:</span><span class="site_color_list" id="c2">{{cafeteria.c_coordinator}}</span></li>
+        <li class="labels"><span>Main Doors:</span><span class="site_color_list" id="c3">{{cafeteria.c_main_doors}}</span></li>
+        <li class="labels"><span>South Patio Doors:</span><span class="site_color_list" id="c4">{{cafeteria.c_south_patio_doors}}</span></li>
+        <li class="labels"><span>North Patio Doors (1):</span><span class="site_color_list" id="c5">{{cafeteria.c_north_patio_doors_1}}</span></li>
+        <li class="labels"><span>North Patio Doors (2):</span><span class="site_color_list" id="c6">{{cafeteria.c_north_patio_doors_2}}</span></li>
+        <li class="labels"><span>Telephone Monitor:</span><span class="site_color_list" id="c7">{{cafeteria.c_monitor}}</span></li>
+        <li class="labels"><span>Patient/Visitor Director(s):</span><span class="site_color_list" id="c8">{{cafeteria.c_directors}}</span></li>
+        <li class="labels"><span>Command Centre Runner(s):</span><span class="site_color_list" id="c9">{{cafeteria.c_runners}}</span></li>
+        <li class="labels"><span>Instructed Participants:</span><span class="site_color_list" id="c10">{{c_explainval}}</span></li>
+    </ul>
         <!-- <p class="labels">&nbspTime (24 hr.): &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c1">{{cafeteria.c_time}}</span></b></p>
         <p class="labels">&nbspStaff Pool Coordinator: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c2">{{cafeteria.c_coordinator}}</span></b></p>
         <p class="labels">&nbspMain Doors: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c3">{{cafeteria.c_main_doors}}</span></b></p>
