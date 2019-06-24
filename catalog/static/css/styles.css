@@ -200,7 +200,7 @@ input[type="submit"] {
     margin: 30px auto 0 auto;
 }
 
-.center-content {
+.center_content {
     margin: 30px auto 0 auto;
 }
 
@@ -225,7 +225,7 @@ input[type="submit"] {
 .fixed_width {
     float: left;
     margin-left: 5px;
-    margin-bottom: 3px;
+    margin-bottom: 10px;
     width: 220px;
 }
 
