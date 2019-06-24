@@ -184,9 +184,12 @@ input[type="submit"] {
     margin-top: 3rem;
     margin-left: 3.15rem;
     margin-bottom: 3rem;
-    visibility: hidden;
     /* top: 80px; */
     /* left: -0.5rem; */
+}
+
+.hide {
+    visibility: hidden;
 }
 
 .background {
