@@ -177,7 +177,7 @@ input[type="submit"] {
 
 .past_data {
     font-size: 0.8rem;
-    position: absolute;
+    position: relative;
     background-color: #d3d3d3;
     padding: 10px;
     border-radius: 10px;
