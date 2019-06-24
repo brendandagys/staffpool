@@ -1,0 +1,242 @@
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.sidebar-nav img {
+    transform:scale(0.1,0.1);
+    /* position: relative;
+    top: -20.9rem;
+    right: 54.5rem; */
+    /* text-align: center; */
+    display: block;
+}
+
+.user {
+    font-size: 0.90rem;
+}
+
+.tracker {
+    font-size: 1.2rem;
+}
+
+.site_color {
+    color: #0275d8;
+}
+
+.site_color_list {
+    color: red;
+}
+
+a {
+    color: #0275d8;            /*1f87e8*/
+}
+
+.container label {
+    max-width: 500px;
+    text-align: left;
+}
+
+.border {
+    color: #0275d8;
+    border-color: red;
+}
+
+.loader {
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #0275d8;    /* #3498db */
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.circle_1 {
+position: relative;
+top: 2.8rem;
+left: -4.5rem;
+}
+
+.circle_2 {
+position: relative;
+top: 4.2rem;
+left: -4.5rem;
+}
+
+.circle_3 {
+position: relative;
+top: 4.2rem;
+left: -4.5rem;
+}
+
+.body {
+    position: relative;
+    top: -4rem;
+    padding-left: 4.3rem;
+}
+
+.body_2 {
+    position: relative;
+    top: -3.3rem;
+}
+
+.body_3 {
+    position: relative;
+    top: -6.6rem;
+}
+
+.indicator {
+    text-decoration: underline;
+}
+
+label {
+    /* color: #3498db; */
+    margin: 0.1rem 0.1rem 0.1rem 0;
+    font-weight: normal;
+    font-size: 0.9rem;
+    background-color: #d3d3d3;
+    padding: 0.5rem;
+    border-radius: 10px;
+    display: inline-block;
+    width: 210px;
+}
+
+th {
+    text-align: center;
+    /* width: 10rem; */
+}
+
+#login_u, #login_p {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    text-align: center;
+}
+
+input[type="text"] {
+    color: blue;
+    /* border-color: red; */
+    background-color: #ebebe0;
+    margin: 0.5px;
+    height: 39px;
+    width: 11rem;
+}
+
+input[type="password"] {
+    color: blue;
+    /* border-color: red; */
+    background-color: #ebebe0;
+    margin: 0.5px;
+    height: 39px;
+    width: 11rem;
+}
+
+#id_c_date, #id_e_date, #id_t_date {
+    color: red;
+    width: 6.1rem;
+}
+
+#id_c_time, #id_e_time, #id_t_time {
+    width: 6.1rem;
+}
+
+#id_c_directors, #id_c_runners, #id_e_directors, #id_e_runners, #id_t_directors, #id_t_runners {
+    width: 20rem;
+}
+
+#id_c_explain, #id_e_explain, #id_t_explain {
+    position: relative;
+    left: 2.25rem;
+}
+
+input[type="submit"] {
+    position: relative;
+    margin: 2rem;
+    /* top: 20rem; */
+    left: 9.5rem;
+    transform: scale(2,2);
+}
+
+/* input[type="checkbox"] {
+    position: relative;
+    top: 0.29rem;
+    left: 2rem;
+    padding: 10px;
+    zoom: 6;
+} */
+
+.main_div {
+    position: relative;
+    left: -1rem;
+}
+
+.past_data {
+    font-size: 0.8rem;
+    position: absolute;
+    background-color: #d3d3d3;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 3rem;
+    margin-left: 3.15rem;
+    /* top: 80px; */
+    /* left: -0.5rem; */
+}
+
+.background {
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    max-width: 200px;
+    padding: 10px;
+}
+
+.my_header {
+    color: white;
+}
+
+.tracker_master {
+    color: white;
+}
+
+.labels {
+    margin: 0.5%;
+    color: black;
+    background-color: #d3d3d3;
+    padding: 5px;
+    border-radius: 10px;
+    width: 700px;
+}
+
+/* .test {
+    width: 50px;
+} */
+
+.grab {
+    text-align: center;
+    /* background-color: #d3d3d3; */
+}
+
+#about-header {
+    margin-top: 55px;
+    /* background-color: #d3d3d3; */
+}
+
+/* .about_page_image {
+    background-color: orange;
+} */
+
+.about_image {
+    background-image: url(../images/nbrhc-3.jpg)
+    /* border-radius: 10px; */
+    /* min-height: 90px; */
+    padding: 20px;
+}
+
+.about_holder {
+    border-radius: 10px;
+    /* height: 200px; */
+}

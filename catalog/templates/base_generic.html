@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.4.1.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  {% block title %}<title>NBRHC Staff Pool</title>{% endblock %}
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- Add additional CSS in static file -->
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+{% load static %}
+<body background="{% static "nbrhc-2.jpg" %}">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-3 col-lg-3">
+
+      {% block sidebar %}
+
+        <ul class="background sidebar-nav align-self-center">
+
+        <!-- {% load static %} -->
+             <!-- <img src="{% static "nbrhc.jpg" %}" alt="Image of Facility" /> -->
+            <!-- <a href="#"><img src="{% static "nbrhc.jpg" %}" alt="Image of Facility" /> </a> -->
+
+          <li><a href="{% url 'cafeteria_form' %}"><b>Cafeteria Form</b></a></li>
+          <li><a href="{% url 'east_lobby_form' %}"><b>East Lobby Form</b></a></li>
+          <li><a href="{% url 'town_centre_form' %}"><b>Town Centre Form</b></a></li>
+              </br>
+          <li class="tracker"><a href="{% url 'LIVE' %}"><b><span style="color: red">LIVE TRACKER</span></b></a></li>
+              </br>
+          <li><a href="{% url 'about' %}"><b>About This Tool</b></a></li>
+
+       </br>
+
+        {% if user.is_authenticated %}
+          <a href="{% url 'logout'%}?next={{request.path}}"><b>Logout</b></a>
+          <li class="user"><b>{{ user.get_username }}</b></li>
+        {% else %}
+          <a href="{% url 'login'%}?next={{request.path}}"><b>Login</b></a>
+        {% endif %}
+
+        </ul>
+
+     {% endblock %}
+
+      </div>
+      <div class="col-sm-12 col-md-8 col-lg-8">
+          {% block content %}
+          {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

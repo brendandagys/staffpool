@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="my_header">
+
+</br><h1 class="">NBRHC Staff Pool</h1>
+  <h4><span class="indicator">Town Centre</span> Submission Form</h4>
+  <p><em>Please enter the event time and the names of assigned staff:</em></p> </br>
+</div>
+
+<div class="main_div container-fluid">
+
+  <form id="town_centre_form_html" action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form_t }}
+    <!-- {{ form.errors}} -->
+</table> </br>
+    <input class="btn btn-primary" type="submit" value="Update" name="t">
+  </form>
+
+</div>
+
+</br></br>
+  <span class="past_data">Number of past Town Centre Staff Pool submissions: &nbsp <strong>{{num_events}}</strong></span>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+        $('#town_centre_form_html :input').not('#id_t_date').on('blur', function(e) {
+            e.preventDefault()
+
+            $.ajax({
+                type: "POST",
+                url: "",
+                // dataType: 'JSON'
+                data: {
+                    't': 'dummy',
+                    't_date': $('#id_t_date').val(),
+                    't_time': $('#id_t_time').val(),
+                    't_coordinator': $('#id_t_coordinator').val(),
+                    't_horticultural': $('#id_t_horticultural').val(),
+                    't_town_centre_main_street': $('#id_t_town_centre_main_street').val(),
+                    't_monitor': $('#id_t_monitor').val(),
+                    't_directors': $('#id_t_directors').val(),
+                    't_runners': $('#id_t_runners').val(),
+                    't_explain': $('#id_t_explain').val(),
+                     csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function () {
+                    console.log('success')
+                }
+            });
+            return false;
+      });
+  });
+
+</script>
+
+{% endblock %}

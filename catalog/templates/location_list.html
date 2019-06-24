@@ -1,0 +1,187 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="tracker_master">
+
+</br> <h1 class="banner">Live List of Assigned Staff</h1>
+
+<h4>Date of Current Event: {{cafeteria.c_date}}</h4>
+<p><em>Names will appear in real-time below, as the staff pool coordinators populate the forms. Page refresh unnecessary!</em></p>
+
+</br>
+
+<div class="body">
+
+  <div class="circle_1 loader"></div>
+
+  <h3>Cafeteria</h3>
+
+  {% if cafeteria %}
+    {% for cafeteria in cafeteria %}
+
+        <p class="labels">&nbspTime (24 hr.): &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c1">{{cafeteria.c_time}}</span></b></p>
+        <p class="labels">&nbspStaff Pool Coordinator: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c2">{{cafeteria.c_coordinator}}</span></b></p>
+        <p class="labels">&nbspMain Doors: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c3">{{cafeteria.c_main_doors}}</span></b></p>
+        <p class="labels">&nbspSouth Patio Doors: &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c4">{{cafeteria.c_south_patio_doors}}</span></b></p>
+        <p class="labels">&nbspNorth Patio Doors (1): &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c5">{{cafeteria.c_north_patio_doors_1}}</span></b></p>
+        <p class="labels">&nbspNorth Patio Doors (2): &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c6">{{cafeteria.c_north_patio_doors_2}}</span></b></p>
+        <p class="labels">&nbspTelephone Monitor: &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c7">{{cafeteria.c_monitor}}</span></b></p>
+        <p class="labels labels_long">&nbspPatient/Visitor Director(s): &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c8">{{cafeteria.c_directors}}</span></b></p>
+        <p class="labels labels_long">&nbspCommand Centre Runner(s): &nbsp&nbsp<b><span class="site_color_list" id="c9">{{cafeteria.c_runners}}</span></b></p>
+        <p class="labels">&nbspInstructed Participants: &thinsp;&thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c10">{{c_explainval}}</span></b></p>
+
+    {% endfor %}
+
+    {% else %}
+
+        <p class="labels">&nbspTime (24 hr.): &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c1"></span></b></p>
+        <p class="labels">&nbspStaff Pool Coordinator: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c2">{{cafeteria.c_coordinator}}</span></b></p>
+        <p class="labels">&nbspMain Doors: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c3"></span></b></p>
+        <p class="labels">&nbspSouth Patio Doors: &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c4"></span></b></p>
+        <p class="labels">&nbspNorth Patio Doors (1): &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c5"></span></b></p>
+        <p class="labels">&nbspNorth Patio Doors (2): &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c6"></span></b></p>
+        <p class="labels">&nbspTelephone Monitor: &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c7"></span></b></p>
+        <p class="labels labels_long">&nbspPatient/Visitor Director(s): &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c8"></span></b></p>
+        <p class="labels labels_long">&nbspCommand Centre Runner(s): &nbsp&nbsp<b><span class="site_color_list" id="c9"></span></b></p>
+        <p class="labels">&nbspInstructed Participants: &thinsp;&thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="c10"></span></b></p>
+
+    {% endif %}
+
+
+<div class="body_2">
+
+    <div class="circle_2 loader"></div>
+
+    </br><h3>East Lobby</h3>
+
+    {% if east_lobby %}
+        {% for east_lobby in east_lobby %}
+
+      <p class="labels">&nbspTime (24 hr.): &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e1">{{east_lobby.e_time}}</span></b></p>
+      <p class="labels">&nbspStaff Pool Coordinator: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e2">{{east_lobby.e_coordinator}}</span></b></p>
+      <p class="labels">&nbspMain Doors: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e3">{{east_lobby.e_main_doors}}</span></b></p>
+      <p class="labels">&nbspLab Entrance: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e4">{{east_lobby.e_lab_entrance}}</span></b></p>
+      <p class="labels">&nbspED Entrance: &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e5">{{east_lobby.e_ed_entrance}}</span></b></p>
+      <p class="labels">&nbspTelephone Monitor: &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e6">{{east_lobby.e_monitor}}</span></b></p>
+      <p class="labels">&nbspPatient/Visitor Director(s): &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e7">{{east_lobby.e_directors}}</span></b></p>
+      <p class="labels">&nbspCommand Centre Runner(s): &nbsp&nbsp<b><span class="site_color_list" id="e8">{{east_lobby.e_runners}}</span></b></p>
+      <p class="labels">&nbspInstructed Participants: &thinsp;&thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e9">{{e_explainval}}</span></b></p>
+
+    {% endfor %}
+
+    {% else %}
+
+        <p class="labels">&nbspTime (24 hr.): &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e1"></span></b></p>
+        <p class="labels">&nbspStaff Pool Coordinator: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e2"></span></b></p>
+        <p class="labels">&nbspMain Doors: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e3"></span></b></p>
+        <p class="labels">&nbspLab Entrance: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e4"></span></b></p>
+        <p class="labels">&nbspED Entrance: &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e5"></span></b></p>
+        <p class="labels">&nbspTelephone Monitor: &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e6"></span></b></p>
+        <p class="labels">&nbspPatient/Visitor Director(s): &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e7"></span></b></p>
+        <p class="labels">&nbspCommand Centre Runner(s): &nbsp&nbsp<b><span class="site_color_list" id="e8"></span></b></p>
+        <p class="labels">&nbspInstructed Participants: &thinsp;&thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="e9"></span></b></p>
+
+    {% endif %}
+
+</div>
+
+<div class="body_3">
+
+    <div class="circle_3 loader"></div>
+
+    </br> <h3>Town Centre</h3>
+
+    {% if town_centre %}
+        {% for town_centre in town_centre %}
+
+      <p class="labels">&nbspTime (24 hr.): &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t1">{{town_centre.t_time}}</span></b></p>
+      <p class="labels">&nbspStaff Pool Coordinator: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t2">{{town_centre.t_coordinator}}</span></b></p>
+      <p class="labels">&nbspHorticultural Entrance: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t3">{{town_centre.t_horticultural}}</span></b></p>
+      <p class="labels">&nbspTown Centre/Main Street: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t4">{{town_centre.t_town_centre_main_street}}</span></b></p>
+      <p class="labels">&nbspTelephone Monitor: &thinsp;&thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t5">{{town_centre.t_monitor}}</span></b></p>
+      <p class="labels">&nbspPatient/Visitor Director(s): &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t6">{{town_centre.t_directors}}</span></b></p>
+      <p class="labels">&nbspCommand Centre Runner(s): &nbsp&nbsp<b><span class="site_color_list" id="t7">{{town_centre.t_runners}}</span></b></p>
+      <p class="labels">&nbspInstructed Participants: &thinsp;&thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t8">{{t_explainval}}</span></b></p>
+
+    {% endfor %}
+
+    {% else %}
+
+        <p class="labels">&nbspTime (24 hr.): &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t1"></span></b></p>
+        <p class="labels">&nbspStaff Pool Coordinator: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t2"></span></b></p>
+        <p class="labels">&nbspHorticultural Entrance: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t3"></span></b></p>
+        <p class="labels">&nbspTown Centre/Main Street: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t4"></span></b></p>
+        <p class="labels">&nbspTelephone Monitor: &thinsp;&thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t5"></span></b></p>
+        <p class="labels">&nbspPatient/Visitor Director(s): &thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t6"></span></b></p>
+        <p class="labels">&nbspCommand Centre Runner(s): &nbsp&nbsp<b><span class="site_color_list" id="t7"></span></b></p>
+        <p class="labels">&nbspInstructed Participants: &thinsp;&thinsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><span class="site_color_list" id="t8"></span></b></p>
+
+    {% endif %}
+
+</div> </div>
+
+    <script>
+      var myVar = setInterval(results_update, 1000);
+      function results_update() {
+
+      $.ajax({
+          url: '',
+          type: 'GET',
+          // dataType: 'json',
+          success: function(cafeteria_instance) {
+            console.log(cafeteria_instance)
+            console.log($(cafeteria_instance).find('#c4').text())
+            // console.log($('#4').text())
+            $('#c1').text($(cafeteria_instance).find('#c1').text().replace('None', ''));
+            $('#c2').text($(cafeteria_instance).find('#c2').text().replace('None', ''));
+            $('#c3').text($(cafeteria_instance).find('#c3').text().replace('None', ''));
+            $('#c4').text($(cafeteria_instance).find('#c4').text().replace('None', ''));
+            $('#c5').text($(cafeteria_instance).find('#c5').text().replace('None', ''));
+            $('#c6').text($(cafeteria_instance).find('#c6').text().replace('None', ''));
+            $('#c7').text($(cafeteria_instance).find('#c7').text().replace('None', ''));
+            $('#c8').text($(cafeteria_instance).find('#c8').text().replace('None', ''));
+            $('#c9').text($(cafeteria_instance).find('#c9').text().replace('None', ''));
+            $('#c10').text($(cafeteria_instance).find('#c10').text().replace('None', '').replace('True', 'Yes').replace('False', 'No'));
+        }
+      });
+
+      $.ajax({
+          url: '',
+          type: 'GET',
+          // dataType: 'json',
+          success: function(east_lobby_instance) {
+              console.log($(cafeteria_instance).find('#e4').text())
+            $('#e1').text($(east_lobby_instance).find('#e1').text().replace('None', ''));
+            $('#e2').text($(east_lobby_instance).find('#e2').text().replace('None', ''));
+            $('#e3').text($(east_lobby_instance).find('#e3').text().replace('None', ''));
+            $('#e4').text($(east_lobby_instance).find('#e4').text().replace('None', ''));
+            $('#e5').text($(east_lobby_instance).find('#e5').text().replace('None', ''));
+            $('#e6').text($(east_lobby_instance).find('#e6').text().replace('None', ''));
+            $('#e7').text($(east_lobby_instance).find('#e7').text().replace('None', ''));
+            $('#e8').text($(east_lobby_instance).find('#e8').text().replace('None', ''));
+            $('#e9').text($(east_lobby_instance).find('#e9').text().replace('None', '').replace('True', 'Yes').replace('False', 'No'));
+        }
+      });
+
+      $.ajax({
+          url: '',
+          type: 'GET',
+          // dataType: 'json',
+          success: function(town_centre_instance) {
+
+            $('#t1').text($(town_centre_instance).find('#t1').text().replace('None', ''));
+            $('#t2').text($(town_centre_instance).find('#t2').text().replace('None', ''));
+            $('#t3').text($(town_centre_instance).find('#t3').text().replace('None', ''));
+            $('#t4').text($(town_centre_instance).find('#t4').text().replace('None', ''));
+            $('#t5').text($(town_centre_instance).find('#t5').text().replace('None', ''));
+            $('#t6').text($(town_centre_instance).find('#t6').text().replace('None', ''));
+            $('#t7').text($(town_centre_instance).find('#t7').text().replace('None', ''));
+            $('#t8').text($(town_centre_instance).find('#t8').text().replace('None', '').replace('True', 'Yes').replace('False', 'No'));
+        }
+      });
+
+  };
+
+    </script>
+</div>
+{% endblock %}

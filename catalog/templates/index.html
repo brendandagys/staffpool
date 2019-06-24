@@ -1,0 +1,85 @@
+{% extends "base_generic.html" %}
+{% block content %}
+		{% load static %}
+
+		<!-- <script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script> -->
+		<!-- <noscript> -->
+
+			<!-- <link rel="stylesheet" href="{% static 'css/skel.css' %}" /> -->
+
+			<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+			<!-- <link rel="stylesheet" href="{% static 'css/style-xlarge.css' %}" /> -->
+		<!-- </noscript> -->
+	</head>
+	<body class="landing">
+
+
+		<!-- Banner -->
+		{% load static %}
+		<div class="about_holder">
+
+		<div class="about_image">
+
+				<h1 id="about-header" class="grab">About This Tool</h1>
+				<p class="grab"><em>Developed to provide an interface to monitor Staff Pool Responses as they happen.</em></p>
+				<h3 class="grab"><b>Administrator: Brendan Dagys (x3063)</b></h3>
+				</br>
+				<p class="grab">Have a question? Email me...</p>
+				<ul class="grab actions">
+					<li>
+						<a href="mailto:brendan.dagys@nrbhc.on.ca?subject=&body=" class="button big">brendan.dagys@nbrhc.on.ca</a>
+					</li>
+				</ul>
+			</br>
+				<p class="grab"><b>This site serves two purposes:</b></p>
+				<p class="grab">The first is to allow <b>easy submission and recording</b> of the staff that
+					are assigned to posts at one of the Staff Pools, during a Code response. The three forms (see the menu bar)
+					can be filled out and remove the need to radio up to the Command Centre with information.</p>
+
+				<p class="grab">The second purpose is to allow <b>live tracking of staff assignments during a response</b>. Using the Live Tracker,
+					the Command Centre and other senior staff can see the names populate as staff are assigned.</p>
+
+				<p class="grab">Every entry into a form is <b>automatically submitted</b> to the database for future use.</p>
+
+		</div> </div>
+
+		<!-- One -->
+			<section id="one" class="wrapper style2 special">
+				<div>
+					<header class="major">
+						<h2>Features</h2>
+						<p>This site was designed to fulfill the following requirements:</p>
+					</header>
+					<div>
+					<div class="row align-items-center">
+						<div class="col">
+							<section class="box">
+								<i class="icon big rounded color1 fa-cloud"></i>
+								<h3>Storage, Security, and Integrity</h3>
+								<p>An encrypted database will store all results for future use, and pre-fills the form if more than one user is accessing it.</p>
+							</section>
+						</div>
+						<div class="col">
+							<section class="box align">
+								<i class="icon big rounded color9 fa-desktop"></i>
+								<h3>View on any device.</h3>
+								<p>Responsive design means that you can submit/view using your device of preference.</p>
+							</section>
+						</div>
+						<div class="col">
+							<section class="box">
+								<i class="icon big rounded color6 fa-rocket"></i>
+								<h3>Be Informed!</h3>
+								<p>Once signed in, you can view the Staff Pool assignments in real-time as they occur. No need to refresh the page!</p>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			</section>
+	</body>
+{% endblock %}

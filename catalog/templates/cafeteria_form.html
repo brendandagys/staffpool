@@ -1,0 +1,63 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="my_header">
+
+</br><h1 class="">NBRHC Staff Pool</h1>
+  <h4><span class="indicator">Cafeteria</span> Submission Form</h4>
+  <p><em>Please enter the event time and the names of assigned staff:</em></p> </br>
+</div>
+
+<div class="main_div container-fluid">
+
+  <form id="cafeteria_form_html" action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form_c }}
+    <!-- {{ form.errors}} -->
+</table> </br>
+    <input class="btn btn-primary" type="submit" value="Update" name="c">
+  </form>
+
+</div>
+
+</br></br>
+  <span class="past_data">Number of past Cafeteria Staff Pool submissions: &nbsp <strong>{{num_events}}</strong></span>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+        $('#cafeteria_form_html :input').not('#id_c_date').on('blur', function(e) {
+            e.preventDefault()
+
+            $.ajax({
+                type: "POST",
+                url: "",
+                // dataType: 'JSON'
+                data: {
+                    'c': 'dummy',
+                    'c_date': $('#id_c_date').val(),
+                    'c_time': $('#id_c_time').val(),
+                    'c_coordinator': $('#id_c_coordinator').val(),
+                    'c_main_doors': $('#id_c_main_doors').val(),
+                    'c_south_patio_doors': $('#id_c_south_patio_doors').val(),
+                    'c_north_patio_doors_1': $('#id_c_north_patio_doors_1').val(),
+                    'c_north_patio_doors_2': $('#id_c_north_patio_doors_2').val(),
+                    'c_monitor': $('#id_c_monitor').val(),
+                    'c_directors': $('#id_c_directors').val(),
+                    'c_runners': $('#id_c_runners').val(),
+                    'c_explain': $('#id_c_explain').val(),
+                     csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function () {
+                    console.log('success')
+                }
+            });
+            return false;
+      });
+  });
+
+</script>
+
+{% endblock %}

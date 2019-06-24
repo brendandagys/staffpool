@@ -1,0 +1,62 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="my_header">
+
+</br><h1 class="">NBRHC Staff Pool</h1>
+  <h4><span class="indicator">East Lobby</span> Submission Form</h4>
+  <p><em>Please enter the event time and the names of assigned staff:</em></p> </br>
+</div>
+
+<div class="main_div container-fluid">
+
+  <form id="east_lobby_form_html" action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form_e }}
+    <!-- {{ form.errors}} -->
+</table> </br>
+    <input class="btn btn-primary" type="submit" value="Update" name="e">
+  </form>
+
+</div>
+
+</br></br>
+  <span class="past_data">Number of past East Lobby Staff Pool submissions: &nbsp <strong>{{num_events}}</strong></span>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+        $('#east_lobby_form_html :input').not('#id_e_date').on('blur', function(e) {
+            e.preventDefault()
+
+            $.ajax({
+                type: "POST",
+                url: "",
+                // dataType: 'JSON'
+                data: {
+                    'e': 'dummy',
+                    'e_date': $('#id_e_date').val(),
+                    'e_time': $('#id_e_time').val(),
+                    'e_coordinator': $('#id_e_coordinator').val(),
+                    'e_main_doors': $('#id_e_main_doors').val(),
+                    'e_lab_entrance': $('#id_e_lab_entrance').val(),
+                    'e_ed_entrance': $('#id_e_ed_entrance').val(),
+                    'e_monitor': $('#id_e_monitor').val(),
+                    'e_directors': $('#id_e_directors').val(),
+                    'e_runners': $('#id_e_runners').val(),
+                    'e_explain': $('#id_e_explain').val(),
+                     csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function () {
+                    console.log('success')
+                }
+            });
+            return false;
+      });
+  });
+
+</script>
+
+{% endblock %}
