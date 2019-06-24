@@ -44,10 +44,10 @@
 			text-decoration: underline;
 		}
 
-	strong, b {
+	/* strong, b {
 		color: #474747;
 		font-weight: 700;
-	}
+	} */
 
 	em, i {
 		font-style: italic;
