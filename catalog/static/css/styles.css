@@ -197,7 +197,7 @@ input[type="submit"] {
     border-radius: 10px;
     max-width: 200px;
     padding: 10px;
-    margin: 0 auto;
+    margin: 30px auto 0 auto;
 }
 
 .my_header {
@@ -227,7 +227,7 @@ input[type="submit"] {
 }
 
 #about-header {
-    margin-top: 55px;
+    margin-top: 45px;
     /* background-color: #d3d3d3; */
 }
 
