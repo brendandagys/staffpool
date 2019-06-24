@@ -229,13 +229,6 @@ input[type="submit"] {
     background-color: orange;
 } */
 
-.about_image {
-    background-image: url(../images/nbrhc-3.jpg)
-    /* border-radius: 10px; */
-    /* min-height: 90px; */
-    padding: 20px;
-}
-
 .about_holder {
     border-radius: 10px;
     /* height: 200px; */
