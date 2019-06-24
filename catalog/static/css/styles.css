@@ -226,6 +226,14 @@ input[type="submit"] {
     /* background-color: #d3d3d3; */
 }
 
+#grab2 {
+    margin-bottom: 0;
+}
+
+.grab3 {
+    width: 225px;
+}
+
 #about-header {
     margin-top: 45px;
     /* background-color: #d3d3d3; */
