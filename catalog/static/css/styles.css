@@ -217,9 +217,9 @@ input[type="submit"] {
     width: 700px;
 }
 
-ul li span {
+p span {
     float: left;
-    width: 300px;
+    width: 240px;
 }
 
 .grab {
