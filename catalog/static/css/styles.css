@@ -220,7 +220,8 @@ input[type="submit"] {
 
 p span {
     float: left;
-    width: 240px;
+    margin-left: 12px;
+    width: 233px;
 }
 
 .grab {
