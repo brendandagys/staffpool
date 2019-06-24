@@ -9,6 +9,7 @@ dj-database-url==0.5.0
 Django==2.2.2
 django-heroku==0.3.1
 entrypoints==0.3
+ez-setup==0.9
 ffmpeg-python==0.1.17
 future==0.17.1
 gunicorn==19.9.0
