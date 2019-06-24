@@ -231,7 +231,12 @@ input[type="submit"] {
 }
 
 .grab3 {
-    max-width: 250px;
+    /* max-width: 250px; */
+    text-align: center;
+}
+
+h3.grab {
+    font-size: 0.85rem;
 }
 
 #about-header {
