@@ -214,14 +214,14 @@ input[type="submit"] {
     background-color: #d3d3d3;
     padding: 5px;
     border-radius: 10px;
-    width: 700px;
+    width: 500px;
     height: 30px;
 }
 
 .fixed_width {
     float: left;
-    margin-left: 6px;
-    margin-bottom: 1px;
+    margin-left: 5px;
+    margin-bottom: 3px;
     width: 220px;
 }
 
