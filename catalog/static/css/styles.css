@@ -231,7 +231,7 @@ input[type="submit"] {
 }
 
 .grab3 {
-    width: 225px;
+    max-width: 250px;
 }
 
 #about-header {
