@@ -197,7 +197,7 @@ input[type="submit"] {
     border-radius: 10px;
     max-width: 200px;
     padding: 10px;
-    text-align: center;
+    margin: 0 auto;
 }
 
 .my_header {
