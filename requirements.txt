@@ -39,8 +39,6 @@ py==1.8.0
 pydub==0.23.1
 Pygments==2.3.1
 pynput==1.4.2
-pyobjc-framework-Cocoa==5.1.2
-pyobjc-framework-Quartz==5.1.2
 PyQt5==5.9.2
 PyQt5-sip==4.19.15
 pyrsistent==0.14.11
