@@ -208,7 +208,16 @@ input[type="submit"] {
     color: white;
 }
 
-.labels {
+/* .labels {
+    margin: 0.5%;
+    color: black;
+    background-color: #d3d3d3;
+    padding: 5px;
+    border-radius: 10px;
+    width: 700px;
+} */
+
+.labels2 {
     margin: 0.5%;
     color: black;
     background-color: #d3d3d3;
@@ -216,6 +225,12 @@ input[type="submit"] {
     border-radius: 10px;
     width: 700px;
 }
+
+.labels2 span {
+    float: left;
+    width: 70px;
+}
+
 
 /* .test {
     width: 50px;
