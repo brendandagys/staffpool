@@ -124,7 +124,7 @@ input[type="text"] {
     background-color: #ebebe0;
     margin: 0.5px;
     height: 39px;
-    width: 8rem;
+    width: 13rem;
 }
 
 input[type="password"] {
@@ -138,7 +138,7 @@ input[type="password"] {
 
 #id_c_date, #id_e_date, #id_t_date, #id_c_time, #id_e_time, #id_t_time {
     color: red;
-    width: 6rem;
+    width: 6.7rem;
 }
 
 /* #id_c_time, #id_e_time, #id_t_time, #id_c_directors, #id_c_runners, #id_e_directors, #id_e_runners, #id_t_directors, #id_t_runners {
@@ -214,6 +214,7 @@ input[type="submit"] {
     background-color: #d3d3d3;
     padding: 5px;
     border-radius: 10px;
+    top: -10%;
     width: 500px;
     height: 30px;
 }
