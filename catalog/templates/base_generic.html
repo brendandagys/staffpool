@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
-{% load static %}
+<!-- {% load static %} -->
 <body background="{% static "nbrhc-2.jpg" %}">
 <!-- <body style="background-repeat: round;" background="{% static "nbrhc-2.jpg" %}"> -->
   <div class="container-fluid">
@@ -37,7 +37,7 @@
           <li><a href="{% url 'east_lobby_form' %}"><b>East Lobby Form</b></a></li>
           <li><a href="{% url 'town_centre_form' %}"><b>Town Centre Form</b></a></li>
               </br>
-          <li class="tracker"><a href="{% url 'LIVE' %}"><b><span style="color: red">LIVE TRACKER</span></b></a></li>
+          <li class="tracker"><a href="{% url 'LIVE' %}"><b><span style="color: red"><img src="{% static "live.png" %}" />LIVE TRACKER</span></b></a></li>
               </br>
           <li><a href="{% url 'about' %}"><b>About This Tool</b></a></li>
 
