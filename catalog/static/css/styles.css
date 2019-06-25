@@ -204,8 +204,7 @@ input[type="submit"] {
 }
 
 .center_other_content {
-    margin: auto;
-    text-align: center;
+    left: 11rem;
 }
 
 .trim_form {
