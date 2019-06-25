@@ -190,6 +190,16 @@ input[type="submit"] {
     visibility: hidden;
 }
 
+.live {
+    position: relative;
+    right: 19.35rem;
+    bottom: 10rem;
+}
+
+.shrink_live {
+    height: 40px;
+}
+
 .background {
     background-color: #d3d3d3;
     border-radius: 10px;
