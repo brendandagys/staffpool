@@ -134,7 +134,7 @@ input[type="password"] {
     background-color: #ebebe0;
     margin: 0.5px;
     height: 39px;
-    width: 11rem;
+    width: 13rem;
 }
 
 #id_c_date, #id_e_date, #id_t_date, #id_c_time, #id_e_time, #id_t_time {
@@ -223,6 +223,11 @@ input[type="submit"] {
 
 .tracker_master {
     color: white;
+    width: 575px;
+}
+
+#live_header {
+    text-align: center;
 }
 
 .labels {
