@@ -138,15 +138,11 @@ input[type="password"] {
 
 #id_c_date, #id_e_date, #id_t_date {
     color: red;
-    width: 6.1rem;
+    width: 8rem;
 }
 
-#id_c_time, #id_e_time, #id_t_time {
-    width: 6.1rem;
-}
-
-#id_c_directors, #id_c_runners, #id_e_directors, #id_e_runners, #id_t_directors, #id_t_runners {
-    width: 20rem;
+#id_c_time, #id_e_time, #id_t_time, #id_c_directors, #id_c_runners, #id_e_directors, #id_e_runners, #id_t_directors, #id_t_runners {
+    width: 8rem;
 }
 
 #id_c_explain, #id_e_explain, #id_t_explain {
