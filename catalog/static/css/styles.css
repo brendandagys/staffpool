@@ -203,6 +203,10 @@ input[type="submit"] {
     text-align: center;
 }
 
+.trim_form {
+    width: 70%;
+}
+
 .my_header {
     color: white;
 }
