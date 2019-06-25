@@ -221,7 +221,7 @@ input[type="submit"] {
 .fixed_width {
     float: left;
     margin-left: 5px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     width: 220px;
 }
 
