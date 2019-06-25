@@ -198,9 +198,10 @@ input[type="submit"] {
     margin: 30px auto 0 auto;
 }
 
-/* .center_content {
+.center_content {
     margin: 30px auto 0 auto;
-} */
+    text-align: center;
+}
 
 .my_header {
     color: white;
