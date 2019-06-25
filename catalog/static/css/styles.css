@@ -203,6 +203,11 @@ input[type="submit"] {
     text-align: center;
 }
 
+.center_other_content {
+    margin: auto;
+    text-align: center;
+}
+
 .trim_form {
     width: 427px;;
     margin: auto;
