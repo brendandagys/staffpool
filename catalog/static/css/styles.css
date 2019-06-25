@@ -205,6 +205,7 @@ input[type="submit"] {
 
 .trim_form {
     width: 70%;
+    margin: auto;
 }
 
 .my_header {
