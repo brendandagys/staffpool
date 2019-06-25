@@ -1,6 +1,10 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+
+{% load static %}
+    <script src="js/jquery.min.js"></script>
+
 <div class="tracker_master">
 
 <div id="live_header">
@@ -48,7 +52,7 @@
 
     {% endif %}
 
-    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#body_2_collapsible">Button with data-target</button>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#body_2_collapsible">Button with data-target</button>
 
 <div id="body_2_collapsible" class="collapse body_2">
 
