@@ -3,15 +3,15 @@
 {% block content %}
 
 {% if form.errors %}
-</br><p style='color: red'>Your username and password didn't match. Please try again.</p>
+</br><p class="login_string" style='color: red'><b>Your username and password didn't match. Please try again.</b></p>
 {% endif %}
 
 {% if next %}
   {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
+    <p class="login_string">Your account doesn't have access to this page. To proceed,
     please login with an account that has access.</p>
   {% else %}
-</br><p style='color: white'>Please login to see this page.</p>
+</br><p class="login_string" style='color: white'>Please login to see this page.</p>
   {% endif %}
 {% endif %}
 
