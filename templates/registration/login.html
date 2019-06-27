@@ -15,17 +15,17 @@
   {% endif %}
 {% endif %}
 
-<form method="post" action="{% url 'login' %}">
+<form method="post" action="{% url 'login' %}" autocomplete="on">
 {% csrf_token %}
 <table>
 
 <tr>
-  <td><span id="login_u">{{ form.username.label_tag }}</span></td>
+  <td><span class="login_form" id="login_u">{{ form.username.label_tag }}</span></td>
   <td>{{ form.username }}</td>
 </tr>
 
 <tr>
-  <td><span id="login_p">{{ form.password.label_tag }}</span></td>
+  <td><span class="login_form" id="login_p">{{ form.password.label_tag }}</span></td>
   <td>{{ form.password }}</td>
 </tr>
 </table>
