@@ -446,7 +446,11 @@ def about(request):
 def code_red_status(request):
 
     if request.method == 'GET':
-        code_red_status = CodeStatuses.objects.all()[0]
+        try:
+            code_red_status = CodeStatuses.objects.all()[0]
+        except:
+            code_red_status = CodeStatuses()
+
         code_red_status = code_red_status.code_red_status
         # print(CodeStatuses.objects.all()[0])
         # response_data = {}

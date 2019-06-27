@@ -1,5 +1,13 @@
 {% extends "base_generic.html" %}
+
+{% block banner %}
+{% endblock %}
+
+{% block set_statuses %}
+{% endblock %}
+
 {% block content %}
+
 		{% load static %}
 
 		<!-- <script src="js/jquery.min.js"></script>
@@ -17,13 +25,11 @@
 	</head>
 	<body class="landing">
 
-
 		<!-- Banner -->
-		{% load static %}
+		<!-- {% load static %} -->
 		<div class="about_holder">
 
 		<div>
-
 				<h1 id="about-header" class="grab">About This Tool</h1>
 				<p class="grab"><em>Developed to provide an interface to monitor Staff Pool responses as they happen.</em></p>
 				<h3 class="grab"><b>Administrator: Brendan Dagys (x3063)</b></h3>
@@ -35,7 +41,8 @@
 					</li>
 				</ul>
 			</br>
-				<p class="grab"><b>This site serves two purposes:</b></p>
+			<div class="grey_backing">
+				<p id="index_purpose_header" class="grab"><b>This site serves two purposes:</b></p>
 				<p class="grab">The first is to allow <b>easy submission and recording</b> of the staff that
 					are assigned to posts at one of the Staff Pools, during a Code response. The three forms (see the menu bar)
 					can be filled out and remove the need to radio up to the Command Centre with information.</p>
@@ -44,7 +51,7 @@
 					the Command Centre and other senior staff can see the names populate as staff are assigned.</p>
 
 				<p class="grab">Every entry into a form is <b>automatically submitted</b> to the database for future use.</p>
-
+			</div>
 		</div> </div>
 
 		<!-- One -->

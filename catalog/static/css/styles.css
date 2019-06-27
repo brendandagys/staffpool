@@ -205,6 +205,7 @@ input[type="submit"] {
     background-color: #d3d3d3;
     border-radius: 10px;
     max-width: 200px;
+    min-width: 200px;
     padding: 10px;
     margin: 30px auto 0 auto;
 }
@@ -295,12 +296,13 @@ h3.grab {
     /* position: relative; */
     /* text-align: center; */
     margin: 8px 4px 4px 4px;
-    width: 100%;
+    width: 12.65rem;
+    /* right: 2.39px; */
 }
 
 #status_horizontal, #status_full_evac {
     margin: 4px;
-    width: 100%;
+    width: 12.5rem;
 }
 
 #status_list {
@@ -309,15 +311,21 @@ h3.grab {
 
 
 .blinking {
-    animation:blinkingText 0.8s infinite;
+    animation:blinkingText 1.2s infinite;
 }
 
 @keyframes blinkingText{
     0%{     color: white; }
-    49%{    color: white; }
-    50%{    color: transparent; }
-    99%{    color: white; }
-    100%{   color: white; }
+    10%{    color: white; }
+    20%{    color: white; }
+    30%{    color: white; }
+    40%{    color: white; }
+    50%{    color: white; }
+    60%{    color: white; }
+    70%{    color: white; }
+    80%{    color: white; }
+    98%{    color: transparent; }
+    100%{   color: transparent; }
 }
 
 .status_banner {
@@ -329,4 +337,25 @@ h3.grab {
 #past_size {
     font-size: 2rem;
     margin: 0;
+}
+
+.banner_yellow {
+    background-color: #FFC107;
+    color: black;
+}
+
+.banner_red {
+    background-color: red;
+}
+
+.grey_backing {
+    color: #1B5AB0;
+    background-color: #d3d3d3;
+    border-radius: 55%;
+    padding: 87px;
+}
+
+#index_purpose_header {
+    font-size: 2rem;
+    margin-bottom: 3rem;
 }
