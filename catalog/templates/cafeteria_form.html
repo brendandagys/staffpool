@@ -25,7 +25,8 @@
     <!-- </div> -->
 
     </br></br>
-    <p class="center_other_content past_data">Number of past Cafeteria Staff Pool submissions: &nbsp <strong>{{num_events}}</strong></p>
+    <p class="center_other_content past_data">Number of past Cafeteria Staff Pool submissions:<br/>
+        <strong id="past_size">{{num_events}}</strong></p>
 
 </div>
 
@@ -42,6 +43,7 @@ $(document).ready(function(){
                 url: "",
                 // dataType: 'JSON'
                 data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
                     'c': 'dummy',
                     'c_date': $('#id_c_date').val(),
                     'c_time': $('#id_c_time').val(),
@@ -53,8 +55,8 @@ $(document).ready(function(){
                     'c_monitor': $('#id_c_monitor').val(),
                     'c_directors': $('#id_c_directors').val(),
                     'c_runners': $('#id_c_runners').val(),
-                    'c_explain': $('#id_c_explain').val(),
-                     csrfmiddlewaretoken: '{{ csrf_token }}'
+                    'c_num_staff': $('#id_c_num_staff').val(),
+                    'c_explain': $('#id_c_explain').val()
                 },
                 success: function () {
                     console.log('success')

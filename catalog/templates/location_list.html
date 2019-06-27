@@ -33,7 +33,8 @@
         <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="c7">{{cafeteria.c_monitor}}</span></b></p>
         <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="c8">{{cafeteria.c_directors}}</span></b></p>
         <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="c9">{{cafeteria.c_runners}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="c10">{{c_explainval}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list" id="c10">{{cafeteria.c_num_staff}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="c11">{{c_explainval}}</span></b></p>
 
     {% endfor %}
 
@@ -48,7 +49,8 @@
         <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="c7"></span></b></p>
         <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="c8"></span></b></p>
         <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="c9"></span></b></p>
-        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="c10"></span></b></p>
+        <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list" id="c10"></span></b></p>
+        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="c11"></span></b></p>
 
     {% endif %}
 
@@ -71,7 +73,8 @@
       <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="e6">{{east_lobby.e_monitor}}</span></b></p>
       <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="e7">{{east_lobby.e_directors}}</span></b></p>
       <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="e8">{{east_lobby.e_runners}}</span></b></p>
-      <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="e9">{{e_explainval}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list" id="e9">{{east_lobby.e_num_staff}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="e10">{{e_explainval}}</span></b></p>
 
     {% endfor %}
 
@@ -85,7 +88,8 @@
     <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="e6"></span></b></p>
     <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="e7"></span></b></p>
     <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="e8"></span></b></p>
-    <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="e9"></span></b></p>
+    <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list" id="e9">{{e_num_staff}}</span></b></p>
+    <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="e10"></span></b></p>
 
     {% endif %}
 
@@ -107,7 +111,8 @@
         <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="t5">{{town_centre.t_monitor}}</span></b></p>
         <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="t6">{{town_centre.t_directors}}</span></b></p>
         <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="t7">{{town_centre.t_runners}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="t8">{{t_explainval}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list" id="t8">{{town_centre.t_num_staff}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="t9">{{t_explainval}}</span></b></p>
 
     {% endfor %}
 
@@ -120,7 +125,8 @@
         <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="t5"></span></b></p>
         <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="t6"></span></b></p>
         <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="t7"></span></b></p>
-        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="t8"></span></b></p>
+        <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list" id="t8"></span></b></p>
+        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="t9"></span></b></p>
 
     {% endif %}
 
@@ -147,7 +153,8 @@
             $('#c7').text($(cafeteria_instance).find('#c7').text().replace('None', ''));
             $('#c8').text($(cafeteria_instance).find('#c8').text().replace('None', ''));
             $('#c9').text($(cafeteria_instance).find('#c9').text().replace('None', ''));
-            $('#c10').text($(cafeteria_instance).find('#c10').text().replace('None', '').replace('True', 'Yes').replace('False', 'No'));
+            $('#c10').text($(cafeteria_instance).find('#c10').text().replace('None', ''));
+            $('#c11').text($(cafeteria_instance).find('#c11').text().replace('None', '').replace('True', 'Yes').replace('False', 'No'));
         }
       });
 
@@ -165,7 +172,8 @@
             $('#e6').text($(east_lobby_instance).find('#e6').text().replace('None', ''));
             $('#e7').text($(east_lobby_instance).find('#e7').text().replace('None', ''));
             $('#e8').text($(east_lobby_instance).find('#e8').text().replace('None', ''));
-            $('#e9').text($(east_lobby_instance).find('#e9').text().replace('None', '').replace('True', 'Yes').replace('False', 'No'));
+            $('#e9').text($(east_lobby_instance).find('#e9').text().replace('None', ''));
+            $('#e10').text($(east_lobby_instance).find('#e10').text().replace('None', '').replace('True', 'Yes').replace('False', 'No'));
         }
       });
 
@@ -182,10 +190,10 @@
             $('#t5').text($(town_centre_instance).find('#t5').text().replace('None', ''));
             $('#t6').text($(town_centre_instance).find('#t6').text().replace('None', ''));
             $('#t7').text($(town_centre_instance).find('#t7').text().replace('None', ''));
-            $('#t8').text($(town_centre_instance).find('#t8').text().replace('None', '').replace('True', 'Yes').replace('False', 'No'));
+            $('#t8').text($(town_centre_instance).find('#t8').text().replace('None', ''));
+            $('#t9').text($(town_centre_instance).find('#t9').text().replace('None', '').replace('True', 'Yes').replace('False', 'No'));
         }
       });
-
   };
 
     </script>

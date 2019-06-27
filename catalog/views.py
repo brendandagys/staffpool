@@ -1,15 +1,18 @@
 import datetime
 
+import json
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
 
 # Create your views here.
-from catalog.models import Cafeteria, East_Lobby, Town_Centre
+from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses
 from catalog.forms import CafeteriaForm, East_LobbyForm, Town_CentreForm
 
 @login_required
@@ -54,6 +57,9 @@ def cafeteria_form(request):
             # if form_c.cleaned_data['c_runners'].strip() != '':
             cafeteria_instance.c_runners = form_c.cleaned_data['c_runners'].strip()
             # if form_c.cleaned_data['c_explain'] != '':
+
+            cafeteria_instance.c_num_staff = form_c.cleaned_data['c_num_staff'].strip()
+
             cafeteria_instance.c_explain = form_c.cleaned_data['c_explain']
 
             cafeteria_instance.save()
@@ -110,6 +116,11 @@ def cafeteria_form(request):
             c_runners = ''
 
         try:
+            c_num_staff = Cafeteria.objects.get(pk=timezone.now()).c_num_staff
+        except:
+            c_num_staff = ''
+
+        try:
             c_explain = Cafeteria.objects.get(pk=timezone.now()).c_explain
         except:
             c_explain = ''
@@ -124,6 +135,7 @@ def cafeteria_form(request):
                                         'c_monitor': c_monitor,
                                         'c_directors': c_directors,
                                         'c_runners': c_runners,
+                                        'c_num_staff': c_num_staff,
                                         'c_explain': c_explain
                                         })
 
@@ -174,6 +186,9 @@ def east_lobby_form(request):
             east_lobby_instance.e_directors = form_e.cleaned_data['e_directors'].strip()
             # if form_e.cleaned_data['e_runners'].strip() != '':
             east_lobby_instance.e_runners = form_e.cleaned_data['e_runners'].strip()
+
+            east_lobby_instance.e_num_staff = form_e.cleaned_data['e_num_staff'].strip()
+
             # if form_e.cleaned_data['e_explain'] != '':
             east_lobby_instance.e_explain = form_e.cleaned_data['e_explain']
 
@@ -227,6 +242,11 @@ def east_lobby_form(request):
             e_runners = ''
 
         try:
+            e_num_staff = East_Lobby.objects.get(pk=timezone.now()).e_num_staff
+        except:
+            e_num_staff = ''
+
+        try:
             e_explain = East_Lobby.objects.get(pk=timezone.now()).e_explain
         except:
             e_explain = ''
@@ -240,6 +260,7 @@ def east_lobby_form(request):
                                          'e_monitor': e_monitor,
                                          'e_directors': e_directors,
                                          'e_runners': e_runners,
+                                         'e_num_staff': e_num_staff,
                                          'e_explain': e_explain
                                          })
 
@@ -288,6 +309,9 @@ def town_centre_form(request):
             town_centre_instance.t_directors = form_t.cleaned_data['t_directors'].strip()
             # if form_t.cleaned_data['t_runners'].strip() != '':
             town_centre_instance.t_runners = form_t.cleaned_data['t_runners'].strip()
+
+            town_centre_instance.t_num_staff = form_t.cleaned_data['t_num_staff'].strip()
+
             # if form_t.cleaned_data['t_explain'] != '':
             town_centre_instance.t_explain = form_t.cleaned_data['t_explain']
 
@@ -336,6 +360,11 @@ def town_centre_form(request):
             t_runners = ''
 
         try:
+            t_num_staff = Town_Centre.objects.get(pk=timezone.now()).t_num_staff
+        except:
+            t_num_staff = ''
+
+        try:
             t_explain = Town_Centre.objects.get(pk=timezone.now()).t_explain
         except:
             t_explain = ''
@@ -348,6 +377,7 @@ def town_centre_form(request):
                                           't_monitor': t_monitor,
                                           't_directors': t_directors,
                                           't_runners': t_runners,
+                                          't_num_staff': t_num_staff,
                                           't_explain': t_explain
                                           })
 
@@ -410,3 +440,33 @@ def about(request):
     context=None
 
     return render(request, 'index.html', context=context)
+
+
+
+def code_red_status(request):
+
+    if request.method == 'GET':
+        code_red_status = CodeStatuses.objects.all()[0]
+        code_red_status = code_red_status.code_red_status
+        # print(CodeStatuses.objects.all()[0])
+        # response_data = {}
+        # response_data['code_status'] = CodeStatuses.objects.all()[0]
+        # response_data['message'] = 'My message'
+        # response_instance = HttpResponse()
+        # response_instance['code_red_status'] = context['code_red_status']
+        # context = {'key', 'value'}
+        # print (context['code_red_status'])
+        # return HttpResponse(context)
+        return JsonResponse({'json_data': code_red_status})
+
+    elif request.method == 'POST':
+        try:
+            code_red_status_instance = CodeStatuses.objects.all()[0]
+        except:
+            code_red_status_instance = CodeStatuses()
+        print(code_red_status_instance)
+        code_red_status_instance.code_red_status = request.POST['code_red_status']
+
+        code_red_status_instance.save()
+
+        return HttpResponse()

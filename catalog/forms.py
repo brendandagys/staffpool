@@ -38,6 +38,9 @@ class CafeteriaForm(forms.Form):
     c_runners = forms.CharField(required=False, label='Command Centre Runner(s)', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                 'placeholder': 'Name(s)...'}))
 
+    c_num_staff = forms.CharField(required=False, label='Number of Staff Present', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
+                                                                                                                 'placeholder': 'Count...'}))
+
     c_explain = forms.NullBooleanField(label=mark_safe('Staff Pool participants told</br>to listen for new instructions</br> and check back in with the</br>Pool Coordinator on return'))#, widget=forms.CheckboxInput(attrs={'class': 'form-check-lg'}))
 
     def clean_c_date(self):
@@ -84,6 +87,10 @@ class CafeteriaForm(forms.Form):
         data = self.cleaned_data['c_runners']
         return data
 
+    def clean_c_num_staff(self):
+        data = self.cleaned_data['c_num_staff']
+        return data
+
     def clean_c_explain(self):
         data = self.cleaned_data['c_explain']
         return data
@@ -116,6 +123,9 @@ class East_LobbyForm(forms.Form):
 
     e_runners = forms.CharField(required=False, label='Command Centre Runner(s)', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                          'placeholder': 'Name(s)...'}))
+
+    e_num_staff = forms.CharField(required=False, label='Number of Staff Present', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
+                                                                                                                 'placeholder': 'Count...'}))
 
     e_explain = forms.NullBooleanField(label=mark_safe('Staff Pool participants told</br>to listen for new instructions</br> and check back in with the</br>Pool Coordinator on return'))
 
@@ -155,6 +165,10 @@ class East_LobbyForm(forms.Form):
         data = self.cleaned_data['e_runners']
         return data
 
+    def clean_e_num_staff(self):
+        data = self.cleaned_data['e_num_staff']
+        return data
+
     def clean_e_explain(self):
         data = self.cleaned_data['e_explain']
         return data
@@ -172,14 +186,22 @@ class Town_CentreForm(forms.Form):
 
     t_horticultural = forms.CharField(required=False, label='Horticultural Entrance', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                          'placeholder': 'Name...'}))
+
     t_town_centre_main_street = forms.CharField(required=False, label='Town Centre/Main Street', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                          'placeholder': 'Name...'}))
+
     t_monitor = forms.CharField(required=False, label='Telephone Monitor', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                          'placeholder': 'Name...'}))
+
     t_directors = forms.CharField(required=False, label='Patient/Visitor Director(s)', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                          'placeholder': 'Name(s)...'}))
+
     t_runners = forms.CharField(required=False, label='Command Centre Runner(s)', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                          'placeholder': 'Name(s)...'}))
+
+    t_num_staff = forms.CharField(required=False, label='Number of Staff Present', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
+                                                                                                                 'placeholder': 'Count...'}))
+
     t_explain = forms.NullBooleanField(label=mark_safe('Staff Pool participants told</br>to listen for new instructions</br> and check back in with the</br>Pool Coordinator on return'))
 
     def clean_t_date(self):
@@ -212,6 +234,10 @@ class Town_CentreForm(forms.Form):
 
     def clean_t_runners(self):
         data = self.cleaned_data['t_runners']
+        return data
+
+    def clean_t_num_staff(self):
+        data = self.cleaned_data['t_num_staff']
         return data
 
     def clean_t_explain(self):

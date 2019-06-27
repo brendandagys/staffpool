@@ -18,23 +18,19 @@
 
 <!-- {% load static %} -->
 <body background="{% static "nbrhc-3.jpg" %}">
+
+    <p id="status_banner" class="status_banner blinking"></p>
+
 <!-- <body style="background-repeat: round;" background="{% static "nbrhc-2.jpg" %}"> -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12 col-md-3 col-lg-3">
 
       {% block sidebar %}
-        <!-- <div class="row align-items-center">
-            <div class="col-sm-12 mx-auto"> -->
 
         <ul class="background sidebar-nav">
-
-        <!-- {% load static %} -->
-             <!-- <img src="{% static "nbrhc.jpg" %}" alt="Image of Facility" /> -->
-            <!-- <a href="#"><img src="{% static "nbrhc.jpg" %}" alt="Image of Facility" /> </a> -->
-
           <li><a href="{% url 'cafeteria_form' %}"><b>Cafeteria Form</b></a></li>
-          <li><a href="{% url 'east_lobby_form' %}"><b>ffEast Lobby Form</b></a></li>
+          <li><a href="{% url 'east_lobby_form' %}"><b>East Lobby Form</b></a></li>
           <li><a href="{% url 'town_centre_form' %}"><b>Town Centre Form</b></a></li>
               </br>
           <!-- <li class="tracker"><a href="{% url 'LIVE' %}"><b><span style="color: red"><img src="{% static "live.png" %}" />LIVE TRACKER</span></b></a></li> -->
@@ -52,8 +48,13 @@
         {% endif %}
 
         </ul>
-    <!-- </div>
-</div> -->
+
+    <div id="status_list">
+        <input id="status_normal" class="status_button btn btn-success" type="button" value="Normal" name="upgrade_button">
+        <input id="status_horizontal" class="status_button btn btn-warning" type="button" value="Horizontal Evacuation" name="upgrade_button">
+        <input id="status_full_evac" class="status_button btn btn-danger" type="button" value="Full Evacuation" name="upgrade_button">
+    </div>
+
      {% endblock %}
 
       </div>
@@ -65,3 +66,149 @@
   </div>
 </body>
 </html>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+var status;
+var status_get;
+var wait = 1;
+
+$.ajax({
+    type: 'GET',
+    url: 'CodeRedStatus/',
+    data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+            'status_request': 'yes'
+          },
+    // dataType: 'json',          // Apparently not needed
+    success: function(response) {
+        status = response['json_data']
+        status_get = response['json_data']
+
+        if (response['json_data'] == 'Normal') {
+            $('#status_banner').text('')
+        }
+        else {
+      $('#status_banner').text(response['json_data'])
+      }
+  }
+});
+
+        $('#status_normal').click(function(e) {
+            status = $('#status_normal').val()
+        });
+
+        $('#status_horizontal').click(function(e) {
+            status = $('#status_horizontal').val()
+        });
+
+        $('#status_full_evac').click(function(e) {
+            status = $('#status_full_evac').val()
+        });
+
+        $(':button').click(function(e) {
+            // status = $('button[name=upgrade_button]').val();
+
+            wait = '1';
+
+            console.log('POST BEFORE: ' + wait)
+
+            $.ajax({
+                type: "POST",
+                url: "CodeRedStatus/",
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'code_red_status': status
+                      },
+                success: function () {
+                    console.log('success');
+                    wait = '0';
+                    console.log('POST AFTER: ' + wait)
+                }
+            });
+        });
+
+
+  var myStatusVar = setInterval(status_update, 10000);
+  function status_update() {
+
+      console.log('GET BEFORE: ' + wait)
+
+
+  $.ajax({
+      type: 'GET',
+      url: 'CodeRedStatus/',
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+              'status_request': 'yes'
+            },
+      // dataType: 'json',          // Apparently not needed
+      success: function(response) {
+          // alert('The status has been changed to ' + response['json_data'])
+          console.log('GET SUCCESS 1 : ' + wait)
+
+          if (response['json_data'] == 'Normal') {
+            $('#status_banner').text('')
+          }
+          else {
+            $('#status_banner').text(response['json_data'])
+            }
+
+        if (response['json_data'] != status_get) {
+            status = response['json_data'] // I don't think this is necessary
+            console.log('GET SUCCESS 2 : ' + wait)
+            if (wait == '0') {
+                alert('The status has been changed from ' + status_get + ' to ' + status)
+            }
+            status_get = response['json_data']
+        }
+
+    }
+  });
+};
+
+});
+
+
+
+
+</script>
+
+
+<!-- <script type="text/javascript">
+
+    var status;
+
+    $(document).ready(function() {
+
+        $('#status_normal').click(function(e) {
+            status = $('#status_normal').val()
+        });
+
+        $('#status_horizontal').click(function(e) {
+            status = $('#status_horizontal').val()
+        });
+
+        $('#status_full_evac').click(function(e) {
+            status = $('#status_full_evac').val()
+        });
+
+        $(':button').click(function(e) {
+            // status = $('button[name=upgrade_button]').val();
+            console.log(status);
+            // alert('STATUS UPGRADED!');
+
+            $.ajax({
+                type: "POST",
+                url: "CodeRedStatus/",
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'code_red_status': status
+                      },
+                success: function () {
+                    console.log('success');
+                }
+            });
+        return false;
+    });
+  });
+
+</script> -->

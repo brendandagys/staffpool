@@ -37,6 +37,7 @@ $(document).ready(function(){
                 url: "",
                 // dataType: 'JSON'
                 data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
                     'e': 'dummy',
                     'e_date': $('#id_e_date').val(),
                     'e_time': $('#id_e_time').val(),
@@ -47,8 +48,8 @@ $(document).ready(function(){
                     'e_monitor': $('#id_e_monitor').val(),
                     'e_directors': $('#id_e_directors').val(),
                     'e_runners': $('#id_e_runners').val(),
+                    'e_num_staff': $('#id_e_num_staff').val(),
                     'e_explain': $('#id_e_explain').val(),
-                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function () {
                     console.log('success')

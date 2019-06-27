@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from catalog.models import Cafeteria, East_Lobby, Town_Centre
+from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses
 
 # admin.site.register(Cafeteria)
 # admin.site.register(East_Lobby)
@@ -43,3 +43,8 @@ class Town_CentreAdmin(admin.ModelAdmin):
         if 'delete_selected' in actions:
             del actions['delete_selected']
         return actions
+
+@admin.register(CodeStatuses)
+class CodeStatuses(admin.ModelAdmin):
+    # list_display = ('code_red_status')
+    pass

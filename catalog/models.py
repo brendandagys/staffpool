@@ -5,6 +5,7 @@ import datetime
 
 # Create your models here.
 class Cafeteria(models.Model):
+
     c_date = models.DateField(blank=False, primary_key=True, verbose_name='Date', default=timezone.now().date())
     c_time = models.CharField(max_length=100, null=True, blank=True, verbose_name='Time (24 hr.)')
     c_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
@@ -15,6 +16,7 @@ class Cafeteria(models.Model):
     c_monitor = models.CharField(max_length=100, null=True, blank=True, verbose_name='Telephone Monitor')
     c_directors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Patient/Visitor Director(s)')
     c_runners = models.CharField(max_length=100, null=True, blank=True, verbose_name='Command Centre Runner(s)')
+    c_num_staff = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff Present')
     c_explain = models.NullBooleanField(verbose_name='Explained to Participants')
 
     class Meta:
@@ -43,6 +45,7 @@ class East_Lobby(models.Model):
     e_monitor = models.CharField(max_length=100, null=True, blank=True, verbose_name='Telephone Monitor')
     e_directors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Patient/Visitor Director(s)')
     e_runners = models.CharField(max_length=100, null=True, blank=True, verbose_name='Command Centre Runner(s)')
+    e_num_staff = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff Present')
     e_explain = models.NullBooleanField(verbose_name='Explained to Participants')
 
     class Meta:
@@ -70,6 +73,7 @@ class Town_Centre(models.Model):
     t_monitor = models.CharField(max_length=100, null=True, blank=True, verbose_name='Telephone Monitor')
     t_directors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Patient/Visitor Director(s)')
     t_runners = models.CharField(max_length=100, null=True, blank=True, verbose_name='Command Centre Runner(s)')
+    t_num_staff = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff Present')
     t_explain = models.NullBooleanField(verbose_name='Explained to Participants')
 
     class Meta:
@@ -87,3 +91,14 @@ class Town_Centre(models.Model):
     # def get_absolute_url(self):
     #     """Returns the url to access a detail record for this location."""
     #     return reverse('town_centre_detail', args=[str(self.id)])
+
+
+class CodeStatuses(models.Model):
+    code_red_status = models.CharField(max_length=100, null=True, blank=True, verbose_name='Code Red Status', default='Normal')
+
+    class Meta:
+        verbose_name_plural = 'Code Red Status'
+        verbose_name = 'Code Red Status'
+
+    def __str__(self):
+        return self.code_red_status
