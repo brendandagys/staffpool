@@ -39,7 +39,7 @@
           <!-- <li class="tracker"><a href="{% url 'LIVE' %}"><b><span style="color: red"><img src="{% static "live.png" %}" />LIVE TRACKER</span></b></a></li> -->
           <li class=" shrink_live tracker"><a class="live" href="{% url 'LIVE' %}"><img src="{% static "live.png" %}" /></a></li>
               </br>
-              
+
           <li><a href="{% url 'about' %}"><b>About This Tool</b></a></li>
 
        </br>
@@ -71,7 +71,10 @@
 {% endblock %}
 
       </div>
+
+    {% block index_content %}
       <div class="col-sm-12 col-md-8 col-lg-8">
+    {% endblock %}
 
           {% block content %}
 
@@ -158,7 +161,7 @@ $.ajax({
         });
 
 
-  var myStatusVar = setInterval(status_update, 250);
+  var myStatusVar = setInterval(status_update, 11250);
   function status_update() {
 
       // console.log('GET BEFORE: ' + wait)

@@ -2,6 +2,9 @@
 
 {% block content %}
 
+<div class="row">
+    <div class="center_content col-sm-12">
+
 {% if form.errors %}
 </br><p class="login_string" style='color: red'><b>Your username and password didn't match. Please try again.</b></p>
 {% endif %}
@@ -14,10 +17,10 @@
 </br><p class="login_string" style='color: white'>Please login to see this page.</p>
   {% endif %}
 {% endif %}
-
+<div class="center_content">
 <form method="post" action="{% url 'login' %}" autocomplete="on">
 {% csrf_token %}
-<table>
+<table class="table_center">
 
 <tr>
   <td><span class="login_form" id="login_u">{{ form.username.label_tag }}</span></td>
@@ -30,11 +33,14 @@
 </tr>
 </table>
 
-<input class="btn btn-success" type="submit" value="Login" />
+<input class="login_button btn btn-success" type="submit" value="Login" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
-
+</div>
 <!-- {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}"><span style='color: white'>Lost password?</span></a></p> -->
+
+</div>
+</div>
 
 {% endblock %}
