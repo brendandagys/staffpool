@@ -43,7 +43,12 @@
 <div id="live_header" class="pad_list_left">
 </br> <h1 class="banner list_page_white">Live List of Assigned Staff</h1>
 
-<h4 class="list_page_white">Date of Current Event: {{cafeteria.c_date}}</h4>
+{% if cafeteria %}
+    {% for cafeteria in cafeteria %}
+    <h4 class="list_page_white">Date of Current Event: {{cafeteria.c_date}}</h4>
+    {% endfor %}
+{% endif %}
+
 <p class="list_page_white"><em>Names will appear in real-time below, as the Staff Pool coordinators populate the forms. Page refresh unnecessary!</em></p>
 
 </br>
@@ -166,7 +171,7 @@
 </div> </div>
 
     <script>
-      var myVar = setInterval(results_update, 500);
+      var myVar = setInterval(results_update, 10500);
       function results_update() {
 
       $.ajax({

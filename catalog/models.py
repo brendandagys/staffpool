@@ -6,8 +6,8 @@ import datetime
 # Create your models here.
 class Cafeteria(models.Model):
 
-    c_date = models.DateField(blank=False, primary_key=True, verbose_name='Date', default=timezone.now().date())
-    c_time = models.CharField(max_length=100, null=True, blank=True, verbose_name='Time (24 hr.)')
+    c_date = models.DateField(null=True, blank=False, verbose_name='Date', default=timezone.now().date())
+    c_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=str(datetime.datetime.now().time())[0:5])
     c_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     c_main_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Main Doors')
     c_south_patio_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='South Patio Doors')
@@ -24,7 +24,7 @@ class Cafeteria(models.Model):
         verbose_name = 'Cafeteria'
 
     def __str__(self):
-        if self.c_coordinator == '':
+        if ((self.c_coordinator is None) or (self.c_coordinator == '') or (self.c_coordinator == 'None')): # Last two unnecessary?
             str_value = 'Undeclared Coordinator'
         else:
             str_value = self.c_coordinator
@@ -36,7 +36,7 @@ class Cafeteria(models.Model):
     #     return reverse('cafeteria_detail', args=[str(self.id)])
 
 class East_Lobby(models.Model):
-    e_date = models.DateField(blank=True, primary_key=True, verbose_name='Date', default=timezone.now().date())
+    e_date = models.DateField(null=True, blank=True, verbose_name='Date', default=timezone.now().date())
     e_time = models.CharField(max_length=100, null=True, blank=True, verbose_name='Time (24 hr.)')
     e_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     e_main_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Main Doors')
@@ -65,8 +65,8 @@ class East_Lobby(models.Model):
     #     return reverse('east_lobby_detail', args=[str(self.id)])
 
 class Town_Centre(models.Model):
-    t_date = models.DateField(blank=True, primary_key=True, verbose_name='Date', default=timezone.now().date())
-    t_time = models.CharField(max_length=100, null=True, blank=True, verbose_name='Time (24 hr.)')
+    t_date = models.DateField(null=True, blank=True, verbose_name='Date', default=timezone.now().date())
+    t_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)')
     t_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     t_horticultural = models.CharField(max_length=100, null=True, blank=True, verbose_name='Horticultural Entrance')
     t_town_centre_main_street = models.CharField(max_length=100, null=True, blank=True, verbose_name='Town Centre/Main Street')
@@ -95,10 +95,14 @@ class Town_Centre(models.Model):
 
 class CodeStatuses(models.Model):
     code_red_status = models.CharField(max_length=100, null=True, blank=True, verbose_name='Code Red Status', default='Normal')
+    status_setter = models.CharField(max_length=100, null=True, blank=True, verbose_name='Status Setter')
+    from_location = models.CharField(max_length=100, null=True, blank=True, verbose_name='From')
+    to_location = models.CharField(max_length=100, null=True, blank=True, verbose_name='To')
 
     class Meta:
         verbose_name_plural = 'Code Red Status'
         verbose_name = 'Code Red Status'
 
     def __str__(self):
-        return self.code_red_status
+        # return self.code_red_status
+        return ', '.join([self.code_red_status, self.status_setter, self.from_location, self.to_location])

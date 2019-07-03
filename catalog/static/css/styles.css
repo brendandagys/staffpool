@@ -45,8 +45,8 @@ a {
 }
 
 .loader {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid red;    /* #3498db */
+  border: 5px solid red;
+  border-top: 5px solid #f3f3f3;    /* #3498db */
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -321,7 +321,7 @@ h3.grab {
 }
 
 #about-header {
-    font-size: 5rem;
+    font-size: 3rem;
     margin:45px auto 35px auto;
     background-color: #d3d3d3;
     padding: 2rem;

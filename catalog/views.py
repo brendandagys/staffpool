@@ -21,23 +21,31 @@ def cafeteria_form(request):
 
     num_events = Cafeteria.objects.all().count() # All is implied by default
 
-    try:
-        cafeteria_instance = Cafeteria.objects.get(pk=timezone.now())
-    except:
-        cafeteria_instance = Cafeteria()
-
     if request.method == 'POST' and 'c' in request.POST:
+        # print(request.POST['c'])
+        if Cafeteria.objects.last() is None:
+            cafeteria_instance = Cafeteria()
+            print(type(cafeteria_instance))
+            print(cafeteria_instance)
+        else:
+            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
+                cafeteria_instance = Cafeteria.objects.all().order_by('-id')[:1][0]
+            else:
+                cafeteria_instance = Cafeteria()
 
         # Create a form instance and populate it with data from the request (binding):
         form_c = CafeteriaForm(request.POST)
-
+        print(form_c.errors)
+        # print(form_c.cleaned_data['c_time'])
         # Check if the form is valid:
         if form_c.is_valid():
+            print('valid')
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             cafeteria_instance.c_date = form_c.cleaned_data['c_date']
 
             # if form_c.cleaned_data['c_time'].strip() != '':
-            cafeteria_instance.c_time = form_c.cleaned_data['c_time'].strip()
+            # print(form_c.cleaned_data['c_time'])
+            cafeteria_instance.c_time = form_c.cleaned_data['c_time']#.strip()
             # if form_c.cleaned_data['c_coordinator'].strip() != '':
             cafeteria_instance.c_coordinator = form_c.cleaned_data['c_coordinator'].strip()
 
@@ -71,58 +79,44 @@ def cafeteria_form(request):
     else:
 
         try:
-            c_time = Cafeteria.objects.get(pk=timezone.now()).c_time
-        except:
-            c_time = ''
+            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
 
-        try:
-            c_coordinator = Cafeteria.objects.get(pk=timezone.now()).c_coordinator
+                c_time = Cafeteria.objects.last().c_time
+                c_coordinator = Cafeteria.objects.last().c_coordinator # Will return None if no match
+                c_main_doors = Cafeteria.objects.last().c_main_doors
+                c_south_patio_doors = Cafeteria.objects.last().c_south_patio_doors
+                c_north_patio_doors_1 = Cafeteria.objects.last().c_north_patio_doors_1
+                c_north_patio_doors_2 = Cafeteria.objects.last().c_north_patio_doors_2
+                c_monitor = Cafeteria.objects.last().c_monitor
+                c_directors = Cafeteria.objects.last().c_directors
+                c_runners = Cafeteria.objects.last().c_runners
+                c_num_staff = Cafeteria.objects.last().c_num_staff
+                c_explain = Cafeteria.objects.last().c_explain
+
+            else:
+                c_time = str(datetime.datetime.now().time())[0:5]
+                c_coordinator = ''
+                c_main_doors = ''
+                c_south_patio_doors = ''
+                c_north_patio_doors_1 = ''
+                c_north_patio_doors_2 = ''
+                c_monitor = ''
+                c_directors = ''
+                c_runners = ''
+                c_num_staff = ''
+                c_explain = ''
+
         except:
+            c_time = str(datetime.datetime.now().time())[0:5]
             c_coordinator = ''
-
-        try:
-            c_main_doors = Cafeteria.objects.get(pk=timezone.now()).c_main_doors
-        except:
             c_main_doors = ''
-
-        try:
-            c_south_patio_doors = Cafeteria.objects.get(pk=timezone.now()).c_south_patio_doors
-        except:
             c_south_patio_doors = ''
-
-        try:
-            c_north_patio_doors_1 = Cafeteria.objects.get(pk=timezone.now()).c_north_patio_doors_1
-        except:
             c_north_patio_doors_1 = ''
-
-        try:
-            c_north_patio_doors_2 = Cafeteria.objects.get(pk=timezone.now()).c_north_patio_doors_2
-        except:
             c_north_patio_doors_2 = ''
-
-        try:
-            c_monitor = Cafeteria.objects.get(pk=timezone.now()).c_monitor
-        except:
             c_monitor = ''
-
-        try:
-            c_directors = Cafeteria.objects.get(pk=timezone.now()).c_directors
-        except:
             c_directors = ''
-
-        try:
-            c_runners = Cafeteria.objects.get(pk=timezone.now()).c_runners
-        except:
             c_runners = ''
-
-        try:
-            c_num_staff = Cafeteria.objects.get(pk=timezone.now()).c_num_staff
-        except:
             c_num_staff = ''
-
-        try:
-            c_explain = Cafeteria.objects.get(pk=timezone.now()).c_explain
-        except:
             c_explain = ''
 
         form_c = CafeteriaForm(initial={'c_date': timezone.now().date(),
@@ -400,8 +394,46 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
         # Call the base implementation first to get the context
         context = super(LocationListView, self).get_context_data(**kwargs)
 
+        temporary_instance = Cafeteria.objects.last() # last() doesn't return a Queryset!!!
 
-        context['cafeteria'] = Cafeteria.objects.filter(c_date=timezone.now())
+        try:
+
+            if (temporary_instance.c_time is None):
+                temporary_instance.c_time = ''
+
+            if (temporary_instance.c_coordinator is None):
+                temporary_instance.c_coordinator = ''
+
+            if (temporary_instance.c_main_doors is None):
+                temporary_instance.c_main_doors = ''
+
+            if (temporary_instance.c_south_patio_doors is None):
+                temporary_instance.c_south_patio_doors = ''
+
+            if (temporary_instance.c_north_patio_doors_1 is None):
+                temporary_instance.c_north_patio_doors_1 = ''
+
+            if (temporary_instance.c_north_patio_doors_2 is None):
+                temporary_instance.c_north_patio_doors_2 = ''
+
+            if (temporary_instance.c_monitor is None):
+                temporary_instance.c_monitor = ''
+
+            if (temporary_instance.c_directors is None):
+                temporary_instance.c_directors = ''
+
+            if (temporary_instance.c_runners is None):
+                temporary_instance.c_runners = ''
+
+            if (temporary_instance.c_num_staff is None):
+                temporary_instance.c_num_staff = ''
+
+            temporary_instance.save()
+
+            context['cafeteria'] = Cafeteria.objects.all().order_by('-id')[:1]
+
+        except:
+            pass
 
         try:
             if context['cafeteria'][0].c_explain is True:
@@ -410,6 +442,16 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
                 context['c_explainval'] = 'No'
         except:
             pass
+
+
+
+
+
+
+
+
+
+
 
         context['east_lobby'] = East_Lobby.objects.filter(e_date=timezone.now())
 
@@ -420,6 +462,17 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
                 context['e_explainval'] = 'No'
         except:
             pass
+
+
+
+
+
+
+
+
+
+
+
 
         context['town_centre'] = Town_Centre.objects.filter(t_date=timezone.now())
 
@@ -447,11 +500,23 @@ def code_red_status(request):
 
     if request.method == 'GET':
         try:
-            code_red_status = CodeStatuses.objects.all()[0]
+            code_red_status = CodeStatuses.objects.last().code_red_status
+            status_setter = CodeStatuses.objects.last().status_setter
+            from_location = CodeStatuses.objects.last().from_location
+            to_location = CodeStatuses.objects.last().to_location
         except:
-            code_red_status = CodeStatuses()
+            code_red_status = ''
+            status_setter = ''
+            from_location = ''
+            to_location = ''
 
-        code_red_status = code_red_status.code_red_status
+        # code_red_status = code_red_status.code_red_status
+        # print(code_red_status.code_red_status)
+        # print(status_setter)
+        # print(from_location)
+        # status_setter = code_red_status.status_setter
+        # from_location = code_red_status['from_location']
+        # to_location = code_red_status.to_location
         # print(CodeStatuses.objects.all()[0])
         # response_data = {}
         # response_data['code_status'] = CodeStatuses.objects.all()[0]
@@ -461,15 +526,38 @@ def code_red_status(request):
         # context = {'key', 'value'}
         # print (context['code_red_status'])
         # return HttpResponse(context)
-        return JsonResponse({'json_data': code_red_status})
+        return JsonResponse({'code_red_status': code_red_status, 'status_setter': status_setter, 'from_location': from_location, 'to_location': to_location})
 
     elif request.method == 'POST':
         try:
+
             code_red_status_instance = CodeStatuses.objects.all()[0]
+            # print(code_red_status_instance.from_location)
+
+            code_red_status_instance.code_red_status = request.POST['code_red_status']
+            code_red_status_instance.status_setter = request.POST['status_setter']
+
+            try:
+                code_red_status_instance.from_location = request.POST['from_location']
+            except:
+                code_red_status_instance.from_location = ''
+
+            try:
+                code_red_status_instance.to_location = request.POST['to_location']
+            except:
+                code_red_status_instance.to_location = ''
+
+            # print('OKOKOKOKOKOOKOKOKOK')
+            # CodeStatuses.objects.last().code_red_status = request.POST['code_red_status']
+            # CodeStatuses.objects.last().status_setter = request.POST['status_setter']
+            # CodeStatuses.objects.last().from_location = request.POST['from_location']
+            # CodeStatuses.objects.last().to_location = request.POST['to_location']
         except:
             code_red_status_instance = CodeStatuses()
-        print(code_red_status_instance)
-        code_red_status_instance.code_red_status = request.POST['code_red_status']
+        # print(code_red_status_instance)
+        # Assign to the database the new value
+
+
 
         code_red_status_instance.save()
 

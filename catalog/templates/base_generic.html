@@ -91,29 +91,34 @@
 $(document).ready(function() {
 
 var status;
-var status_get;
-var last_status
+var last_status;
+var status_setter;
+var from_location;
+var to_location;
 
 $.ajax({
     type: 'GET',
     url: 'CodeRedStatus/',
     data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-            'status_request': 'yes'
+            'status_request': 'yes' // Is this line only here because you need something?
           },
     // dataType: 'json',          // Apparently not needed
     success: function(response) {
-        status = response['json_data']
-        status_get = response['json_data']
+        status = response['code_red_status'] // Needed?
+        last_status = response['code_red_status']
+        // status_setter = response['status_setter'] // Probably not needed unless I want to exempt setter from notice alert
+        // from_location = response['from_location']
+        // to_location = response['to_location']
 
-        if (response['json_data'] == 'Normal') {
+        if (response['code_red_status'] == 'Normal') {
             $('#status_banner').text('')
         }
 
         else {
 
-            $('#status_banner').text(response['json_data'])
+            $('#status_banner').text(response['code_red_status'])
 
-            if (response.json_data == 'Horizontal Evacuation') {
+            if (response.code_red_status == 'Horizontal Evacuation') {
                 $('#status_banner').addClass('banner_yellow')
             }
             else {
@@ -124,48 +129,72 @@ $.ajax({
 });
 
         $('#status_normal').click(function(e) {
-            status = $('#status_normal').val()
-            $('#status_banner').text('')
-            $('#status_banner').removeClass('banner_yellow')
-            $('#status_banner').removeClass('banner_red')
+            status_setter = prompt("Please enter your name:");
+
+            if (status_setter != null) {
+                status = $('#status_normal').val();
+                from_location = '';
+                to_location = '';
+
+                $('#status_banner').text('');
+                $('#status_banner').removeClass('banner_yellow');
+                $('#status_banner').removeClass('banner_red');
+            }
         });
 
         $('#status_horizontal').click(function(e) {
-            status = $('#status_horizontal').val()
-            $('#status_banner').text('Horizontal Evacuation')
-            $('#status_banner').addClass('banner_yellow')
-            $('#status_banner').removeClass('banner_red')
+            status_setter = prompt("Please enter your name:");
+            from_location = prompt("From:");
+            to_location = prompt("To:");
 
+            if (status_setter != null && from_location != null && to_location != null) {
+                status = $('#status_horizontal').val();
+
+                $('#status_banner').text('Horizontal Evacuation');
+                $('#status_banner').addClass('banner_yellow');
+                $('#status_banner').removeClass('banner_red');
+            }
         });
 
         $('#status_full_evac').click(function(e) {
-            status = $('#status_full_evac').val()
-            $('#status_banner').text('Full Evacuation')
-            $('#status_banner').addClass('banner_red')
-            $('#status_banner').removeClass('banner_yellow')
+            status_setter = prompt("Please enter your name:");
 
+            if (status_setter != null) {
+                status = $('#status_full_evac').val();
+                from_location = '';
+                to_location = '';
+
+                $('#status_banner').text('Full Evacuation');
+                $('#status_banner').addClass('banner_red');
+                $('#status_banner').removeClass('banner_yellow');
+            }
         });
 
         $(':button').click(function(e) {
 
-            $.ajax({
-                type: "POST",
-                url: "CodeRedStatus/",
-                data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                        'code_red_status': status
-                      },
-                success: function () {
-                    console.log('Post success!');
-                }
-            });
+            if (status_setter != null && from_location != null && to_location != null) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "CodeRedStatus/",
+                    data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                            'code_red_status': status,
+                            'status_setter': status_setter,
+                            'from_location': from_location,
+                            'to_location': to_location
+                          },
+                    success: function () {
+                        console.log('Post success!');
+                    }
+                });
+            }
         });
 
 
-  var myStatusVar = setInterval(status_update, 11250);
+  var myStatusVar = setInterval(status_update, 5250);
   function status_update() {
 
       // console.log('GET BEFORE: ' + wait)
-
 
   $.ajax({
       type: 'GET',
@@ -178,27 +207,28 @@ $.ajax({
           // alert('The status has been changed to ' + response['json_data'])
           // console.log('GET SUCCESS 1 : ' + wait)
 
-          if (response['json_data'] == 'Normal') {
+          if (response['code_red_status'] == 'Normal') {
             $('#status_banner').text('')
           }
-          else if (response['json_data'] == 'Horizontal Evacuation') {
-            $('#status_banner').text('Horizontal Evacuation')
+          else if (response['code_red_status'] == 'Horizontal Evacuation') {
+            $('#status_banner').text('Horizontal Evacuation from ' + response['from_location'] + ' to ' + response['to_location'])
             $('#status_banner').addClass('banner_yellow')
             $('#status_banner').removeClass('banner_red')
             }
-          else if (response['json_data'] == 'Full Evacuation') {
+          else if (response['code_red_status'] == 'Full Evacuation') {
             $('#status_banner').text('Full Evacuation')
             $('#status_banner').addClass('banner_red')
             $('#status_banner').removeClass('banner_yellow')
           }
 
-        if (response['json_data'] != status_get) {
-            status = response['json_data']; // I don't think this is necessary
+        if (response['code_red_status'] != last_status) {
+            status = response['code_red_status']; // I don't think this is necessary // I THINK IT IS
+            last_status = response['code_red_status'];
             // console.log('GET SUCCESS 2 : ' + wait)
             // if (wait == '0') {
-            alert('The status has been changed from ' + status_get + ' to ' + status);
+            alert(response['status_setter'] + ' has set the status from ' + last_status + ' to ' + status);
             // }
-            status_get = response['json_data'];
+
         }
     }
   });
