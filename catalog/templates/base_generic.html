@@ -59,7 +59,7 @@
 {% endblock %}
 
 {% block set_statuses %}
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user.get_username == 'brendan' %}
 
     <div id="status_list">
         <input id="status_normal" class="status_button btn btn-success" type="button" value="Normal" name="upgrade_button"> </br>
@@ -104,75 +104,116 @@ $.ajax({
           },
     // dataType: 'json',          // Apparently not needed
     success: function(response) {
-        status = response['code_red_status'] // Needed?
-        last_status = response['code_red_status']
+        status = response['code_red_status']; // Needed?
+        last_status = response['code_red_status'];
         // status_setter = response['status_setter'] // Probably not needed unless I want to exempt setter from notice alert
         // from_location = response['from_location']
         // to_location = response['to_location']
 
         if (response['code_red_status'] == 'Normal') {
-            $('#status_banner').text('')
+            $('#status_banner').text('');
         }
 
         else {
 
-            $('#status_banner').text(response['code_red_status'])
+            $('#status_banner').text(response['code_red_status']);
 
             if (response.code_red_status == 'Horizontal Evacuation') {
-                $('#status_banner').addClass('banner_yellow')
+                $('#status_banner').addClass('banner_yellow');
             }
             else {
-                $('#status_banner').addClass('banner_red')
+                $('#status_banner').addClass('banner_red');
             }
       }
   }
 });
 
         $('#status_normal').click(function(e) {
-            status_setter = prompt("Please enter your name:");
+            if (status != 'Normal') {
 
-            if (status_setter != null) {
-                status = $('#status_normal').val();
-                from_location = '';
-                to_location = '';
+                status_setter = prompt("Please enter your name:");
 
-                $('#status_banner').text('');
-                $('#status_banner').removeClass('banner_yellow');
-                $('#status_banner').removeClass('banner_red');
+                if ((status_setter != null) && (status_setter != '')) {
+                    status = $('#status_normal').val();
+                    last_status = $('#status_normal').val();
+                    from_location = '';
+                    to_location = '';
+
+                    $('#status_banner').text('');
+                    $('#status_banner').removeClass('banner_yellow');
+                    $('#status_banner').removeClass('banner_red');
+                }
+                else if (status_setter == '') {
+                    alert("You must give a name.");
+                }
+            }
+            else {
+                alert("The status is already set to Normal!");
             }
         });
 
         $('#status_horizontal').click(function(e) {
             status_setter = prompt("Please enter your name:");
-            from_location = prompt("From:");
-            to_location = prompt("To:");
 
-            if (status_setter != null && from_location != null && to_location != null) {
-                status = $('#status_horizontal').val();
+            if (status_setter != null && status_setter != '') {
 
-                $('#status_banner').text('Horizontal Evacuation');
-                $('#status_banner').addClass('banner_yellow');
-                $('#status_banner').removeClass('banner_red');
+                from_location = prompt("From:");
+
+                if (from_location != null && from_location != '') {
+
+                    to_location = prompt("To:");
+
+                    if (to_location != null && to_location != '') {
+
+                        // if (status_setter != null && from_location != null && to_location != null) {
+                        status = $('#status_horizontal').val();
+                        last_status = $('#status_horizontal').val();
+
+                        $('#status_banner').text('Horizontal Evacuation');
+                        $('#status_banner').addClass('banner_yellow');
+                        $('#status_banner').removeClass('banner_red');
+                        }
+                    else if (to_location == '') {
+                        alert('You must provide a To location.');
+                    }
+                }
+                else if (from_location == '') {
+                    alert('You must provide a From location.');
+                }
+            }
+            else if (status_setter == '') {
+                alert('You must give a name.');
             }
         });
 
         $('#status_full_evac').click(function(e) {
-            status_setter = prompt("Please enter your name:");
+            if (status != 'Full Evacuation') {
 
-            if (status_setter != null) {
-                status = $('#status_full_evac').val();
-                from_location = '';
-                to_location = '';
+                status_setter = prompt("Please enter your name:");
 
-                $('#status_banner').text('Full Evacuation');
-                $('#status_banner').addClass('banner_red');
-                $('#status_banner').removeClass('banner_yellow');
+                if ((status_setter != null) && (status_setter != '')) {
+                    status = $('#status_full_evac').val();
+                    last_status = $('#status_full_evac').val();
+                    from_location = '';
+                    to_location = '';
+
+                    $('#status_banner').text('Full Evacuation');
+                    $('#status_banner').addClass('banner_red');
+                    $('#status_banner').removeClass('banner_yellow');
+                }
+
+                else if (status_setter == '') { //If they click cancel, I'll get a Uncaught TypeError for no strip method existing for null
+                    alert("You must give a name.");
+                }
+            }
+            else {
+                alert("The status is already set to Full Evacuation!");
             }
         });
 
         $(':button').click(function(e) {
 
-            if (status_setter != null && from_location != null && to_location != null) {
+            if (status_setter != null && status_setter != '' && from_location != null && to_location != null) {
 
                 $.ajax({
                     type: "POST",
@@ -191,7 +232,7 @@ $.ajax({
         });
 
 
-  var myStatusVar = setInterval(status_update, 5250);
+  var myStatusVar = setInterval(status_update, 3000);
   function status_update() {
 
       // console.log('GET BEFORE: ' + wait)
@@ -222,11 +263,11 @@ $.ajax({
           }
 
         if (response['code_red_status'] != last_status) {
-            status = response['code_red_status']; // I don't think this is necessary // I THINK IT IS
             last_status = response['code_red_status'];
             // console.log('GET SUCCESS 2 : ' + wait)
             // if (wait == '0') {
-            alert(response['status_setter'] + ' has set the status from ' + last_status + ' to ' + status);
+            alert(response['status_setter'] + ' has set the status from ' + status + ' to ' + last_status);
+            status = response['code_red_status'];
             // }
 
         }

@@ -37,7 +37,7 @@ class Cafeteria(models.Model):
 
 class East_Lobby(models.Model):
     e_date = models.DateField(null=True, blank=True, verbose_name='Date', default=timezone.now().date())
-    e_time = models.CharField(max_length=100, null=True, blank=True, verbose_name='Time (24 hr.)')
+    e_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=str(datetime.datetime.now().time())[0:5])
     e_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     e_main_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Main Doors')
     e_lab_entrance = models.CharField(max_length=100, null=True, blank=True, verbose_name='Lab Entrance')
@@ -66,7 +66,7 @@ class East_Lobby(models.Model):
 
 class Town_Centre(models.Model):
     t_date = models.DateField(null=True, blank=True, verbose_name='Date', default=timezone.now().date())
-    t_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)')
+    t_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=str(datetime.datetime.now().time())[0:5])
     t_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     t_horticultural = models.CharField(max_length=100, null=True, blank=True, verbose_name='Horticultural Entrance')
     t_town_centre_main_street = models.CharField(max_length=100, null=True, blank=True, verbose_name='Town Centre/Main Street')

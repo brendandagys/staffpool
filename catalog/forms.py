@@ -11,8 +11,6 @@ class CafeteriaForm(forms.Form):
     c_date = forms.DateField(label='Date:', disabled=True, initial=timezone.now().date(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                  'placeholder': 'Date (yyyy-mm-dd)...'}))
 
-    # c_time = forms.TimeField(required=True, label='Time (24 hr.)', widget=forms.widgets.TimeInput(attrs={'class': 'time-pick'}), input_formats=['%H:%M', '%I:%M%p', '%I:%M %p'])
-
     c_time = forms.CharField(required=False, label='Time (24 hr.)', disabled=True, initial=str(datetime.datetime.now().time())[0:5], widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm',
                                                                                                   'placeholder': 'Time...'}))
 
@@ -102,7 +100,7 @@ class East_LobbyForm(forms.Form):
     e_date = forms.DateField(label='Date:', disabled=True, initial=timezone.now().date(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                  'placeholder': 'Date (yyyy-mm-dd)...'}))
 
-    e_time = forms.CharField(required=False, label='Time (24 hr.)', widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm',
+    e_time = forms.CharField(required=False, label='Time (24 hr.)', disabled=True, initial=str(datetime.datetime.now().time())[0:5], widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm',
                                                                                                   'placeholder': 'Time...'}))
 
     e_coordinator = forms.CharField(required=False, label='Staff Pool Coordinator', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
@@ -180,7 +178,7 @@ class Town_CentreForm(forms.Form):
     t_date = forms.DateField(label='Date:', disabled=True, initial=timezone.now().date(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                  'placeholder': 'Date (yyyy-mm-dd)...'}))
 
-    t_time = forms.CharField(required=False, label='Time (24 hr.)', widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm',
+    t_time = forms.CharField(required=False, label='Time (24 hr.)', disabled=True, initial=str(datetime.datetime.now().time())[0:5], widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm',
                                                                                                   'placeholder': 'Time...'}))
 
     t_coordinator = forms.CharField(required=False, label='Staff Pool Coordinator', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',

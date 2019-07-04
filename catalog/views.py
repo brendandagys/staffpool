@@ -22,14 +22,15 @@ def cafeteria_form(request):
     num_events = Cafeteria.objects.all().count() # All is implied by default
 
     if request.method == 'POST' and 'c' in request.POST:
-        # print(request.POST['c'])
+
         if Cafeteria.objects.last() is None:
             cafeteria_instance = Cafeteria()
-            print(type(cafeteria_instance))
-            print(cafeteria_instance)
+
         else:
+            
             if ((Cafeteria.objects.last().c_date == timezone.now().date()) and (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
                 cafeteria_instance = Cafeteria.objects.all().order_by('-id')[:1][0]
+
             else:
                 cafeteria_instance = Cafeteria()
 
