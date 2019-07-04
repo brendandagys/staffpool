@@ -27,7 +27,7 @@ def cafeteria_form(request):
             cafeteria_instance = Cafeteria()
 
         else:
-            
+
             if ((Cafeteria.objects.last().c_date == timezone.now().date()) and (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
                 cafeteria_instance = Cafeteria.objects.all().order_by('-id')[:1][0]
 
@@ -36,39 +36,23 @@ def cafeteria_form(request):
 
         # Create a form instance and populate it with data from the request (binding):
         form_c = CafeteriaForm(request.POST)
-        print(form_c.errors)
-        # print(form_c.cleaned_data['c_time'])
+        # print(form_c.errors)
+
         # Check if the form is valid:
         if form_c.is_valid():
-            print('valid')
+
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             cafeteria_instance.c_date = form_c.cleaned_data['c_date']
-
-            # if form_c.cleaned_data['c_time'].strip() != '':
-            # print(form_c.cleaned_data['c_time'])
             cafeteria_instance.c_time = form_c.cleaned_data['c_time']#.strip()
-            # if form_c.cleaned_data['c_coordinator'].strip() != '':
             cafeteria_instance.c_coordinator = form_c.cleaned_data['c_coordinator'].strip()
-
-            # if form_c.cleaned_data['c_main_doors'].strip() != '':
             cafeteria_instance.c_main_doors = form_c.cleaned_data['c_main_doors'].strip()
-            # if form_c.cleaned_data['c_south_patio_doors'].strip() != '':
             cafeteria_instance.c_south_patio_doors = form_c.cleaned_data['c_south_patio_doors'].strip()
-            # if form_c.cleaned_data['c_north_patio_doors_1'].strip() != '':
             cafeteria_instance.c_north_patio_doors_1 = form_c.cleaned_data['c_north_patio_doors_1'].strip()
-            # if form_c.cleaned_data['c_north_patio_doors_2'].strip() != '':
             cafeteria_instance.c_north_patio_doors_2 = form_c.cleaned_data['c_north_patio_doors_2'].strip()
-
-            # if form_c.cleaned_data['c_monitor'].strip() != '':
             cafeteria_instance.c_monitor = form_c.cleaned_data['c_monitor'].strip()
-            # if form_c.cleaned_data['c_directors'].strip() != '':
             cafeteria_instance.c_directors = form_c.cleaned_data['c_directors'].strip()
-            # if form_c.cleaned_data['c_runners'].strip() != '':
             cafeteria_instance.c_runners = form_c.cleaned_data['c_runners'].strip()
-            # if form_c.cleaned_data['c_explain'] != '':
-
             cafeteria_instance.c_num_staff = form_c.cleaned_data['c_num_staff'].strip()
-
             cafeteria_instance.c_explain = form_c.cleaned_data['c_explain']
 
             cafeteria_instance.save()
@@ -148,45 +132,38 @@ def east_lobby_form(request):
 
     num_events = East_Lobby.objects.all().count() # All is implied by default
 
-    try:
-        east_lobby_instance = East_Lobby.objects.get(pk=timezone.now())
-    except:
-        east_lobby_instance = East_Lobby()
-
     if request.method == 'POST' and 'e' in request.POST:
+
+        if East_Lobby.objects.last() is None:
+            east_lobby_instance = East_Lobby()
+
+        else:
+
+            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and (abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
+                east_lobby_instance = East_Lobby.objects.all().order_by('-id')[:1][0]
+
+            else:
+                east_lobby_instance = East_Lobby()
 
         # Create a form instance and populate it with data from the request (binding):
         form_e = East_LobbyForm(request.POST)
+        # print(form_c.errors)
 
         # Check if the form is valid:
         if form_e.is_valid():
+
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             east_lobby_instance.e_date = form_e.cleaned_data['e_date']
-
-            # if form_e.cleaned_data['e_time'].strip() != '':
-            east_lobby_instance.e_time = form_e.cleaned_data['e_time'].strip()
-            # if form_e.cleaned_data['e_coordinator'].strip() != '':
+            east_lobby_instance.e_time = form_e.cleaned_data['e_time']#.strip()
             east_lobby_instance.e_coordinator = form_e.cleaned_data['e_coordinator'].strip()
-
-            # if form_e.cleaned_data['e_main_doors'].strip() != '':
             east_lobby_instance.e_main_doors = form_e.cleaned_data['e_main_doors'].strip()
-            # if form_e.cleaned_data['e_lab_entrance'].strip() != '':
             east_lobby_instance.e_lab_entrance = form_e.cleaned_data['e_lab_entrance'].strip()
-            # if form_e.cleaned_data['e_ed_entrance'].strip() != '':
             east_lobby_instance.e_ed_entrance = form_e.cleaned_data['e_ed_entrance'].strip()
-
-            # if form_e.cleaned_data['e_monitor'].strip() != '':
             east_lobby_instance.e_monitor = form_e.cleaned_data['e_monitor'].strip()
-            # if form_e.cleaned_data['e_directors'].strip() != '':
             east_lobby_instance.e_directors = form_e.cleaned_data['e_directors'].strip()
-            # if form_e.cleaned_data['e_runners'].strip() != '':
             east_lobby_instance.e_runners = form_e.cleaned_data['e_runners'].strip()
-
             east_lobby_instance.e_num_staff = form_e.cleaned_data['e_num_staff'].strip()
-
-            # if form_e.cleaned_data['e_explain'] != '':
             east_lobby_instance.e_explain = form_e.cleaned_data['e_explain']
-
 
             east_lobby_instance.save()
 
@@ -197,72 +174,60 @@ def east_lobby_form(request):
     else:
 
         try:
-            e_time = East_Lobby.objects.get(pk=timezone.now()).e_time
-        except:
-            e_time = ''
+            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and (abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
 
-        try:
-            e_coordinator = East_Lobby.objects.get(pk=timezone.now()).e_coordinator
+                e_time = East_Lobby.objects.last().e_time
+                e_coordinator = East_Lobby.objects.last().e_coordinator # Will return None if no match
+                e_main_doors = East_Lobby.objects.last().e_main_doors
+                e_lab_entrance = East_Lobby.objects.last().e_lab_entrance
+                e_ed_entrance = East_Lobby.objects.last().e_ed_entrance
+                e_monitor = East_Lobby.objects.last().e_monitor
+                e_directors = East_Lobby.objects.last().e_directors
+                e_runners = East_Lobby.objects.last().e_runners
+                e_num_staff = East_Lobby.objects.last().e_num_staff
+                e_explain = East_Lobby.objects.last().e_explain
+
+            else:
+                e_time = str(datetime.datetime.now().time())[0:5]
+                e_coordinator = ''
+                e_main_doors = ''
+                e_lab_entrance = ''
+                e_ed_entrance = ''
+                e_monitor = ''
+                e_directors = ''
+                e_runners = ''
+                e_num_staff = ''
+                e_explain = ''
+
         except:
+            e_time = str(datetime.datetime.now().time())[0:5]
             e_coordinator = ''
-
-        try:
-            e_main_doors = East_Lobby.objects.get(pk=timezone.now()).e_main_doors
-        except:
             e_main_doors = ''
-
-        try:
-            e_lab_entrance = East_Lobby.objects.get(pk=timezone.now()).e_lab_entrance
-        except:
             e_lab_entrance = ''
-
-        try:
-            e_ed_entrance = East_Lobby.objects.get(pk=timezone.now()).e_ed_entrance
-        except:
             e_ed_entrance = ''
-
-        try:
-            e_monitor = East_Lobby.objects.get(pk=timezone.now()).e_monitor
-        except:
             e_monitor = ''
-
-        try:
-            e_directors = East_Lobby.objects.get(pk=timezone.now()).e_directors
-        except:
             e_directors = ''
-
-        try:
-            e_runners = East_Lobby.objects.get(pk=timezone.now()).e_runners
-        except:
             e_runners = ''
-
-        try:
-            e_num_staff = East_Lobby.objects.get(pk=timezone.now()).e_num_staff
-        except:
             e_num_staff = ''
-
-        try:
-            e_explain = East_Lobby.objects.get(pk=timezone.now()).e_explain
-        except:
             e_explain = ''
 
-        form_e = East_LobbyForm(initial={'e_date': timezone.now(),
-                                         'e_time': e_time,
-                                         'e_coordinator': e_coordinator,
-                                         'e_main_doors': e_main_doors,
-                                         'e_lab_entrance': e_lab_entrance,
-                                         'e_ed_entrance': e_ed_entrance,
-                                         'e_monitor': e_monitor,
-                                         'e_directors': e_directors,
-                                         'e_runners': e_runners,
-                                         'e_num_staff': e_num_staff,
-                                         'e_explain': e_explain
-                                         })
+        form_e = East_LobbyForm(initial={'e_date': timezone.now().date(),
+                                        'e_time': e_time,
+                                        'e_coordinator': e_coordinator,
+                                        'e_main_doors': e_main_doors,
+                                        'e_lab_entrance': e_lab_entrance,
+                                        'e_ed_entrance': e_ed_entrance,
+                                        'e_monitor': e_monitor,
+                                        'e_directors': e_directors,
+                                        'e_runners': e_runners,
+                                        'e_num_staff': e_num_staff,
+                                        'e_explain': e_explain
+                                        })
 
     context = { 'num_events': num_events,
                 'form_e': form_e, }
 
-    # Render the HTML template with the data in the context variable
+    # Render the HTML template index.html with the data in the context variable
     return render(request, 'east_lobby_form.html', context=context)
 
 # ==================================================================================================
@@ -273,43 +238,37 @@ def town_centre_form(request):
 
     num_events = Town_Centre.objects.all().count() # All is implied by default
 
-    try:
-        town_centre_instance = Town_Centre.objects.get(pk=timezone.now())
-    except:
-        town_centre_instance = Town_Centre()
-
     if request.method == 'POST' and 't' in request.POST:
+
+        if Town_Centre.objects.last() is None:
+            town_centre_instance = Town_Centre()
+
+        else:
+
+            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and (abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
+                town_centre_instance = Town_Centre.objects.all().order_by('-id')[:1][0]
+
+            else:
+                town_centre_instance = Town_Centre()
 
         # Create a form instance and populate it with data from the request (binding):
         form_t = Town_CentreForm(request.POST)
+        # print(form_c.errors)
 
         # Check if the form is valid:
         if form_t.is_valid():
+
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             town_centre_instance.t_date = form_t.cleaned_data['t_date']
-
-            # if form_t.cleaned_data['t_time'].strip() != '':
-            town_centre_instance.t_time = form_t.cleaned_data['t_time'].strip()
-            # if form_t.cleaned_data['t_coordinator'].strip() != '':
+            town_centre_instance.t_time = form_t.cleaned_data['t_time']#.strip()
             town_centre_instance.t_coordinator = form_t.cleaned_data['t_coordinator'].strip()
-
-            # if form_t.cleaned_data['t_horticultural'].strip() != '':
-            town_centre_instance.t_horticultural = form_t.cleaned_data['t_horticultural'].strip()
-            # if form_t.cleaned_data['t_town_centre_main_street'].strip() != '':
+            town_centre_instance.t_main_doors = form_t.cleaned_data['t_main_doors'].strip()
             town_centre_instance.t_town_centre_main_street = form_t.cleaned_data['t_town_centre_main_street'].strip()
-
-            # if form_t.cleaned_data['t_monitor'].strip() != '':
             town_centre_instance.t_monitor = form_t.cleaned_data['t_monitor'].strip()
-            # if form_t.cleaned_data['t_directors'].strip() != '':
             town_centre_instance.t_directors = form_t.cleaned_data['t_directors'].strip()
-            # if form_t.cleaned_data['t_runners'].strip() != '':
             town_centre_instance.t_runners = form_t.cleaned_data['t_runners'].strip()
-
             town_centre_instance.t_num_staff = form_t.cleaned_data['t_num_staff'].strip()
-
-            # if form_t.cleaned_data['t_explain'] != '':
             town_centre_instance.t_explain = form_t.cleaned_data['t_explain']
-
 
             town_centre_instance.save()
 
@@ -320,70 +279,59 @@ def town_centre_form(request):
     else:
 
         try:
-            t_time = Town_Centre.objects.get(pk=timezone.now()).t_time
-        except:
-            t_time = ''
+            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and (abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
 
-        try:
-            t_coordinator = Town_Centre.objects.get(pk=timezone.now()).t_coordinator
+                t_time = Town_Centre.objects.last().t_time
+                t_coordinator = Town_Centre.objects.last().t_coordinator # Will return None if no match
+                t_main_doors = Town_Centre.objects.last().t_main_doors
+                t_town_centre_main_street = Town_Centre.objects.last().t_town_centre_main_street
+                t_monitor = Town_Centre.objects.last().t_monitor
+                t_directors = Town_Centre.objects.last().t_directors
+                t_runners = Town_Centre.objects.last().t_runners
+                t_num_staff = Town_Centre.objects.last().t_num_staff
+                t_explain = Town_Centre.objects.last().t_explain
+
+            else:
+                t_time = str(datetime.datetime.now().time())[0:5]
+                t_coordinator = ''
+                t_main_doors = ''
+                t_town_centre_main_street = ''
+                t_monitor = ''
+                t_directors = ''
+                t_runners = ''
+                t_num_staff = ''
+                t_explain = ''
+
         except:
+            t_time = str(datetime.datetime.now().time())[0:5]
             t_coordinator = ''
-
-        try:
-            t_horticultural = Town_Centre.objects.get(pk=timezone.now()).t_horticultural
-        except:
-            t_horticultural = ''
-
-        try:
-            t_town_centre_main_street = Town_Centre.objects.get(pk=timezone.now()).t_town_centre_main_street
-        except:
+            t_main_doors = ''
             t_town_centre_main_street = ''
-
-        try:
-            t_monitor = Town_Centre.objects.get(pk=timezone.now()).t_monitor
-        except:
             t_monitor = ''
-
-        try:
-            t_directors = Town_Centre.objects.get(pk=timezone.now()).t_directors
-        except:
             t_directors = ''
-
-        try:
-            t_runners = Town_Centre.objects.get(pk=timezone.now()).t_runners
-        except:
             t_runners = ''
-
-        try:
-            t_num_staff = Town_Centre.objects.get(pk=timezone.now()).t_num_staff
-        except:
             t_num_staff = ''
-
-        try:
-            t_explain = Town_Centre.objects.get(pk=timezone.now()).t_explain
-        except:
             t_explain = ''
 
-        form_t = Town_CentreForm(initial={'t_date': timezone.now(),
-                                          't_time': t_time,
-                                          't_coordinator': t_coordinator,
-                                          't_horticultural': t_horticultural,
-                                          't_town_centre_main_street': t_town_centre_main_street,
-                                          't_monitor': t_monitor,
-                                          't_directors': t_directors,
-                                          't_runners': t_runners,
-                                          't_num_staff': t_num_staff,
-                                          't_explain': t_explain
-                                          })
+        form_c = Town_CentreForm(initial={'t_date': timezone.now().date(),
+                                        't_time': t_time,
+                                        't_coordinator': t_coordinator,
+                                        't_main_doors': t_main_doors,
+                                        't_town_centre_main_street': t_town_centre_main_street,
+                                        't_monitor': t_monitor,
+                                        't_directors': t_directors,
+                                        't_runners': t_runners,
+                                        't_num_staff': t_num_staff,
+                                        't_explain': t_explain
+                                        })
 
     context = { 'num_events': num_events,
                 'form_t': form_t, }
 
-    # Render the HTML template with the data in the context variable
+    # Render the HTML template index.html with the data in the context variable
     return render(request, 'town_centre_form.html', context=context)
 
 # ==================================================================================================
-
 
 class LocationListView(LoginRequiredMixin, generic.ListView):
     model = Cafeteria
@@ -445,16 +393,43 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
             pass
 
 
+        temporary_instance_e = East_Lobby.objects.last() # last() doesn't return a Queryset!!!
 
+        try:
 
+            if (temporary_instance_e.e_time is None):
+                temporary_instance_e.e_time = ''
 
+            if (temporary_instance_e.e_coordinator is None):
+                temporary_instance_e.e_coordinator = ''
 
+            if (temporary_instance_e.e_main_doors is None):
+                temporary_instance_e.e_main_doors = ''
 
+            if (temporary_instance_e.e_lab_entrance is None):
+                temporary_instance_e.e_lab_entrance = ''
 
+            if (temporary_instance_e.e_ed_entrance is None):
+                temporary_instance_e.e_ed_entrance = ''
 
+            if (temporary_instance_e.e_monitor is None):
+                temporary_instance_e.e_monitor = ''
 
+            if (temporary_instance_e.e_directors is None):
+                temporary_instance_e.e_directors = ''
 
-        context['east_lobby'] = East_Lobby.objects.filter(e_date=timezone.now())
+            if (temporary_instance_e.e_runners is None):
+                temporary_instance_e.e_runners = ''
+
+            if (temporary_instance_e.e_num_staff is None):
+                temporary_instance_e.e_num_staff = ''
+
+            temporary_instance_e.save()
+
+            context['east_lobby'] = East_Lobby.objects.all().order_by('-id')[:1]
+
+        except:
+            pass
 
         try:
             if context['east_lobby'][0].e_explain is True:
@@ -465,17 +440,40 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
             pass
 
 
+        temporary_instance_t = Town_Centre.objects.last() # last() doesn't return a Queryset!!!
 
+        try:
 
+            if (temporary_instance_t.t_time is None):
+                temporary_instance_t.t_time = ''
 
+            if (temporary_instance_t.t_coordinator is None):
+                temporary_instance_t.t_coordinator = ''
 
+            if (temporary_instance_t.t_main_doors is None):
+                temporary_instance_t.t_main_doors = ''
 
+            if (temporary_instance_t.t_town_centre_main_street is None):
+                temporary_instance_t.t_town_centre_main_street = ''
 
+            if (temporary_instance_t.t_monitor is None):
+                temporary_instance_t.t_monitor = ''
 
+            if (temporary_instance_t.t_directors is None):
+                temporary_instance_t.t_directors = ''
 
+            if (temporary_instance_t.t_runners is None):
+                temporary_instance_t.t_runners = ''
 
+            if (temporary_instance_t.t_num_staff is None):
+                temporary_instance_t.t_num_staff = ''
 
-        context['town_centre'] = Town_Centre.objects.filter(t_date=timezone.now())
+            temporary_instance_t.save()
+
+            context['town_centre'] = Town_Centre.objects.all().order_by('-id')[:1]
+
+        except:
+            pass
 
         try:
             if context['town_centre'][0].t_explain is True:
@@ -485,8 +483,8 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
         except:
             pass
 
-        return context
 
+        return context
 
 
 def about(request):
@@ -511,22 +509,6 @@ def code_red_status(request):
             from_location = ''
             to_location = ''
 
-        # code_red_status = code_red_status.code_red_status
-        # print(code_red_status.code_red_status)
-        # print(status_setter)
-        # print(from_location)
-        # status_setter = code_red_status.status_setter
-        # from_location = code_red_status['from_location']
-        # to_location = code_red_status.to_location
-        # print(CodeStatuses.objects.all()[0])
-        # response_data = {}
-        # response_data['code_status'] = CodeStatuses.objects.all()[0]
-        # response_data['message'] = 'My message'
-        # response_instance = HttpResponse()
-        # response_instance['code_red_status'] = context['code_red_status']
-        # context = {'key', 'value'}
-        # print (context['code_red_status'])
-        # return HttpResponse(context)
         return JsonResponse({'code_red_status': code_red_status, 'status_setter': status_setter, 'from_location': from_location, 'to_location': to_location})
 
     elif request.method == 'POST':
@@ -548,17 +530,8 @@ def code_red_status(request):
             except:
                 code_red_status_instance.to_location = ''
 
-            # print('OKOKOKOKOKOOKOKOKOK')
-            # CodeStatuses.objects.last().code_red_status = request.POST['code_red_status']
-            # CodeStatuses.objects.last().status_setter = request.POST['status_setter']
-            # CodeStatuses.objects.last().from_location = request.POST['from_location']
-            # CodeStatuses.objects.last().to_location = request.POST['to_location']
         except:
             code_red_status_instance = CodeStatuses()
-        # print(code_red_status_instance)
-        # Assign to the database the new value
-
-
 
         code_red_status_instance.save()
 
