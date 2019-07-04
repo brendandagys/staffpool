@@ -28,7 +28,10 @@ def cafeteria_form(request):
 
         else:
 
-            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
+            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
+               ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+               ( (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+               
                 cafeteria_instance = Cafeteria.objects.all().order_by('-id')[:1][0]
 
             else:
@@ -64,7 +67,9 @@ def cafeteria_form(request):
     else:
 
         try:
-            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
+            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
+               ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+               ( (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
                 c_time = Cafeteria.objects.last().c_time
                 c_coordinator = Cafeteria.objects.last().c_coordinator # Will return None if no match
@@ -139,7 +144,10 @@ def east_lobby_form(request):
 
         else:
 
-            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and (abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
+            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and
+               ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+               ( (abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+
                 east_lobby_instance = East_Lobby.objects.all().order_by('-id')[:1][0]
 
             else:
@@ -174,7 +182,9 @@ def east_lobby_form(request):
     else:
 
         try:
-            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and (abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
+            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and
+               ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+               ( (abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
                 e_time = East_Lobby.objects.last().e_time
                 e_coordinator = East_Lobby.objects.last().e_coordinator # Will return None if no match
@@ -245,7 +255,10 @@ def town_centre_form(request):
 
         else:
 
-            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and (abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
+            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and
+               ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+               ( (abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+
                 town_centre_instance = Town_Centre.objects.all().order_by('-id')[:1][0]
 
             else:
@@ -280,13 +293,9 @@ def town_centre_form(request):
 
         try:
 
-
-            
-            print(abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])))
-
-
-
-            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and (abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
+            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and
+               ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+               ( (abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
                 t_time = Town_Centre.objects.last().t_time
                 t_coordinator = Town_Centre.objects.last().t_coordinator # Will return None if no match
