@@ -45,8 +45,19 @@
 
 {% if cafeteria %}
     {% for cafeteria in cafeteria %}
-    <h4 class="list_page_white">Date of Current Event: {{cafeteria.c_date}}</h4>
+    <h4 class="list_page_white">Date of Event: {{cafeteria.c_date}}</h4>
     {% endfor %}
+
+{% elif east_lobby %}
+    {% for east_lobby in east_lobby %}
+    <h4 class="list_page_white">Date of Event: {{east_lobby.e_date}}</h4>
+    {% endfor %}
+
+{% elif town_centre %}
+    {% for town_centre in town_centre %}
+    <h4 class="list_page_white">Date of Event: {{town_centre.t_date}}</h4>
+    {% endfor %}
+
 {% endif %}
 
 <p class="list_page_white"><em>Names will appear in real-time below, as the Staff Pool coordinators populate the forms. Page refresh unnecessary!</em></p>
@@ -103,16 +114,16 @@
     {% if east_lobby %}
         {% for east_lobby in east_lobby %}
 
-      <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list" id="e1">{{east_lobby.e_time}}</span></b></p>
-      <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list" id="e2">{{east_lobby.e_coordinator}}</b></span></b></p>
-      <p class="labels"><span class="fixed_width">Main Doors:</span><b><span class="site_color_list" id="e3">{{east_lobby.e_main_doors}}</span></b></p>
-      <p class="labels"><span class="fixed_width">Lab Entrance:</span><b><span class="site_color_list" id="e4">{{east_lobby.e_lab_entrance}}</span></b></p>
-      <p class="labels"><span class="fixed_width">ED Entrance:</span><b><span class="site_color_list" id="e5">{{east_lobby.e_ed_entrance}}</span></b></p>
-      <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="e6">{{east_lobby.e_monitor}}</span></b></p>
-      <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="e7">{{east_lobby.e_directors}}</span></b></p>
-      <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="e8">{{east_lobby.e_runners}}</span></b></p>
-      <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list" id="e9">{{east_lobby.e_num_staff}}</span></b></p>
-      <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="e10">{{e_explainval}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list left_align" id="e1">{{east_lobby.e_time}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list left_align" id="e2">{{east_lobby.e_coordinator}}</b></span></b></p>
+      <p class="labels"><span class="fixed_width">Main Doors:</span><b><span class="site_color_list left_align" id="e3">{{east_lobby.e_main_doors}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Lab Entrance:</span><b><span class="site_color_list left_align" id="e4">{{east_lobby.e_lab_entrance}}</span></b></p>
+      <p class="labels"><span class="fixed_width">ED Entrance:</span><b><span class="site_color_list left_align" id="e5">{{east_lobby.e_ed_entrance}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list left_align" id="e6">{{east_lobby.e_monitor}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list left_align" id="e7">{{east_lobby.e_directors}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list left_align" id="e8">{{east_lobby.e_runners}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list left_align" id="e9">{{east_lobby.e_num_staff}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list left_align" id="e10">{{e_explainval}}</span></b></p>
 
     {% endfor %}
 
@@ -142,15 +153,15 @@
     {% if town_centre %}
         {% for town_centre in town_centre %}
 
-        <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list" id="t1">{{town_centre.t_time}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list" id="t2">{{town_centre.t_coordinator}}</b></span></b></p>
-        <p class="labels"><span class="fixed_width">Horticultural Entrance:</span><b><span class="site_color_list" id="t3">{{town_centre.t_horticultural}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Town Centre/Main Street:</span><b><span class="site_color_list" id="t4">{{town_centre.t_town_centre_main_street}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="t5">{{town_centre.t_monitor}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="t6">{{town_centre.t_directors}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="t7">{{town_centre.t_runners}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list" id="t8">{{town_centre.t_num_staff}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list" id="t9">{{t_explainval}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list left_align" id="t1">{{town_centre.t_time}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list left_align" id="t2">{{town_centre.t_coordinator}}</b></span></b></p>
+        <p class="labels"><span class="fixed_width">Horticultural Entrance:</span><b><span class="site_color_list left_align" id="t3">{{town_centre.t_horticultural}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Town Centre/Main Street:</span><b><span class="site_color_list left_align" id="t4">{{town_centre.t_town_centre_main_street}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list left_align" id="t5">{{town_centre.t_monitor}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list left_align" id="t6">{{town_centre.t_directors}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list left_align" id="t7">{{town_centre.t_runners}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Number of Staff Present:</span><b><span class="site_color_list left_align" id="t8">{{town_centre.t_num_staff}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Instructed Participants:</span><b><span class="site_color_list left_align" id="t9">{{t_explainval}}</span></b></p>
 
     {% endfor %}
 

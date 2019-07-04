@@ -2,16 +2,18 @@
 
 {% block content %}
 
-<div class="my_header">
+<div class="center_content my_header">
 
 </br><h1 class="">NBRHC Staff Pool</h1>
   <h4><span class="indicator">Town Centre</span> Submission Form</h4>
   <p><em>Please enter the event time and the names of assigned staff:</em></p> </br>
 </div>
 
-<div class="main_div container-fluid">
+<div>
 
-  <form id="town_centre_form_html" action="" method="post">
+<!-- <div class="main_div container-fluid"> -->
+
+  <form class="trim_form" id="town_centre_form_html" action="" method="post">
     {% csrf_token %}
     <table>
     {{ form_t }}
@@ -20,11 +22,14 @@
     <input class="btn btn-primary" type="submit" value="Update" name="t">
   </form>
 
+      <!-- </div> -->
+
+    </br></br>
+    <p class="center_other_content past_data">Number of past Town Centre Staff Pool submissions:<br/>
+        <strong id="past_size">{{num_events}}</strong></p>
 </div>
 
-</br></br>
-  <span class="past_data">Number of past Town Centre Staff Pool submissions: &nbsp <strong>{{num_events}}</strong></span>
-<p class="hide">...</p>
+<!-- <p class="hide">...</p> -->
 
 <script type="text/javascript">
 

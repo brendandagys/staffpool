@@ -262,7 +262,7 @@ def town_centre_form(request):
             town_centre_instance.t_date = form_t.cleaned_data['t_date']
             town_centre_instance.t_time = form_t.cleaned_data['t_time']#.strip()
             town_centre_instance.t_coordinator = form_t.cleaned_data['t_coordinator'].strip()
-            town_centre_instance.t_main_doors = form_t.cleaned_data['t_main_doors'].strip()
+            town_centre_instance.t_horticultural = form_t.cleaned_data['t_horticultural'].strip()
             town_centre_instance.t_town_centre_main_street = form_t.cleaned_data['t_town_centre_main_street'].strip()
             town_centre_instance.t_monitor = form_t.cleaned_data['t_monitor'].strip()
             town_centre_instance.t_directors = form_t.cleaned_data['t_directors'].strip()
@@ -279,11 +279,18 @@ def town_centre_form(request):
     else:
 
         try:
+
+
+            
+            print(abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])))
+
+
+
             if ((Town_Centre.objects.last().t_date == timezone.now().date()) and (abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) < 2)):
 
                 t_time = Town_Centre.objects.last().t_time
                 t_coordinator = Town_Centre.objects.last().t_coordinator # Will return None if no match
-                t_main_doors = Town_Centre.objects.last().t_main_doors
+                t_horticultural = Town_Centre.objects.last().t_horticultural
                 t_town_centre_main_street = Town_Centre.objects.last().t_town_centre_main_street
                 t_monitor = Town_Centre.objects.last().t_monitor
                 t_directors = Town_Centre.objects.last().t_directors
@@ -294,7 +301,7 @@ def town_centre_form(request):
             else:
                 t_time = str(datetime.datetime.now().time())[0:5]
                 t_coordinator = ''
-                t_main_doors = ''
+                t_horticultural = ''
                 t_town_centre_main_street = ''
                 t_monitor = ''
                 t_directors = ''
@@ -305,7 +312,7 @@ def town_centre_form(request):
         except:
             t_time = str(datetime.datetime.now().time())[0:5]
             t_coordinator = ''
-            t_main_doors = ''
+            t_horticultural = ''
             t_town_centre_main_street = ''
             t_monitor = ''
             t_directors = ''
@@ -313,10 +320,10 @@ def town_centre_form(request):
             t_num_staff = ''
             t_explain = ''
 
-        form_c = Town_CentreForm(initial={'t_date': timezone.now().date(),
+        form_t = Town_CentreForm(initial={'t_date': timezone.now().date(),
                                         't_time': t_time,
                                         't_coordinator': t_coordinator,
-                                        't_main_doors': t_main_doors,
+                                        't_horticultural': t_horticultural,
                                         't_town_centre_main_street': t_town_centre_main_street,
                                         't_monitor': t_monitor,
                                         't_directors': t_directors,
@@ -450,8 +457,8 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
             if (temporary_instance_t.t_coordinator is None):
                 temporary_instance_t.t_coordinator = ''
 
-            if (temporary_instance_t.t_main_doors is None):
-                temporary_instance_t.t_main_doors = ''
+            if (temporary_instance_t.t_horticultural is None):
+                temporary_instance_t.t_horticultural = ''
 
             if (temporary_instance_t.t_town_centre_main_street is None):
                 temporary_instance_t.t_town_centre_main_street = ''
@@ -482,7 +489,6 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
                 context['t_explainval'] = 'No'
         except:
             pass
-
 
         return context
 
