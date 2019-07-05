@@ -31,7 +31,7 @@ def cafeteria_form(request):
             if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
                ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                ( (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
-               
+
                 cafeteria_instance = Cafeteria.objects.all().order_by('-id')[:1][0]
 
             else:
@@ -359,7 +359,17 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
         # Call the base implementation first to get the context
         context = super(LocationListView, self).get_context_data(**kwargs)
 
-        temporary_instance = Cafeteria.objects.last() # last() doesn't return a Queryset!!!
+
+
+        if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
+           ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+           ( (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+
+            temporary_instance = Cafeteria.objects.last() # last() doesn't return a Queryset!!!
+
+        else:
+            temporary_instance = None
+
 
         try:
 
@@ -409,7 +419,14 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
             pass
 
 
-        temporary_instance_e = East_Lobby.objects.last() # last() doesn't return a Queryset!!!
+        if ((East_Lobby.objects.last().e_date == timezone.now().date()) and
+           ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+           ( (abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+
+            temporary_instance_e = East_Lobby.objects.last() # last() doesn't return a Queryset!!!
+
+        else:
+            temporary_instance_e = None
 
         try:
 
@@ -455,8 +472,14 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
         except:
             pass
 
+        if ((Town_Centre.objects.last().t_date == timezone.now().date()) and
+           ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+           ( (abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
-        temporary_instance_t = Town_Centre.objects.last() # last() doesn't return a Queryset!!!
+            temporary_instance_t = Town_Centre.objects.last() # last() doesn't return a Queryset!!!
+
+        else:
+            temporary_instance_t = None
 
         try:
 
