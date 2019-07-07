@@ -70,6 +70,16 @@
     {% endif %}
 {% endblock %}
 
+{% block send_message %}
+    {% if user.is_authenticated %}
+
+    <div id="send_message_div">
+        <input id="send_message" class="status_button btn btn-primary" type="button" value="Broadcast a message..." name="send_message_button">
+    </div>
+
+    {% endif %}
+{% endblock %}
+
       </div>
 
     {% block index_content %}
@@ -95,6 +105,36 @@ var last_status;
 var status_setter;
 var from_location;
 var to_location;
+
+var message_1;
+var message_2;
+var message_3;
+var message_4;
+var message_5;
+var message_6;
+var message_7;
+var message_8;
+var message_9;
+var message_10;
+var author;
+var timestamp;
+
+$.ajax({
+    type: 'GET',
+    url: 'Messages/',
+    data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+            'message_request': 'yes' // Is this line only here because you need something?
+          },
+    success: function(response) {
+        message_1 = response['message_1'];
+        // author = response['author'];
+
+        console.log(response['author']);
+        console.log(response['message_1'])
+        console.log(response['timestamp'])
+        // timestamp = response['timestamp']; // Needed?
+    }
+});
 
 $.ajax({
     type: 'GET',
@@ -128,11 +168,42 @@ $.ajax({
   }
 });
 
+        $('#send_message').click(function(e) {
+            var new_author = prompt("Please enter your name:");
+
+            if (new_author === '') {
+                alert("You must give a name.");
+            }
+
+            else if (new_author != null) {
+                var message = prompt("Message:");
+
+                if (message === '') {
+                    alert("You must enter a message.");
+                }
+                else if (message != null) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Messages/",
+                        data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                                'author': new_author,
+                                'message': message
+                              },
+                        success: function () {
+                            message_1 = message;
+                            console.log('Message sent!');
+                        }
+                    });
+                }
+            }
+        });
+
         $('#status_normal').click(function(e) {
             if (status != 'Normal') {
-
+                // Get name
                 status_setter = prompt("Please enter your name:");
-
+                // Only if they don't click Cancel and give some text if clicking OK
                 if ((status_setter != null) && (status_setter != '')) {
                     status = $('#status_normal').val();
                     last_status = $('#status_normal').val();
@@ -143,7 +214,7 @@ $.ajax({
                     $('#status_banner').removeClass('banner_yellow');
                     $('#status_banner').removeClass('banner_red');
                 }
-                else if (status_setter == '') {
+                else if (status_setter == '') { // If they submit an empty string
                     alert("You must give a name.");
                 }
             }
@@ -211,7 +282,7 @@ $.ajax({
             }
         });
 
-        $(':button').click(function(e) {
+        $(':button').not('#send_message').click(function(e) {     // Won't run when message button is clicked
 
             if (status_setter != null && status_setter != '' && from_location != null && to_location != null) {
 
@@ -273,47 +344,28 @@ $.ajax({
         }
     }
   });
-};
 
+  $.ajax({
+      type: 'GET',
+      url: 'Messages/',
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+              'status_request': 'yes'
+            },
+      success: function(response) {
+
+         console.log(response['author']);
+         console.log(response['message_1']);
+         console.log(response['timestamp'].substring(11,19));
+
+          if (response['message_1'] != message_1) {
+            alert("Message from " + response['author'] + ' @ ' + response['timestamp'].substring(11,19) + ':\n\n' + response['message_1']);
+            message_1 = response['message_1']
+          }
+        }
+     });
+   };
 });
 
+// });
+
 </script>
-
-<!-- <script type="text/javascript">
-
-    var status;
-
-    $(document).ready(function() {
-
-        $('#status_normal').click(function(e) {
-            status = $('#status_normal').val()
-        });
-
-        $('#status_horizontal').click(function(e) {
-            status = $('#status_horizontal').val()
-        });
-
-        $('#status_full_evac').click(function(e) {
-            status = $('#status_full_evac').val()
-        });
-
-        $(':button').click(function(e) {
-            // status = $('button[name=upgrade_button]').val();
-            console.log(status);
-            // alert('STATUS UPGRADED!');
-
-            $.ajax({
-                type: "POST",
-                url: "CodeRedStatus/",
-                data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                        'code_red_status': status
-                      },
-                success: function () {
-                    console.log('success');
-                }
-            });
-        return false;
-    });
-  });
-
-</script> -->

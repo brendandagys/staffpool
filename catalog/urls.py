@@ -1,6 +1,8 @@
 from django.urls import path, re_path
 from django.views.generic import RedirectView
 from . import views
+from chat import views as chat_views
+# import chat.views.messages
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/LIVE/', permanent=True)),
@@ -11,5 +13,8 @@ urlpatterns = [
     path('About/', views.about, name='about'),
     path('LIVE/CodeRedStatus/', views.code_red_status, name='code_red_status_view'),
     re_path(r'^.*CodeRed.*$', views.code_red_status, name='code_red_status'),
+    re_path(r'^.*Messages.*$', chat_views.messages, name='messages_2'),
+
+    # re_path(r'^.*Messages.*$', views')
     # path('catalog/', RedirectView.as_view(url='/Home/LIVE/', permanent=True))
 ]

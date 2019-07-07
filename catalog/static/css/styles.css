@@ -338,11 +338,16 @@ h3.grab {
     /* height: 200px; */
 }
 
+#send_message {
+    margin-top: 3rem;
+    width: 12.5rem;
+}
+
 #status_normal {
     /* position: relative; */
     /* text-align: center; */
     margin: 8px 4px 4px 4px;
-    width: 12.65rem;
+    width: 12.5rem;
     /* right: 2.39px; */
 }
 
@@ -352,6 +357,10 @@ h3.grab {
 }
 
 #status_list {
+    text-align: center;
+}
+
+#send_message_div {
     text-align: center;
 }
 

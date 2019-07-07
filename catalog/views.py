@@ -532,24 +532,43 @@ def about(request):
     return render(request, 'index.html', context=context)
 
 
-
+@login_required
 def code_red_status(request):
 
     if request.method == 'GET':
         try:
             code_red_status = CodeStatuses.objects.last().code_red_status
             status_setter = CodeStatuses.objects.last().status_setter
-            from_location = CodeStatuses.objects.last().from_location
-            to_location = CodeStatuses.objects.last().to_location
-        except:
-            code_red_status = ''
-            status_setter = ''
+
+            try:
+                from_location = CodeStatuses.objects.last().from_location
+            except:
+                from_location = ''
+
+            try:
+                to_location = CodeStatuses.objects.last().to_location
+            except:
+                to_location = ''
+
+        except: # If any of the first two are None...
+
+            code_red_status_instance = CodeStatuses()
+
+            code_red_status_instance.code_red_status = 'Normal'
+            code_red_status_instance.status_setter = 'Unspecified'
+            code_red_status_instance.from_location = ''
+            code_red_status_instance.to_location = ''
+
+            code_red_status_instance.save()
+
+            code_red_status = 'Normal'
+            status_setter = 'Unspecified'
             from_location = ''
             to_location = ''
 
         return JsonResponse({'code_red_status': code_red_status, 'status_setter': status_setter, 'from_location': from_location, 'to_location': to_location})
 
-    elif request.method == 'POST':
+    elif request.method == 'POST': # Shouldn't need to TRY/EXCEPT or to save. Should be done on GET
         try:
 
             code_red_status_instance = CodeStatuses.objects.all()[0]

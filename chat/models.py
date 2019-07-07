@@ -1,8 +1,11 @@
 from django.db import models
+from django.utils import timezone
+# import datetime
 
 # Create your models here.
 class Messages(models.Model):
-    timestamp = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='Time of latest message')
+    timestamp = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='Time of latest message')#, default=timezone.now())
+    author = models.CharField(max_length=50, null=True, blank=True, verbose_name='Author')
     message_1 = models.CharField(max_length=500, null=True, blank=True, verbose_name='Message 1', default='')
     message_2 = models.CharField(max_length=500, null=True, blank=True, verbose_name='Message 2', default='')
     message_3 = models.CharField(max_length=500, null=True, blank=True, verbose_name='Message 3', default='')
@@ -20,4 +23,4 @@ class Messages(models.Model):
 
     def __str__(self):
         # return self.code_red_status
-        return 'Last 10 Messages'
+        return 'Last 10 Messages Information'

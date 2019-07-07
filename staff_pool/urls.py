@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.urls import include
 from django.conf.urls import include, url
 from django.views.generic import RedirectView
@@ -22,9 +22,13 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
+from chat.views import messages
+
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
+    re_path(r'^.*Messages.*$', messages, name='messages'),
     path('chat/', include('chat.urls')),
+    path('messages/', include('chat.urls')),
     path('accounts/', include('django.contrib.auth.urls')), # Add Django site authentication urls (for login, logout, password management)
     path('', include('catalog.urls')),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

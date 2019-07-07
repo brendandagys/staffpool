@@ -104,5 +104,24 @@ class CodeStatuses(models.Model):
         verbose_name = 'Code Red Status'
 
     def __str__(self):
-        # return self.code_red_status
-        return ', '.join([self.code_red_status, self.status_setter, self.from_location, self.to_location])
+
+        if self.status_setter is not None and self.status_setter != '':
+            status_setter = self.status_setter
+            status_setter = ', ' + status_setter
+        else:
+            status_setter = ''
+
+        if self.from_location is not None and self.from_location != '':
+            from_location = self.from_location
+            from_location = ', ' + from_location
+        else:
+            from_location = ''
+
+        if self.to_location is not None and self.to_location != '':
+            to_location = self.to_location
+            to_location = ', ' + to_location
+        else:
+            to_location = ''
+
+        return self.code_red_status + status_setter + from_location + to_location
+        # return ', '.join([self.code_red_status, self.status_setter, self.from_location, self.to_location])
