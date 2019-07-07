@@ -329,6 +329,11 @@ h3.grab {
     width: 70%;
 }
 
+#chat_link {
+    color: green;
+    font-size: 1.5rem;
+}
+
 /* .about_page_image {
     background-color: orange;
 } */

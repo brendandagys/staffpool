@@ -27,7 +27,9 @@ from chat.views import messages
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     re_path(r'^.*Messages.*$', messages, name='messages'),
-    path('chat/', include('chat.urls')),
+    # path('chat/', include('chat.urls')),
+    re_path(r'^.*chat.*$', include('chat.urls')),
+
     path('messages/', include('chat.urls')),
     path('accounts/', include('django.contrib.auth.urls')), # Add Django site authentication urls (for login, logout, password management)
     path('', include('catalog.urls')),

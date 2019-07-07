@@ -9,7 +9,7 @@ from . import views
 app_name = 'chat'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    re_path(r'^(?P<room_name>[^/]+)/$', views.room, name='room'),
+    # path('', views.index, name='index'),
+    path('', views.room, name='room'),
     # url(r'^(?P<room_name>[^/]+)/$', views.room, name='room'), # Original line from actual tutorial
 ]
