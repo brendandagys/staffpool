@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 
-    <!-- <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.4.1.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.4.1.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   {% block title %}<title>NBRHC Staff Pool</title>{% endblock %}
 
@@ -109,16 +109,16 @@ var from_location;
 var to_location;
 
 var message_1;
-var message_2;
-var message_3;
-var message_4;
-var message_5;
-var message_6;
-var message_7;
-var message_8;
-var message_9;
-var message_10;
-var author;
+// var message_2;
+// var message_3;
+// var message_4;
+// var message_5;
+// var message_6;
+// var message_7;
+// var message_8;
+// var message_9;
+// var message_10;
+var author_1;
 var timestamp;
 
 $.ajax({
@@ -129,9 +129,8 @@ $.ajax({
           },
     success: function(response) {
         message_1 = response['message_1'];
-        // author = response['author'];
 
-        console.log(response['author']);
+        console.log(response['author_1']);
         console.log(response['message_1'])
         console.log(response['timestamp'])
         // timestamp = response['timestamp']; // Needed?
@@ -189,12 +188,12 @@ $.ajax({
                         type: "POST",
                         url: "Messages/",
                         data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                                'author': new_author,
-                                'message': message
+                                'author_1': new_author,
+                                'message_1': message
                               },
                         success: function () {
                             message_1 = message;
-                            console.log('Message sent!');
+                            console.log('Message sent: ' + message_1);
                         }
                     });
                 }
@@ -308,8 +307,6 @@ $.ajax({
   var myStatusVar = setInterval(status_update, 3000);
   function status_update() {
 
-      // console.log('GET BEFORE: ' + wait)
-
   $.ajax({
       type: 'GET',
       url: 'CodeRedStatus/',
@@ -355,12 +352,12 @@ $.ajax({
             },
       success: function(response) {
 
-         console.log(response['author']);
+         console.log(response['author_1']);
          console.log(response['message_1']);
          console.log(response['timestamp'].substring(11,19));
 
           if (response['message_1'] != message_1) {
-            alert("Message from " + response['author'] + ' @ ' + response['timestamp'].substring(11,19) + ':\n\n' + response['message_1']);
+            alert("Message from " + response['author_1'] + ' @ ' + response['timestamp'].substring(11,19) + ':\n\n' + response['message_1']);
             message_1 = response['message_1']
           }
         }

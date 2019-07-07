@@ -41,13 +41,25 @@ def messages(request):
             message_8 = ''
             message_9 = ''
             message_10 = ''
-            author = 'Unspecified'
+
+            author_1 = 'Unspecified'
+            author_2 = ''
+            author_3 = ''
+            author_4 = ''
+            author_5 = ''
+            author_6 = ''
+            author_7 = ''
+            author_8 = ''
+            author_9 = ''
+            author_10 = ''
+
             timestamp = timezone.now()
 
             # timestamp is a datetime object!
-            Messages.objects.create(author='Unspecified', message_1='', message_2='', message_3='',
-                                     message_4='', message_5='', message_6='', message_7='', message_8='',
-                                     message_9='', message_10='')#, timestamp = datetime.datetime.now())
+            Messages.objects.create(author_1='Unspecified', author_2='', author_3='', author_4='', author_5='', author_6='',
+                                    author_7='', author_8='' , author9_='' , author10_='', message_1='', message_2='',
+                                    message_3='', message_4='', message_5='', message_6='', message_7='', message_8='',
+                                    message_9='', message_10='')#, timestamp = datetime.datetime.now())
 
         else:
             message_1 = last_10_messages_instance.message_1
@@ -90,9 +102,45 @@ def messages(request):
             if message_10 is None:
                 message_10 = ''
 
-            author = last_10_messages_instance.author
-            if author is None:
-                author = ''
+            author_1 = last_10_messages_instance.author_1
+            if author_1 is None:
+                author_1 = ''
+
+            author_2 = last_10_messages_instance.author_2
+            if author_2 is None:
+                author_2 = ''
+
+            author_3 = last_10_messages_instance.author_3
+            if author_3 is None:
+                author_3 = ''
+
+            author_4 = last_10_messages_instance.author_4
+            if author_4 is None:
+                author_4 = ''
+
+            author_5 = last_10_messages_instance.author_5
+            if author_5 is None:
+                author_5 = ''
+
+            author_6 = last_10_messages_instance.author_6
+            if author_6 is None:
+                author_6 = ''
+
+            author_7 = last_10_messages_instance.author_7
+            if author_7 is None:
+                author_7 = ''
+
+            author_8 = last_10_messages_instance.author_8
+            if author_8 is None:
+                author_8 = ''
+
+            author_9 = last_10_messages_instance.author_9
+            if author_9 is None:
+                author_9 = ''
+
+            author_10 = last_10_messages_instance.author_10
+            if author_10 is None:
+                author_10 = ''
 
             timestamp = last_10_messages_instance.timestamp
 
@@ -106,7 +154,17 @@ def messages(request):
                              'message_8': message_8,
                              'message_9': message_9,
                              'message_10': message_10,
-                             'author': author,
+                             'author_1': author_1,
+                             'author_2': author_2,
+                             'author_3': author_3,
+                             'author_4': author_4,
+                             'author_5': author_5,
+                             'author_6': author_6,
+                             'author_7': author_7,
+                             'author_8': author_8,
+                             'author_9': author_9,
+                             'author_10': author_10,
+
                              'timestamp': timestamp
                              })
 
@@ -125,14 +183,25 @@ def messages(request):
         last_10_messages_instance.message_3 = last_10_messages_instance.message_2
         last_10_messages_instance.message_2 = last_10_messages_instance.message_1
 
-        last_10_messages_instance.message_1 = request.POST['message']
+        last_10_messages_instance.message_1 = request.POST['message_1']
 
-        last_10_messages_instance.author = request.POST['author']
+        last_10_messages_instance.author_10 = last_10_messages_instance.author_9
+        last_10_messages_instance.author_9 = last_10_messages_instance.author_8
+        last_10_messages_instance.author_8 = last_10_messages_instance.author_7
+        last_10_messages_instance.author_7 = last_10_messages_instance.author_6
+        last_10_messages_instance.author_6 = last_10_messages_instance.author_5
+        last_10_messages_instance.author_5 = last_10_messages_instance.author_4
+        last_10_messages_instance.author_4 = last_10_messages_instance.author_3
+        last_10_messages_instance.author_3 = last_10_messages_instance.author_2
+        last_10_messages_instance.author_2 = last_10_messages_instance.author_1
+
+        last_10_messages_instance.author_1 = request.POST['author_1']
+        
         last_10_messages_instance.timestamp = datetime.datetime.now()
 
         last_10_messages_instance.save()
 
-        print(request.POST['message'])
-        print(request.POST['author'])
+        print(request.POST['message_1'])
+        print(request.POST['author_1'])
 
         return HttpResponse()

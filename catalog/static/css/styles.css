@@ -426,3 +426,15 @@ h3.grab {
 .login_form {
     width: 50px;
 } */
+
+/* #chat-log {
+    color: blue;
+    font-family: Mono;
+} */
+
+textarea
+{
+   font-family: "Monaco", "Courier New", monospace;
+   font-size: 14px;
+   margin: 25px auto 25px auto;
+}
