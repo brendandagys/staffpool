@@ -46,5 +46,4 @@ class Town_CentreAdmin(admin.ModelAdmin):
 
 @admin.register(CodeStatuses)
 class CodeStatuses(admin.ModelAdmin):
-    # list_display = ('code_red_status')
-    pass
+    readonly_fields = ('code_timestamp',)

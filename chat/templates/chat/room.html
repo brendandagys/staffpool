@@ -9,13 +9,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
+<body background="{% static "nbrhc-3.jpg" %}">
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
 
-        <textarea id="chat-log" cols="100" rows="40" disabled></textarea><br/>
-        <input id="chat-message-input" type="text" size="100"/><br/></br>
+        <textarea id="chat-log" cols="100" rows="30" disabled></textarea><br/>
+        <input id="chat-message-input" type="text" class="chatroom_input"/><br/></br>
         <input id="chat-message-submit" class="btn btn-primary" type="button" value="Send"/>
 
         </div>
@@ -27,6 +27,10 @@
     var current_name = 'empty';
 
     current_name = prompt("Please enter the chat name you'd like to use:");
+
+    if (current_name == null || current_name.trim() == '') {
+        window.location.replace("{% url 'LIVE' %}");
+    }
 
     $.ajax({
         type: 'GET',
@@ -59,27 +63,37 @@
             author_10 = response['author_10'];
 
             // Couldn't get jQuery to work...
-            document.querySelector('#chat-log').value += (author_10.padEnd(12, ' ').toUpperCase() + message_10 + '\n');
-            document.querySelector('#chat-log').value += (author_9.padEnd(12, ' ').toUpperCase() + message_9 + '\n');
-            document.querySelector('#chat-log').value += (author_8.padEnd(12, ' ').toUpperCase() + message_8 + '\n');
-            document.querySelector('#chat-log').value += (author_7.padEnd(12, ' ').toUpperCase() + message_7 + '\n');
-            document.querySelector('#chat-log').value += (author_6.padEnd(12, ' ').toUpperCase() + message_6 + '\n');
-            document.querySelector('#chat-log').value += (author_5.padEnd(12, ' ').toUpperCase() + message_5 + '\n');
-            document.querySelector('#chat-log').value += (author_4.padEnd(12, ' ').toUpperCase() + message_4 + '\n');
-            document.querySelector('#chat-log').value += (author_3.padEnd(12, ' ').toUpperCase() + message_3 + '\n');
-            document.querySelector('#chat-log').value += (author_2.padEnd(12, ' ').toUpperCase() + message_2 + '\n');
-            document.querySelector('#chat-log').value += (author_1.padEnd(12, ' ').toUpperCase() + message_1 + '\n');
 
-            $('#chat-log').value += (author_1 + ': ' + message_1);
-            $('#chat-log').value += (author_2 + ': ' + message_2);
-            $('#chat-log').value += (author_3 + ': ' + message_3);
-            $('#chat-log').value += (author_4 + ': ' + message_4);
-            $('#chat-log').value += (author_5 + ': ' + message_5);
-            $('#chat-log').value += (author_6 + ': ' + message_6);
-            $('#chat-log').value += (author_7 + ': ' + message_7);
-            $('#chat-log').value += (author_8 + ': ' + message_8);
-            $('#chat-log').value += (author_9 + ': ' + message_9);
-            $('#chat-log').value += (author_10 + ': ' + message_10);
+            if (message_10 !== '') {
+                document.querySelector('#chat-log').value += (author_10.padEnd(12, ' ').toUpperCase() + message_10 + '\n');
+            }
+            if (message_9 !== '') {
+                document.querySelector('#chat-log').value += (author_9.padEnd(12, ' ').toUpperCase() + message_9 + '\n');
+            }
+            if (message_8 !== '') {
+                document.querySelector('#chat-log').value += (author_8.padEnd(12, ' ').toUpperCase() + message_8 + '\n');
+            }
+            if (message_7 !== '') {
+                document.querySelector('#chat-log').value += (author_7.padEnd(12, ' ').toUpperCase() + message_7 + '\n');
+            }
+            if (message_6 !== '') {
+                document.querySelector('#chat-log').value += (author_6.padEnd(12, ' ').toUpperCase() + message_6 + '\n');
+            }
+            if (message_5 !== '') {
+                document.querySelector('#chat-log').value += (author_5.padEnd(12, ' ').toUpperCase() + message_5 + '\n');
+            }
+            if (message_4 !== '') {
+                document.querySelector('#chat-log').value += (author_4.padEnd(12, ' ').toUpperCase() + message_4 + '\n');
+            }
+            if (message_3 !== '') {
+                document.querySelector('#chat-log').value += (author_3.padEnd(12, ' ').toUpperCase() + message_3 + '\n');
+            }
+            if (message_2 !== '') {
+                document.querySelector('#chat-log').value += (author_2.padEnd(12, ' ').toUpperCase() + message_2 + '\n');
+            }
+            if (message_1 !== '') {
+                document.querySelector('#chat-log').value += (author_1.padEnd(12, ' ').toUpperCase() + message_1 + '\n');
+            }
         }
     });
 
@@ -94,6 +108,9 @@
         var data = JSON.parse(e.data);
         var message = data['message'];
         document.querySelector('#chat-log').value += (message + '\n');
+
+        var textarea = document.getElementById('chat-log');
+        textarea.scrollTop = textarea.scrollHeight;
     };
 
     chatSocket.onclose = function(e) {
@@ -109,10 +126,25 @@
 
     document.querySelector('#chat-message-submit').onclick = function(e) {
         var messageInputDom = document.querySelector('#chat-message-input');
-        var message = current_name.padEnd(10, ' ') + messageInputDom.value;
+        var message = current_name.padEnd(12, ' ').toUpperCase() + messageInputDom.value;
         chatSocket.send(JSON.stringify({
             'message': message
         }));
+
+        var textarea = document.getElementById('chat-log');
+        textarea.scrollTop = textarea.scrollHeight;
+
+        $.ajax({
+            type: "POST",
+            url: "Messages/",
+            data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'author_1': current_name,
+                    'message_1': messageInputDom.value
+                  },
+            success: function () {
+                console.log('Message POST to database success.')
+            }
+        });
 
         messageInputDom.value = '';
     };

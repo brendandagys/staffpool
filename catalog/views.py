@@ -129,7 +129,7 @@ def cafeteria_form(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'cafeteria_form.html', context=context)
 
-# ==================================================================================================
+# =====================================================================================================================
 
 @login_required
 def east_lobby_form(request):
@@ -240,7 +240,7 @@ def east_lobby_form(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'east_lobby_form.html', context=context)
 
-# ==================================================================================================
+# =====================================================================================================================
 
 @login_required
 def town_centre_form(request):
@@ -347,7 +347,8 @@ def town_centre_form(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'town_centre_form.html', context=context)
 
-# ==================================================================================================
+# ======================================================================================================================
+# ======================================================================================================================
 
 class LocationListView(LoginRequiredMixin, generic.ListView):
     model = Cafeteria
@@ -360,16 +361,19 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
         context = super(LocationListView, self).get_context_data(**kwargs)
 
 
+        if Cafeteria.objects.last() is not None:
 
-        if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
-           ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
-           ( (abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
+               ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+               ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
-            temporary_instance = Cafeteria.objects.last() # last() doesn't return a Queryset!!!
+                temporary_instance = Cafeteria.objects.last() # last() doesn't return a Queryset!!!
+
+            else:
+                temporary_instance = None
 
         else:
             temporary_instance = None
-
 
         try:
 
@@ -418,12 +422,20 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
         except:
             pass
 
+# ========================================================================================================
 
-        if ((East_Lobby.objects.last().e_date == timezone.now().date()) and
-           ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
-           ( (abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+        # This makes sure that when the DB is reset and no tables exist, there is no error in the second if statement
+        # No attribute 'e.date' on NoneType...
+        if East_Lobby.objects.last() is not None:
 
-            temporary_instance_e = East_Lobby.objects.last() # last() doesn't return a Queryset!!!
+            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and
+               ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+               ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+
+                temporary_instance_e = East_Lobby.objects.last() # last() doesn't return a Queryset!!!
+
+            else:
+                temporary_instance_e = None
 
         else:
             temporary_instance_e = None
@@ -472,11 +484,18 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
         except:
             pass
 
-        if ((Town_Centre.objects.last().t_date == timezone.now().date()) and
-           ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
-           ( (abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+# =====================================================================================================================
 
-            temporary_instance_t = Town_Centre.objects.last() # last() doesn't return a Queryset!!!
+        if Town_Centre.objects.last() is not None:
+
+            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and
+               ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+               ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+
+                temporary_instance_t = Town_Centre.objects.last() # last() doesn't return a Queryset!!!
+
+            else:
+                temporary_instance_t = None
 
         else:
             temporary_instance_t = None
@@ -524,6 +543,8 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
 
         return context
 
+# ======================================================================================================================
+# ======================================================================================================================
 
 def about(request):
 
@@ -531,42 +552,58 @@ def about(request):
 
     return render(request, 'index.html', context=context)
 
+# ======================================================================================================================
 
 @login_required
 def code_red_status(request):
 
     if request.method == 'GET':
-        try:
-            code_red_status = CodeStatuses.objects.last().code_red_status
-            status_setter = CodeStatuses.objects.last().status_setter
 
-            try:
-                from_location = CodeStatuses.objects.last().from_location
-            except:
-                from_location = ''
+        code_red_status_instance = CodeStatuses.objects.last()
 
-            try:
-                to_location = CodeStatuses.objects.last().to_location
-            except:
-                to_location = ''
+        reset_status = 'No'
 
-        except: # If any of the first two are None...
-
-            code_red_status_instance = CodeStatuses()
-
-            code_red_status_instance.code_red_status = 'Normal'
-            code_red_status_instance.status_setter = 'Unspecified'
-            code_red_status_instance.from_location = ''
-            code_red_status_instance.to_location = ''
-
-            code_red_status_instance.save()
+        if code_red_status_instance is None:
 
             code_red_status = 'Normal'
             status_setter = 'Unspecified'
             from_location = ''
             to_location = ''
+            # code_timestamp = timezone.now()
 
-        return JsonResponse({'code_red_status': code_red_status, 'status_setter': status_setter, 'from_location': from_location, 'to_location': to_location})
+            CodeStatuses.objects.create(code_red_status = 'Normal', status_setter = 'Unspecified',
+                                        from_location = '', to_location = '')
+
+        else:
+
+            if ((datetime.datetime.now() - code_red_status_instance.code_timestamp).seconds/60 > 120):
+                reset_status = 'Yes'
+
+            code_red_status = code_red_status_instance.code_red_status
+            if code_red_status is None or reset_status == 'Yes':
+                code_red_status = 'Normal'
+                code_red_status_instance.code_red_status = 'Normal'
+
+            status_setter = code_red_status_instance.status_setter
+            if status_setter is None or reset_status == 'Yes':
+                status_setter = 'Unspecified'
+                code_red_status_instance.status_setter = 'Unspecified'
+
+            from_location = code_red_status_instance.from_location
+            if from_location is None or reset_status == 'Yes':
+                from_location = ''
+                code_red_status_instance.from_location = ''
+
+            to_location = code_red_status_instance.to_location
+            if to_location is None or reset_status == 'Yes':
+                to_location = ''
+                code_red_status_instance.to_location = ''
+
+            if reset_status == 'Yes':
+                code_red_status_instance.save()
+
+        return JsonResponse({'reset_status': reset_status, 'code_red_status': code_red_status, 'status_setter': status_setter, 'from_location': from_location, 'to_location': to_location})#, 'code_timestamp': code_timestamp})
+
 
     elif request.method == 'POST': # Shouldn't need to TRY/EXCEPT or to save. Should be done on GET
         try:

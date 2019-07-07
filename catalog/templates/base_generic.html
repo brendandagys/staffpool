@@ -109,15 +109,6 @@ var from_location;
 var to_location;
 
 var message_1;
-// var message_2;
-// var message_3;
-// var message_4;
-// var message_5;
-// var message_6;
-// var message_7;
-// var message_8;
-// var message_9;
-// var message_10;
 var author_1;
 var timestamp;
 
@@ -130,10 +121,8 @@ $.ajax({
     success: function(response) {
         message_1 = response['message_1'];
 
-        console.log(response['author_1']);
-        console.log(response['message_1'])
-        console.log(response['timestamp'])
-        // timestamp = response['timestamp']; // Needed?
+        // console.log(response['author_1']);
+        // console.log(response['message_1'])
     }
 });
 
@@ -316,7 +305,16 @@ $.ajax({
       // dataType: 'json',          // Apparently not needed
       success: function(response) {
           // alert('The status has been changed to ' + response['json_data'])
-          // console.log('GET SUCCESS 1 : ' + wait)
+
+          console.log('START')
+          console.log('Existing status: ' + status)
+          console.log('Existing last_status: ' + last_status)
+          console.log('From GET: ' + response['reset_status'])
+          console.log('From GET: ' + response['code_red_status'])
+          console.log('From GET: ' + response['status_setter'])
+          console.log('END')
+          // console.log(response['from_location'])
+          // console.log(response['to_location'])
 
           if (response['code_red_status'] == 'Normal') {
             $('#status_banner').text('')
@@ -332,15 +330,19 @@ $.ajax({
             $('#status_banner').removeClass('banner_yellow')
           }
 
-        if (response['code_red_status'] != last_status) {
+        if (response['code_red_status'] != last_status && response['reset_status'] == 'No') {
             last_status = response['code_red_status'];
-            // console.log('GET SUCCESS 2 : ' + wait)
-            // if (wait == '0') {
-            alert(response['status_setter'] + ' has set the status from ' + status + ' to ' + last_status);
-            status = response['code_red_status'];
-            // }
 
+            alert(response['status_setter'] + ' has set the status From ' + status + ' to ' + last_status);
+            status = response['code_red_status'];
         }
+        else {
+            last_status = response['code_red_status'];
+            status = response['code_red_status'];
+        }
+        console.log('New status: ' + status)
+        console.log('New last_status: ' + last_status)
+        console.log(' ')
     }
   });
 
@@ -352,11 +354,11 @@ $.ajax({
             },
       success: function(response) {
 
-         console.log(response['author_1']);
-         console.log(response['message_1']);
-         console.log(response['timestamp'].substring(11,19));
+         // console.log(response['author_1']);
+         // console.log(response['message_1']);
+         // console.log(response['timestamp'].substring(11,19));
 
-          if (response['message_1'] != message_1) {
+          if (response['message_1'] != message_1 && response['message_1'] != '') {
             alert("Message from " + response['author_1'] + ' @ ' + response['timestamp'].substring(11,19) + ':\n\n' + response['message_1']);
             message_1 = response['message_1']
           }

@@ -94,6 +94,7 @@ class Town_Centre(models.Model):
 
 
 class CodeStatuses(models.Model):
+    code_timestamp = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='Time of Status Change')#, default=timezone.now()
     code_red_status = models.CharField(max_length=100, null=True, blank=True, verbose_name='Code Red Status', default='Normal')
     status_setter = models.CharField(max_length=100, null=True, blank=True, verbose_name='Status Setter')
     from_location = models.CharField(max_length=100, null=True, blank=True, verbose_name='From')
@@ -124,4 +125,3 @@ class CodeStatuses(models.Model):
             to_location = ''
 
         return self.code_red_status + status_setter + from_location + to_location
-        # return ', '.join([self.code_red_status, self.status_setter, self.from_location, self.to_location])
