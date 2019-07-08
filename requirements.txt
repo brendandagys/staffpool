@@ -1,6 +1,5 @@
 aioredis==1.2.0
 appnope==0.1.0
-asgi-redis==1.4.3
 asgiref==3.1.4
 asn1crypto==0.24.0
 async-timeout==3.0.1
@@ -24,7 +23,6 @@ django-heroku==0.3.1
 django-redis-cache==2.0.0
 entrypoints==0.3
 ez-setup==0.9
-ffmpeg-python==0.1.17
 future==0.17.1
 gunicorn==19.9.0
 hiredis==1.0.0

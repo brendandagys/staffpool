@@ -88,8 +88,8 @@ ASGI_APPLICATION = 'staff_pool.routing.application'
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        'CONFIG': { #                             This will break localhost
+            "hosts": [os.environ.get('REDIS_URL', 6379)],#'redis://localhost:6379')],
         },
     },
 }
