@@ -1,15 +1,6 @@
-<!-- chat/templates/chat/room.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body background="{% static "nbrhc-3.jpg" %}">
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -21,7 +12,6 @@
         </div>
       </div>
     </div>
-</body>
 <script>
 
     var current_name = 'empty';
@@ -68,34 +58,34 @@
             author_10 = response['author_10'];
 
             if (message_10 !== '') {
-                document.querySelector('#chat-log').value += (author_10.padEnd(12, ' ').toUpperCase() + message_10 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_10.padEnd(12, ' ').toUpperCase() + message_10 + '\n');
             }
             if (message_9 !== '') {
-                document.querySelector('#chat-log').value += (author_9.padEnd(12, ' ').toUpperCase() + message_9 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_9.padEnd(12, ' ').toUpperCase() + message_9 + '\n');
             }
             if (message_8 !== '') {
-                document.querySelector('#chat-log').value += (author_8.padEnd(12, ' ').toUpperCase() + message_8 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_8.padEnd(12, ' ').toUpperCase() + message_8 + '\n');
             }
             if (message_7 !== '') {
-                document.querySelector('#chat-log').value += (author_7.padEnd(12, ' ').toUpperCase() + message_7 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_7.padEnd(12, ' ').toUpperCase() + message_7 + '\n');
             }
             if (message_6 !== '') {
-                document.querySelector('#chat-log').value += (author_6.padEnd(12, ' ').toUpperCase() + message_6 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_6.padEnd(12, ' ').toUpperCase() + message_6 + '\n');
             }
             if (message_5 !== '') {
-                document.querySelector('#chat-log').value += (author_5.padEnd(12, ' ').toUpperCase() + message_5 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_5.padEnd(12, ' ').toUpperCase() + message_5 + '\n');
             }
             if (message_4 !== '') {
-                document.querySelector('#chat-log').value += (author_4.padEnd(12, ' ').toUpperCase() + message_4 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_4.padEnd(12, ' ').toUpperCase() + message_4 + '\n');
             }
             if (message_3 !== '') {
-                document.querySelector('#chat-log').value += (author_3.padEnd(12, ' ').toUpperCase() + message_3 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_3.padEnd(12, ' ').toUpperCase() + message_3 + '\n');
             }
             if (message_2 !== '') {
-                document.querySelector('#chat-log').value += (author_2.padEnd(12, ' ').toUpperCase() + message_2 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_2.padEnd(12, ' ').toUpperCase() + message_2 + '\n');
             }
             if (message_1 !== '') {
-                document.querySelector('#chat-log').value += (author_1.padEnd(12, ' ').toUpperCase() + message_1 + '\n');
+                document.querySelector('#chat-log').value += (' ' + author_1.padEnd(12, ' ').toUpperCase() + message_1 + '\n');
             }
         }
     });
@@ -116,7 +106,7 @@
                 console.log('Current name: ' + current_name)
                 if (response['timestamp'].substring(0,21) !== last_timestamp && response['author_1'] !== current_name) {
 
-                    document.querySelector('#chat-log').value += (response['author_1'].padEnd(12, ' ').toUpperCase() + response['message_1'] + '\n');
+                    document.querySelector('#chat-log').value += (' ' + response['author_1'].padEnd(12, ' ').toUpperCase() + response['message_1'] + '\n');
 
                     last_timestamp = response['timestamp'].substring(0,21)
 
@@ -163,7 +153,7 @@
                 }
             });
 
-        document.querySelector('#chat-log').value += (current_name.padEnd(12, ' ').toUpperCase() + messageInputDom.value + '\n');
+        document.querySelector('#chat-log').value += (' ' + current_name.padEnd(12, ' ').toUpperCase() + messageInputDom.value + '\n');
 
         var textarea = document.getElementById('chat-log');
         textarea.scrollTop = textarea.scrollHeight;
@@ -173,4 +163,5 @@
 };
 
 </script>
-</html>
+
+{% endblock %}
