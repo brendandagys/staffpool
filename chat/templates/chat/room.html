@@ -25,6 +25,8 @@
 <script>
 
     var current_name = 'empty';
+    var last_timestamp = 'empty';
+    var last_author = 'empty';
 
     current_name = prompt("Please enter the chat name you'd like to use:");
 
@@ -39,6 +41,9 @@
                 'message_request': 'yes' // Is this line only here because you need something?
               },
         success: function(response) {
+
+            last_timestamp = response['timestamp'].substring(0,21);
+            console.log('Initial GET: ' + last_timestamp.substring(0,21));
 
             message_1 = response['message_1'];
             message_2 = response['message_2'];
@@ -61,8 +66,6 @@
             author_8 = response['author_8'];
             author_9 = response['author_9'];
             author_10 = response['author_10'];
-
-            // Couldn't get jQuery to work...
 
             if (message_10 !== '') {
                 document.querySelector('#chat-log').value += (author_10.padEnd(12, ' ').toUpperCase() + message_10 + '\n');
@@ -97,25 +100,32 @@
         }
     });
 
-    // var roomName = {{ room_name_json }};
-    var roomName = 'staffpool';
+    var myVar = setInterval(chat_update, 250);
+    function chat_update() {
 
-    var chatSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat/' + roomName + '/');
+        $.ajax({
+            type: 'GET',
+            url: 'Messages/',
+            data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'message_request': 'yes' // Is this line only here because you need something?
+                  },
+            success: function(response) {
 
-    chatSocket.onmessage = function(e) {
-        var data = JSON.parse(e.data);
-        var message = data['message'];
-        document.querySelector('#chat-log').value += (message + '\n');
+                console.log('Recurring GET: ' + response['timestamp'].substring(0,21))
+                console.log('Response author: ' + response['author_1'])
+                console.log('Current name: ' + current_name)
+                if (response['timestamp'].substring(0,21) !== last_timestamp && response['author_1'] !== current_name) {
 
-        var textarea = document.getElementById('chat-log');
-        textarea.scrollTop = textarea.scrollHeight;
-    };
+                    document.querySelector('#chat-log').value += (response['author_1'].padEnd(12, ' ').toUpperCase() + response['message_1'] + '\n');
 
-    chatSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
-    };
+                    last_timestamp = response['timestamp'].substring(0,21)
+
+                    var textarea = document.getElementById('chat-log');
+                    textarea.scrollTop = textarea.scrollHeight;
+            }
+        }
+    });
+};
 
     document.querySelector('#chat-message-input').focus();
     document.querySelector('#chat-message-input').onkeyup = function(e) {
@@ -126,27 +136,41 @@
 
     document.querySelector('#chat-message-submit').onclick = function(e) {
         var messageInputDom = document.querySelector('#chat-message-input');
-        var message = current_name.padEnd(12, ' ').toUpperCase() + messageInputDom.value;
-        chatSocket.send(JSON.stringify({
-            'message': message
-        }));
+
+        if (messageInputDom.value.trim() != '') {
+
+            $.ajax({
+                type: "POST",
+                url: "Messages/",
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'author_1': current_name,
+                        'message_1': messageInputDom.value
+                      },
+                success: function () {
+                    console.log('Message POST to database success.')
+                    }
+                });
+
+            $.ajax({
+                type: 'GET',
+                url: 'Messages/',
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'message_request': 'yes' // Is this line only here because you need something?
+                      },
+                success: function(response) {
+                    last_timestamp = response['timestamp'].substring(0,21)
+                    console.log('Third GET: ' + response['timestamp'].substring(0,21))
+                }
+            });
+
+        document.querySelector('#chat-log').value += (current_name.padEnd(12, ' ').toUpperCase() + messageInputDom.value + '\n');
 
         var textarea = document.getElementById('chat-log');
         textarea.scrollTop = textarea.scrollHeight;
 
-        $.ajax({
-            type: "POST",
-            url: "Messages/",
-            data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                    'author_1': current_name,
-                    'message_1': messageInputDom.value
-                  },
-            success: function () {
-                console.log('Message POST to database success.')
-            }
-        });
-
         messageInputDom.value = '';
-    };
+    }
+};
+
 </script>
 </html>
