@@ -5,7 +5,7 @@ from chat import views as chat_views
 # import chat.views.messages
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/LIVE/', permanent=True)),
+    # path('', RedirectView.as_view(url='/LIVE/', permanent=True)),
     path('LIVE/', views.LocationListView.as_view(), name='LIVE'),
     path('Cafeteria/', views.cafeteria_form, name='cafeteria_form'),
     path('EastLobby/', views.east_lobby_form, name='east_lobby_form'),
