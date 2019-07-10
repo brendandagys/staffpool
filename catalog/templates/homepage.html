@@ -46,11 +46,12 @@
     <div class="container">
       <div class="row">
 
-      <div class="col-lg-3">
+      <div class="tile_padding col-lg-3">
         <a href="{% url 'LIVE' %}">
           <div class="grow features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
-              <i class="icon-screen-desktop m-auto text-primary"></i>
+                <img src="{% static 'fireengine.png' %}" alt="Fire Truck" width="100" height="100"/>
+              <!-- <i class="icon-screen-desktop m-auto text-primary"></i> -->
             </div>
             <h3>Code Red</h3>
             <p class="lead mb-0">Enter the Code Red response portal to submit data or view the response in real-time.</p>
@@ -58,33 +59,36 @@
           </a>
       </div>
 
-        <div class="col-lg-3">
+        <div class="tile_padding col-lg-3">
           <div class="grow features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
-              <i class="icon-layers m-auto text-primary"></i>
+            <img src="{% static 'bandaids.png' %}" alt="Bandaids" width="100" height="100"/>
+              <!-- <i class="icon-layers m-auto text-primary"></i> -->
             </div>
             <h3>Code White</h3>
-            <p class="lead mb-0">Click here to submit data on a Code White incident.</p>
+            <p class="lead mb-0">Submit data on a Code White incident.</p>
           </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="tile_padding col-lg-3">
           <div class="grow features-icons-item mx-auto mb-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
-              <i class="icon-check m-auto text-primary"></i>
+            <img src="{% static 'blueheart2.png' %}" alt="Blue Heart" width="100" height="100"/>
+              <!-- <i class="icon-check m-auto text-primary"></i> -->
             </div>
             <h3>Code Blue</h3>
-            <p class="lead mb-0">Click here to submit data on a Code Blue incident.</p>
+            <p class="lead mb-0">Submit data on a Code Blue incident.</p>
           </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="tile_padding col-lg-3">
           <div class="grow features-icons-item mx-auto mb-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
-              <i class="icon-check m-auto text-primary"></i>
+            <img src="{% static 'pinkheart2.png' %}" alt="Pink Heart" width="110" height="110"/>
+              <!-- <i class="icon-check m-auto text-primary"></i> -->
             </div>
             <h3>Code Pink</h3>
-            <p class="lead mb-0">Click here to submit data on a Code Pink incident.</p>
+            <p class="lead mb-0">Submit data on a Code Pink incident.</p>
           </div>
         </div>
 
@@ -134,14 +138,14 @@
               </br></br></br>
           <p class="lead mb-0"><i>Have a question? Email me...</i></p>
               </br>
-          <p class="lead mb-0"><a href="mailto:brendan.dagys@nrbhc.on.ca?subject=&body=" class="button big">brendan.dagys@nbrhc.on.ca</a></p>
+          <p class="lead mb-0"><a id="contact_me" href="mailto:brendan.dagys@nrbhc.on.ca?subject=&body=" class="button big">brendan.dagys@nbrhc.on.ca</a></p>
         </div>
       </div>
   </section>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 </body>
 </html>
