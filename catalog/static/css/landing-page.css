@@ -141,7 +141,7 @@ footer.footer {
     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 700;
     background-color: rgb(173, 181, 189); /* Fallback for older browsers without RGBA-support */
-    background-color: rgba(173, 181, 189, 0.8);
+    background-color: rgba(173, 181, 189, 1);
     margin: auto 12% auto 12%;
     padding: 10px 15px;
     border-radius: 2rem;
