@@ -11,7 +11,7 @@ urlpatterns = [
     path('EastLobby/', views.east_lobby_form, name='east_lobby_form'),
     path('TownCentre/', views.town_centre_form, name='town_centre_form'),
     path('About/', views.about, name='about'),
-    path('LIVE/CodeRedStatus/', views.code_red_status, name='code_red_status_view'),
+    # path('LIVE/CodeRedStatus/', views.code_red_status, name='code_red_status_view'),
     re_path(r'^.*CodeRed.*$', views.code_red_status, name='code_red_status'),
     re_path(r'^.*Messages.*$', chat_views.messages, name='messages_2'),
 

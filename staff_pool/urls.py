@@ -23,6 +23,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from chat.views import messages
+from catalog.views import homepage
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
@@ -30,9 +31,10 @@ urlpatterns = [
     # path('chat/', include('chat.urls')),
     re_path(r'^.*chat.*$', include('chat.urls')),
 
+    path('', homepage, name='homepage'),
     path('messages/', include('chat.urls')),
     path('accounts/', include('django.contrib.auth.urls')), # Add Django site authentication urls (for login, logout, password management)
-    path('', include('catalog.urls')),
+    path('CodeRed/', include('catalog.urls')),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Add Django site authentication urls (for login, logout, password management)
