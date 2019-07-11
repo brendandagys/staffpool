@@ -460,3 +460,9 @@ textarea {
     width: 100%;
     height: 80%;
 }
+
+.new_form_button {
+  display: block;
+  width: 200px;
+  margin: auto;
+}

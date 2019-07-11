@@ -26,12 +26,15 @@ def cafeteria_form(request):
 
     if request.method == 'POST' and 'c' in request.POST:
 
+        # print(request.POST.keys())
+        print(request.POST.get('reset', 'ooook'))
+
         if Cafeteria.objects.last() is None:
             cafeteria_instance = Cafeteria()
 
         else:
 
-            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
+            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and request.POST.get('reset', '') != 'Yes' and
                ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
@@ -70,7 +73,7 @@ def cafeteria_form(request):
     else:
 
         try:
-            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
+            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and request.GET.get('new_form_indicator','') != 'Yes' and
                ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
