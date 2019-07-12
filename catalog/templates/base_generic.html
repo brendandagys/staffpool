@@ -62,7 +62,7 @@
 {% endblock %}
 
 {% block set_statuses %}
-    {% if user.is_authenticated and user.get_username == 'brendan' %}
+    {% if user.is_authenticated and user.get_username == 'brendan' or user.get_username == 'jeremy' or user.get_username == 'eileen' or user.get_username == 'angele' %}
 
     <div id="status_list">
         <input id="status_normal" class="status_button btn btn-success" type="button" value="Normal" name="upgrade_button"> </br>
