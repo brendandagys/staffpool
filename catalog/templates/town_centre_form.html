@@ -9,9 +9,13 @@
   <p><em>Please enter the event time and the names of assigned staff:</em></p> </br>
 </div>
 
-<div>
+{% if show_form_button == 'Yes' %}
+    <div>
+        <input id="new_form_button" class="new_form_button btn btn-secondary" type="button" value="Generate a New Form" name="new_form_button"> </br>
+    </div>
+{% endif %}
 
-<!-- <div class="main_div container-fluid"> -->
+<div>
 
   <form class="trim_form" id="town_centre_form_html" action="" method="post">
     {% csrf_token %}
@@ -27,15 +31,34 @@
     </br></br>
     <p class="center_other_content past_data">Number of past Town Centre Staff Pool submissions:<br/>
         <strong id="past_size">{{num_events}}</strong></p>
+
 </div>
 
 <!-- <p class="hide">...</p> -->
 
 <script type="text/javascript">
 
+var form_is_reset = 'No';
+var reset_once = 'No';
+var reset = 'No'
+
 $(document).ready(function(){
-        $('#town_centre_form_html :input').not('#id_t_date').on('blur', function(e) {
+
+        $(document).on('blur', '#town_centre_form_html', function(e) {
+            // console.log('Form is reset: ' + form_is_reset);
+            // console.log('Reset once: ' + reset_once);
             e.preventDefault()
+
+            if (form_is_reset == 'Yes' && reset_once == 'No') {
+                reset = 'Yes';
+                reset_once = 'Yes';
+            }
+            else {
+                reset = 'No';
+            }
+
+            // console.log('Form is reset AFTER: ' + form_is_reset);
+            // console.log('Reset once AFTER: ' + reset_once);
 
             $.ajax({
                 type: "POST",
@@ -43,6 +66,7 @@ $(document).ready(function(){
                 // dataType: 'JSON'
                 data: {
                     csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'reset': reset,
                     't': 'dummy',
                     't_date': $('#id_t_date').val(),
                     't_time': $('#id_t_time').val(),
@@ -60,7 +84,26 @@ $(document).ready(function(){
                 }
             });
             return false;
-      });
+       });
+  });
+
+  $('#new_form_button').click(function(e) {     // Won't run when message button is clicked
+
+       form_is_reset = 'Yes';
+
+        $.ajax({
+            type: "GET",
+            url: "",
+            data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'new_form_indicator': 'Yes',
+                  },
+            success: function (new_form) {
+
+                $('#town_centre_form_html').replaceWith($(new_form).find('#town_centre_form_html'));
+
+                console.log('New form success!');
+            }});
+        });
   });
 
 </script>

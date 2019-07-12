@@ -9,9 +9,13 @@
   <p><em>Please enter the event time and the names of assigned staff:</em></p> </br>
 </div>
 
-<div>
+{% if show_form_button == 'Yes' %}
+    <div>
+        <input id="new_form_button" class="new_form_button btn btn-secondary" type="button" value="Generate a New Form" name="new_form_button"> </br>
+    </div>
+{% endif %}
 
-<!-- <div class="main_div container-fluid"> -->
+<div>
 
   <form class="trim_form" id="east_lobby_form_html" action="" method="post">
     {% csrf_token %}
@@ -34,9 +38,27 @@
 
 <script type="text/javascript">
 
+var form_is_reset = 'No';
+var reset_once = 'No';
+var reset = 'No'
+
 $(document).ready(function(){
-        $('#east_lobby_form_html :input').not('#id_e_date').on('blur', function(e) {
+
+        $(document).on('blur', '#east_lobby_form_html', function(e) {
+            // console.log('Form is reset: ' + form_is_reset);
+            // console.log('Reset once: ' + reset_once);
             e.preventDefault()
+
+            if (form_is_reset == 'Yes' && reset_once == 'No') {
+                reset = 'Yes';
+                reset_once = 'Yes';
+            }
+            else {
+                reset = 'No';
+            }
+
+            // console.log('Form is reset AFTER: ' + form_is_reset);
+            // console.log('Reset once AFTER: ' + reset_once);
 
             $.ajax({
                 type: "POST",
@@ -44,6 +66,7 @@ $(document).ready(function(){
                 // dataType: 'JSON'
                 data: {
                     csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'reset': reset,
                     'e': 'dummy',
                     'e_date': $('#id_e_date').val(),
                     'e_time': $('#id_e_time').val(),
@@ -64,6 +87,25 @@ $(document).ready(function(){
             return false;
       });
   });
+
+  $('#new_form_button').click(function(e) {     // Won't run when message button is clicked
+
+     form_is_reset = 'Yes';
+
+      $.ajax({
+          type: "GET",
+          url: "",
+          data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                  'new_form_indicator': 'Yes',
+                },
+          success: function (new_form) {
+
+              $('#east_lobby_form_html').replaceWith($(new_form).find('#east_lobby_form_html'));
+
+              console.log('New form success!');
+          }});
+      });
+});
 
 </script>
 

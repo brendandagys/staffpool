@@ -9,9 +9,11 @@
   <p><em>Please enter the event time and the names of assigned staff:</em></p> </br>
 </div>
 
-<div>
-    <input id="new_form_button" class="new_form_button btn btn-secondary" type="button" value="Generate a New Form" name="new_form_button"> </br>
-</div>
+{% if show_form_button == 'Yes' %}
+    <div>
+        <input id="new_form_button" class="new_form_button btn btn-secondary" type="button" value="Generate a New Form" name="new_form_button"> </br>
+    </div>
+{% endif %}
 
 <div>
 
@@ -85,8 +87,9 @@ $(document).ready(function(){
             });
             return false;
       });
+});
 
-  $('#new_form_button').click(function(e) {     // Won't run when message button is clicked
+$('#new_form_button').click(function(e) {     // Won't run when message button is clicked
 
      form_is_reset = 'Yes';
 
@@ -104,6 +107,7 @@ $(document).ready(function(){
           }});
       });
 });
+
 </script>
 
 {% endblock %}

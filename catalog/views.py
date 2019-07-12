@@ -22,6 +22,8 @@ def homepage(request):
 def cafeteria_form(request):
     '''View function for home page of site.'''
 
+    show_form_button = 'No'
+
     num_events = Cafeteria.objects.all().count() # All is implied by default
 
     if request.method == 'POST' and 'c' in request.POST:
@@ -89,6 +91,8 @@ def cafeteria_form(request):
                 c_num_staff = Cafeteria.objects.last().c_num_staff
                 c_explain = Cafeteria.objects.last().c_explain
 
+                show_form_button = 'Yes'
+
             else:
                 c_time = str(datetime.datetime.now().time())[0:5]
                 c_coordinator = ''
@@ -130,7 +134,9 @@ def cafeteria_form(request):
                                         })
 
     context = { 'num_events': num_events,
-                'form_c': form_c, }
+                'form_c': form_c,
+                'show_form_button': show_form_button,
+              }
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'cafeteria_form.html', context=context)
@@ -141,16 +147,20 @@ def cafeteria_form(request):
 def east_lobby_form(request):
     '''View function for home page of site.'''
 
+    show_form_button = 'No'
+
     num_events = East_Lobby.objects.all().count() # All is implied by default
 
     if request.method == 'POST' and 'e' in request.POST:
+
+        print(request.POST.get('reset', 'ooook'))
 
         if East_Lobby.objects.last() is None:
             east_lobby_instance = East_Lobby()
 
         else:
 
-            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and
+            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and request.POST.get('reset', '') != 'Yes' and
                ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
@@ -188,7 +198,7 @@ def east_lobby_form(request):
     else:
 
         try:
-            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and
+            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and request.GET.get('new_form_indicator','') != 'Yes' and
                ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
@@ -202,6 +212,8 @@ def east_lobby_form(request):
                 e_runners = East_Lobby.objects.last().e_runners
                 e_num_staff = East_Lobby.objects.last().e_num_staff
                 e_explain = East_Lobby.objects.last().e_explain
+
+                show_form_button = 'Yes'
 
             else:
                 e_time = str(datetime.datetime.now().time())[0:5]
@@ -241,7 +253,9 @@ def east_lobby_form(request):
                                         })
 
     context = { 'num_events': num_events,
-                'form_e': form_e, }
+                'form_e': form_e,
+                'show_form_button': show_form_button,
+              }
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'east_lobby_form.html', context=context)
@@ -252,16 +266,20 @@ def east_lobby_form(request):
 def town_centre_form(request):
     '''View function for home page of site.'''
 
+    show_form_button = 'No'
+
     num_events = Town_Centre.objects.all().count() # All is implied by default
 
     if request.method == 'POST' and 't' in request.POST:
+
+        print(request.POST.get('reset', 'ooook'))
 
         if Town_Centre.objects.last() is None:
             town_centre_instance = Town_Centre()
 
         else:
 
-            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and
+            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and request.POST.get('reset', '') != 'Yes' and
                ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
@@ -299,7 +317,7 @@ def town_centre_form(request):
 
         try:
 
-            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and
+            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and request.GET.get('new_form_indicator','') != 'Yes' and
                ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
 
@@ -312,6 +330,8 @@ def town_centre_form(request):
                 t_runners = Town_Centre.objects.last().t_runners
                 t_num_staff = Town_Centre.objects.last().t_num_staff
                 t_explain = Town_Centre.objects.last().t_explain
+
+                show_form_button = 'Yes'
 
             else:
                 t_time = str(datetime.datetime.now().time())[0:5]
@@ -348,7 +368,9 @@ def town_centre_form(request):
                                         })
 
     context = { 'num_events': num_events,
-                'form_t': form_t, }
+                'form_t': form_t,
+                'show_form_button': show_form_button,
+              }
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'town_centre_form.html', context=context)
