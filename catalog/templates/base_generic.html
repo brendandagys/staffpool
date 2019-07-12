@@ -307,13 +307,13 @@ $.ajax({
       success: function(response) {
           // alert('The status has been changed to ' + response['json_data'])
 
-          console.log('START')
-          console.log('Existing status: ' + status)
-          console.log('Existing last_status: ' + last_status)
-          console.log('From GET: ' + response['reset_status'])
-          console.log('From GET: ' + response['code_red_status'])
-          console.log('From GET: ' + response['status_setter'])
-          console.log('END')
+          // console.log('START')
+          // console.log('Existing status: ' + status)
+          // console.log('Existing last_status: ' + last_status)
+          // console.log('From GET: ' + response['reset_status'])
+          // console.log('From GET: ' + response['code_red_status'])
+          // console.log('From GET: ' + response['status_setter'])
+          // console.log('END')
           // console.log(response['from_location'])
           // console.log(response['to_location'])
 
@@ -341,9 +341,9 @@ $.ajax({
             last_status = response['code_red_status'];
             status = response['code_red_status'];
         }
-        console.log('New status: ' + status)
-        console.log('New last_status: ' + last_status)
-        console.log(' ')
+        // console.log('New status: ' + status)
+        // console.log('New last_status: ' + last_status)
+        // console.log(' ')
     }
   });
 
