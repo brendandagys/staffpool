@@ -105,9 +105,18 @@ $(document).ready(function() {
 
 var status;
 var last_status;
-var status_setter;
+// var status_setter;
 var from_location;
 var to_location;
+
+var current_user = '{{ current_user_id }}';
+// console.log(current_user);
+
+var name_asked_for = 'Yes';
+
+if ('{{ current_user_id }}' === 'Staff') {
+    name_asked_for = 'No';
+}
 
 var message_1;
 var author_1;
@@ -160,42 +169,59 @@ $.ajax({
 });
 
         $('#send_message').click(function(e) {
-            var new_author = prompt("Please enter your name:");
 
-            if (new_author === '') {
-                alert("You must give a name.");
+            if (current_user == 'Staff' && name_asked_for == 'No')) {
+
+              var current_user_temp = prompt("Please enter your name:");
+              if (current_user_temp == null) {
+                  return;
+              }
+              else if (current_user_temp.trim() == '') {
+                  // current_user = 'Staff';
+                  alert("You must give a name.");
+                  return;
+              }
+              else if (current_user_temp != null) {
+                  current_user = current_user_temp;
+                  name_asked_for = 'Yes';
             }
+          }
 
-            else if (new_author != null) {
-                var message = prompt("Message:");
-
-                if (message === '') {
-                    alert("You must enter a message.");
-                }
-                else if (message != null) {
+              var message = prompt("Message:");
+              if (message == null) {
+                // current_user = 'Staff';
+                console.log('Bad message: ' + current_user);
+                return;
+              }
+              else if (message.trim() == '') {
+                  alert("You must enter a message.");
+                  return;
+              }
+              else if (message != null) {
 
                     $.ajax({
                         type: "POST",
                         url: "Messages/",
                         data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                                'author_1': new_author,
+                                'author_1': current_user,
                                 'message_1': message
                               },
                         success: function () {
                             message_1 = message;
-                            console.log('Message sent: ' + message_1);
+                            console.log('Message by ' + current_user + ' sent: ' + message_1);
                         }
                     });
                 }
-            }
+           // }}
         });
 
         $('#status_normal').click(function(e) {
             if (status != 'Normal') {
                 // Get name
-                status_setter = prompt("Please enter your name:");
-                // Only if they don't click Cancel and give some text if clicking OK
-                if ((status_setter != null) && (status_setter != '')) {
+                if (current_user == null) {
+                  current_user = prompt("Please enter your name:");
+                  // Only if they don't click Cancel and give some text if clicking OK
+                if ((current_user != null) && (status_setter != '')) {
                     status = $('#status_normal').val();
                     last_status = $('#status_normal').val();
                     from_location = '';
@@ -211,7 +237,7 @@ $.ajax({
             }
             else {
                 alert("The status is already set to Normal!");
-            }
+            }}
         });
 
         $('#status_horizontal').click(function(e) {

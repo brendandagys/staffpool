@@ -15,6 +15,20 @@ from django.utils import timezone
 from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses
 from catalog.forms import CafeteriaForm, East_LobbyForm, Town_CentreForm
 
+def session_name(request):
+
+    if request.method == 'POST':
+        request.session['given_staff_name'] = request.POST['given_staff_name']
+
+    if request.method == 'GET':
+        name = request.session.get('given_staff_name', 'Not Stated')
+
+        # if name == 'Not Stated':
+        #     request.session['given_staff_name'] = 'Not Stated'
+
+        return JsonResponse({'given_staff_name': name})
+
+
 def homepage(request):
     return render(request, 'homepage.html')
 
@@ -136,6 +150,7 @@ def cafeteria_form(request):
     context = { 'num_events': num_events,
                 'form_c': form_c,
                 'show_form_button': show_form_button,
+                'current_user_id': request.user.get_username().capitalize(),
               }
 
     # Render the HTML template index.html with the data in the context variable
@@ -255,6 +270,7 @@ def east_lobby_form(request):
     context = { 'num_events': num_events,
                 'form_e': form_e,
                 'show_form_button': show_form_button,
+                'current_user_id': request.user.get_username().capitalize(),
               }
 
     # Render the HTML template index.html with the data in the context variable
@@ -370,6 +386,7 @@ def town_centre_form(request):
     context = { 'num_events': num_events,
                 'form_t': form_t,
                 'show_form_button': show_form_button,
+                'current_user_id': request.user.get_username().capitalize(),
               }
 
     # Render the HTML template index.html with the data in the context variable
@@ -569,6 +586,8 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
         except:
             pass
 
+        context['current_user_id'] = self.request.user.get_username().capitalize()
+
         return context
 
 # ======================================================================================================================
@@ -576,7 +595,7 @@ class LocationListView(LoginRequiredMixin, generic.ListView):
 
 def about(request):
 
-    context=None
+    context['current_user_id'] = request.user.get_username().capitalize()
 
     return render(request, 'index.html', context=context)
 
