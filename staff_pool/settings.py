@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalog.apps.CatalogConfig',
     'chat',
+    'import_export',
     # 'channels',
 ]
 
@@ -146,7 +147,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Just added because push to Heroku wasn't working
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'), # Changed this from static to staticfiles to make manage.py collectstatic work for export
 )
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)

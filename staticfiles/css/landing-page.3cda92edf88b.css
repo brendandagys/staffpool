@@ -1,0 +1,205 @@
+/*!
+ * Start Bootstrap - Landing Page v5.0.6 (https://startbootstrap.com/template-overviews/landing-page)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-landing-page/blob/master/LICENSE)
+ */
+
+body {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+a:not(#contact_me) {
+    color: black;
+    text-decoration: none !important;
+    border-bottom: 1px solid black;
+}
+
+img {
+    display: block;
+    margin: 0 auto 30px auto;
+}
+
+header.masthead {
+  position: relative;
+  /* background-color: #343a40; */
+  background: url("../banner.221171892c56.jpg") no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.call-to-action {
+  position: relative;
+  /* background-color: #343a40; */
+  background-image: url("../banner.221171892c56.jpg") no-repeat center center;
+  background-size: cover;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+header.masthead .overlay {
+  position: absolute;
+  background-color: #212529;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+}
+
+header.masthead h1 {
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  header.masthead {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  header.masthead h1 {
+    font-size: 3rem;
+  }
+}
+
+.showcase .showcase-text {
+  padding: 3rem;
+}
+
+.showcase .showcase-img {
+  min-height: 30rem;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .showcase .showcase-text {
+    padding: 7rem;
+  }
+}
+
+.features-icons {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.features-icons .features-icons-item {
+  max-width: 20rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon {
+  height: 8rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon i {
+  font-size: 4.5rem;
+}
+
+.features-icons .features-icons-item:hover .features-icons-icon i {
+  font-size: 5rem;
+}
+
+.testimonials {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.testimonials .testimonial-item {
+  max-width: 18rem;
+}
+
+.testimonials .testimonial-item img {
+  max-width: 12rem;
+  -webkit-box-shadow: 0px 5px 5px 0px #adb5bd;
+  box-shadow: 0px 5px 5px 0px #adb5bd;
+}
+
+.call-to-action .overlay {
+  position: absolute;
+  background-color: #212529;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+}
+
+footer.footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.banner_text {
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    background-color: rgb(173, 181, 189); /* Fallback for older browsers without RGBA-support */
+    background-color: rgba(173, 181, 189, 1);
+    margin: auto 12% auto 12%;
+    padding: 10px 15px;
+    border-radius: 2rem;
+}
+
+.opaque {
+    color: black;
+}
+
+.opaque_also {
+    color: white;
+}
+
+.opaque_bottom {
+    position: relative;
+    top: 3rem;
+    color: white;
+    background-color: #007bff;
+    padding: 0.5rem;
+    margin: auto 24%;
+    border-radius: 1rem;
+}
+
+#second {
+    margin-top: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+#job_title {
+    font-size: 0.75rem;
+    position: relative;
+    left: 8.8rem;
+}
+
+.grow:hover {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    color: blue;
+}
+
+.tile_padding {
+    position: relative;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.tile_padding_blue {
+    position: relative;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+@media only screen and (max-width: 991px) {
+    .tile_padding_blue {
+        position: relative;
+        padding-left: 35px;
+        padding-right: 35px;
+        margin-bottom: 50px;
+}
