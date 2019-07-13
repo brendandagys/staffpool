@@ -29,7 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     re_path(r'^.*Messages.*$', messages, name='messages'),
     # path('chat/', include('chat.urls')),
-    re_path(r'^.*chat.*$', include('chat.urls')),
+    re_path(r'^.*chat.*', include('chat.urls')),
 
     path('', homepage, name='homepage'),
     path('messages/', include('chat.urls')),
