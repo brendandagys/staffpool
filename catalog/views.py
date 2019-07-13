@@ -18,7 +18,11 @@ from catalog.forms import CafeteriaForm, East_LobbyForm, Town_CentreForm
 def session_name(request):
 
     if request.method == 'POST':
+        print('POST ran in view function')
+        print(request.POST['given_staff_name'])
         request.session['given_staff_name'] = request.POST['given_staff_name']
+
+        return HttpResponse()
 
     if request.method == 'GET':
         name = request.session.get('given_staff_name', 'Not Stated')
