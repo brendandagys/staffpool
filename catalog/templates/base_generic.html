@@ -107,7 +107,7 @@ $(document).ready(function() {
 
 var status;
 var last_status;
-var status_setter;
+// var status_setter;
 var from_location;
 var to_location;
 
@@ -325,7 +325,7 @@ $.ajax({
         });
 
 
-  var myStatusVar = setInterval(status_update, 10000);
+  var myStatusVar = setInterval(status_update, 1000);
   function status_update() {
 
   $.ajax({
@@ -368,13 +368,6 @@ $.ajax({
             alert(response['status_setter'] + ' has set the status From ' + status + ' to ' + last_status);
             status = response['code_red_status'];
         }
-        // else {
-        //     last_status = response['code_red_status'];
-        //     status = response['code_red_status'];
-        // }
-        // console.log('New status: ' + status)
-        // console.log('New last_status: ' + last_status)
-        // console.log(' ')
     }
   });
 

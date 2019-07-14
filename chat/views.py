@@ -27,21 +27,6 @@ def room(request):
         'current_user_id': request.user.get_username().capitalize(),
     })
 
-def chat_session_name(request):
-    print('CHAT SESSION NAME VIEW FUNCTION RAN')
-    if request.method == 'POST':
-        print('Name POST: ' + request.POST['given_staff_name'])
-        request.session['given_staff_name'] = request.POST['given_staff_name']
-
-        return HttpResponse()
-
-    if request.method == 'GET':
-        print('Method is GET')
-        name = request.session.get('given_staff_name', 'Not Stated')
-        print(name)
-        return JsonResponse({'given_staff_name': name})
-
-
 def messages(request):
 
     if request.method == 'GET':

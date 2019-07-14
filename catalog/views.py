@@ -42,8 +42,8 @@ def cafeteria_form(request):
 
     if request.method == 'POST' and 'c' in request.POST:
 
-        # print(request.POST.keys())
-        print(request.POST.get('reset', 'ooook'))
+        print(request.POST.keys())
+        print(request.POST.get('reset', 'Couldn\'t find reset answer'))
 
         if Cafeteria.objects.last() is None:
             cafeteria_instance = Cafeteria()
@@ -87,7 +87,7 @@ def cafeteria_form(request):
 
     # If this is a GET (or any other method) create the default form.
     else:
-
+        print(request.GET)
         try:
             if ((Cafeteria.objects.last().c_date == timezone.now().date()) and request.GET.get('new_form_indicator','') != 'Yes' and
                ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
@@ -211,12 +211,13 @@ def east_lobby_form(request):
 
     # If this is a GET (or any other method) create the default form.
     else:
-
+        print(request.GET)
+        # print('Running East Lobby GET' + ': new_form_indicator = ' + request.GET.get('new_form_indicator', ''))
         try:
             if ((East_Lobby.objects.last().e_date == timezone.now().date()) and request.GET.get('new_form_indicator','') != 'Yes' and
                ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
-
+                # print('this ran')
                 e_time = East_Lobby.objects.last().e_time
                 e_coordinator = East_Lobby.objects.last().e_coordinator # Will return None if no match
                 e_main_doors = East_Lobby.objects.last().e_main_doors

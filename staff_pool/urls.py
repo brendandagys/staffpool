@@ -22,22 +22,24 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from chat.views import messages, chat_session_name
-from catalog.views import homepage
-from catalog.views import session_name
+from catalog import views as catalog_views
+from chat.views import messages
+from catalog.views import homepage, session_name, code_red_status
 
 urlpatterns = [
-    re_path(r'.*ChatSession.*', chat_session_name, name='chat_session_name'),
     path('admin/', admin.site.urls, name='admin'),
-    re_path(r'^.*Messages.*$', messages, name='messages'),
-    # path('chat/', include('chat.urls')),
-    re_path(r'^.*chat.*', include('chat.urls')),
-    re_path(r'^.*Session.*$', session_name, name='session_name'),
-
-    path('', homepage, name='homepage'),
-    path('messages/', include('chat.urls')),
     path('accounts/', include('django.contrib.auth.urls')), # Add Django site authentication urls (for login, logout, password management)
+
+    re_path(r'.*Session.*', session_name, name='session_name'),
+    re_path(r'^.*Messages.*$', messages, name='messages'),
+    re_path(r'^.*CodeRedStatus.*$', code_red_status, name='code_red_status'),
+
+    path('CodeRed/', catalog_views.LocationListView.as_view(), name='LIVE'),
     path('CodeRed/', include('catalog.urls')),
+    re_path(r'^.*chat.*', include('chat.urls')),
+    path('', homepage, name='homepage'),
+
+    # path('messages/', include('chat.urls')),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Add Django site authentication urls (for login, logout, password management)

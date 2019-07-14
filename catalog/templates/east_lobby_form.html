@@ -89,6 +89,9 @@ $(document).ready(function(){
 
   $('#new_form_button').click(function(e) {     // Won't run when message button is clicked
 
+     console.log('Form is reset on CLICK: ' + form_is_reset);
+     console.log('Reset once on CLICK: ' + reset_once);
+
      form_is_reset = 'Yes';
 
       $.ajax({
