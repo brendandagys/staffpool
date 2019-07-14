@@ -14,15 +14,40 @@
       </div>
     </div>
 <script>
-
-    var current_name = 'empty';
+    var current_user = '{{ current_user_id }}';
+    // var current_name = 'empty';
     var last_timestamp = 'empty';
     var last_author = 'empty';
 
-    current_name = prompt("Please enter the chat name you'd like to use:");
+    if (current_user === 'Staff') {
 
-    if (current_name == null || current_name.trim() == '') {
-        window.location.replace("{% url 'LIVE' %}");
+        $.ajax({
+            type: 'GET',
+            url: 'Session/',
+            data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                    // 'session_request': 'yes' // Is this line only here because you need something?
+                  },
+            success: function(response) {
+                console.log('GET Staff name: ' + response['given_staff_name']);
+
+                var given_staff_name_temp = response['given_staff_name'];
+
+                if (given_staff_name_temp !== 'Not Stated') {
+                  current_user = given_staff_name_temp;
+                }
+            }
+        });
+    }
+
+    if (current_user === 'Staff') {
+        var chat_name_temp = prompt("Please enter the chat name you'd like to use:");
+
+        if (chat_name_temp == null || chat_name_temp.trim() == '') {
+            window.location.replace("{% url 'LIVE' %}");
+        }
+        else {
+            current_user = chat_name_temp;
+        }
     }
 
     $.ajax({
@@ -98,13 +123,13 @@
             type: 'GET',
             url: 'Messages/',
             data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                    'message_request': 'yes' // Is this line only here because you need something?
+                    // 'message_request': 'yes' // Is this line only here because you need something?
                   },
             success: function(response) {
 
-                console.log('Recurring GET: ' + response['timestamp'].substring(0,21))
-                console.log('Response author: ' + response['author_1'])
-                console.log('Current name: ' + current_name)
+                // console.log('Recurring GET: ' + response['timestamp'].substring(0,21))
+                // console.log('Response author: ' + response['author_1'])
+                // console.log('Current name: ' + current_name)
                 if (response['timestamp'].substring(0,21) !== last_timestamp && response['author_1'] !== current_name) {
 
                     document.querySelector('#chat-log').value += (response['author_1'].padEnd(12, ' ').toUpperCase() + response['message_1'] + '\n');
@@ -146,11 +171,11 @@
                 type: 'GET',
                 url: 'Messages/',
                 data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                        'message_request': 'yes' // Is this line only here because you need something?
+                        // 'message_request': 'yes' // Is this line only here because you need something?
                       },
                 success: function(response) {
                     last_timestamp = response['timestamp'].substring(0,21)
-                    console.log('Third GET: ' + response['timestamp'].substring(0,21))
+                    // console.log('Third GET: ' + response['timestamp'].substring(0,21))
                 }
             });
 
@@ -159,7 +184,7 @@
         var textarea = document.getElementById('chat-log');
         textarea.scrollTop = textarea.scrollHeight;
 
-        messageInputDom.value = '';
+        messageInputDom.value = ''; // Clear input field
     }
 };
 

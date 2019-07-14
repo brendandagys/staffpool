@@ -17,6 +17,7 @@ def index(request):
     return render(request, 'chat/index.html', {})
 
 # def room(request, room_name):
+@login_required
 def room(request):
 
     # Get the last 10 messages and add to the context. Also, maybe import the staffpool models above?

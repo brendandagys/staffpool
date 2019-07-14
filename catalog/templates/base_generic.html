@@ -119,8 +119,8 @@ var current_user = '{{ current_user_id }}';
 // }
 
 var message_1;
-var author_1;
-var timestamp;
+// var author_1;
+// var timestamp;
 
 if (current_user === 'Staff') {
 
@@ -128,13 +128,12 @@ if (current_user === 'Staff') {
       type: 'GET',
       url: 'Session/',
       data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-              'session_request': 'yes' // Is this line only here because you need something?
+              // 'session_request': 'yes' // Is this line only here because you need something?
             },
       success: function(response) {
-          console.log('GET session success');
-          console.log(response['given_staff_name']);
-          
-          given_staff_name_temp = response['given_staff_name'];
+          console.log('GET Staff name: ' + response['given_staff_name']);
+
+          var given_staff_name_temp = response['given_staff_name'];
 
           if (given_staff_name_temp !== 'Not Stated') {
             current_user = given_staff_name_temp;
@@ -147,13 +146,10 @@ $.ajax({
     type: 'GET',
     url: 'Messages/',
     data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-            'message_request': 'yes' // Is this line only here because you need something?
+            // 'message_request': 'yes' // Is this line only here because you need something?
           },
     success: function(response) {
         message_1 = response['message_1'];
-
-        // console.log(response['author_1']);
-        // console.log(response['message_1'])
     }
 });
 
@@ -161,32 +157,24 @@ $.ajax({
     type: 'GET',
     url: 'CodeRedStatus/',
     data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-            'status_request': 'yes' // Is this line only here because you need something?
+            // 'status_request': 'yes' // Is this line only here because you need something?
           },
-    // dataType: 'json',          // Apparently not needed
     success: function(response) {
         status = response['code_red_status']; // Needed?
         last_status = response['code_red_status'];
-        // status_setter = response['status_setter'] // Probably not needed unless I want to exempt setter from notice alert
-        // from_location = response['from_location']
-        // to_location = response['to_location']
 
         if (response['code_red_status'] == 'Normal') {
-            $('#status_banner').text('');
+            $('#status_banner').text('')
         }
-
-        else {
-
-            $('#status_banner').text(response['code_red_status']);
-
-            if (response.code_red_status == 'Horizontal Evacuation') {
-                $('#status_banner').addClass('banner_yellow');
-            }
-            else {
-                $('#status_banner').addClass('banner_red');
-            }
-      }
-  }
+        else if (response['code_red_status'] == 'Horizontal Evacuation') {
+            $('#status_banner').text('Horizontal Evacuation from ' + response['from_location'] + ' to ' + response['to_location'])
+            $('#status_banner').addClass('banner_yellow')
+          }
+        else if (response['code_red_status'] == 'Full Evacuation') {
+            $('#status_banner').text('Full Evacuation')
+            $('#status_banner').addClass('banner_red')
+        }
+    }
 });
 
         $('#send_message').click(function(e) {
@@ -198,13 +186,11 @@ $.ajax({
                   return;
               }
               else if (current_user_temp.trim() == '') {
-                  // current_user = 'Staff';
                   alert("You must give a name.");
                   return;
               }
               else if (current_user_temp != null) {
                   current_user = current_user_temp;
-                  // name_asked_for = 'Yes';
 
                   $.ajax({
                       type: "POST",
@@ -216,12 +202,12 @@ $.ajax({
                           console.log('Posted name: ' + current_user);
                       }
                   });
-            }
+              }
           }
 
               var message = prompt("Message:");
+
               if (message == null) {
-                // current_user = 'Staff';
                 console.log('Clicked Cancel on message dialog: ' + current_user);
                 return;
               }
@@ -249,83 +235,72 @@ $.ajax({
 
         $('#status_normal').click(function(e) {
             if (status != 'Normal') {
-                // Get name
-                if (current_user == null) {
-                  current_user = prompt("Please enter your name:");
-                  // Only if they don't click Cancel and give some text if clicking OK
-                if ((current_user != null) && (status_setter != '')) {
-                    status = $('#status_normal').val();
-                    last_status = $('#status_normal').val();
-                    from_location = '';
-                    to_location = '';
 
-                    $('#status_banner').text('');
-                    $('#status_banner').removeClass('banner_yellow');
-                    $('#status_banner').removeClass('banner_red');
-                }
-                else if (status_setter == '') { // If they submit an empty string
-                    alert("You must give a name.");
-                }
+                // Only if they don't click Cancel and give some text if clicking OK
+                // if ((current_user != null) && (status_setter != '')) {
+                status = $('#status_normal').val();
+                last_status = $('#status_normal').val();
+                from_location = '';
+                to_location = '';
+
+                $('#status_banner').text('');
+                $('#status_banner').removeClass('banner_yellow');
+                $('#status_banner').removeClass('banner_red');
             }
+
             else {
                 alert("The status is already set to Normal!");
-            }}
+            }
         });
 
         $('#status_horizontal').click(function(e) {
-            status_setter = prompt("Please enter your name:");
 
-            if (status_setter != null && status_setter != '') {
+            if (status != 'Horizontal Evacuation') {
 
                 from_location = prompt("From:");
 
                 if (from_location != null && from_location != '') {
 
-                    to_location = prompt("To:");
+                        to_location = prompt("To:");
 
-                    if (to_location != null && to_location != '') {
+                        if (to_location != null && to_location != '') {
 
-                        // if (status_setter != null && from_location != null && to_location != null) {
-                        status = $('#status_horizontal').val();
-                        last_status = $('#status_horizontal').val();
+                            // if (status_setter != null && from_location != null && to_location != null) {
+                            status = $('#status_horizontal').val();
+                            last_status = $('#status_horizontal').val();
 
-                        $('#status_banner').text('Horizontal Evacuation');
-                        $('#status_banner').addClass('banner_yellow');
-                        $('#status_banner').removeClass('banner_red');
+                            $('#status_banner').text('Horizontal Evacuation');
+                            $('#status_banner').addClass('banner_yellow');
+                            $('#status_banner').removeClass('banner_red');
+                            }
+                        else if (to_location == '') {
+                            alert('You must provide a To location.');
                         }
-                    else if (to_location == '') {
-                        alert('You must provide a To location.');
-                    }
                 }
+
                 else if (from_location == '') {
                     alert('You must provide a From location.');
                 }
             }
-            else if (status_setter == '') {
-                alert('You must give a name.');
+
+            else {
+                alert("The status is already set to Horizontal Evacuation!");    
             }
         });
 
         $('#status_full_evac').click(function(e) {
             if (status != 'Full Evacuation') {
 
-                status_setter = prompt("Please enter your name:");
+                status = $('#status_full_evac').val();
+                last_status = $('#status_full_evac').val();
+                from_location = '';
+                to_location = '';
 
-                if ((status_setter != null) && (status_setter != '')) {
-                    status = $('#status_full_evac').val();
-                    last_status = $('#status_full_evac').val();
-                    from_location = '';
-                    to_location = '';
-
-                    $('#status_banner').text('Full Evacuation');
-                    $('#status_banner').addClass('banner_red');
-                    $('#status_banner').removeClass('banner_yellow');
-                }
-
-                else if (status_setter == '') { //If they click cancel, I'll get a Uncaught TypeError for no strip method existing for null
-                    alert("You must give a name.");
-                }
+                $('#status_banner').text('Full Evacuation');
+                $('#status_banner').addClass('banner_red');
+                $('#status_banner').removeClass('banner_yellow');
             }
+
             else {
                 alert("The status is already set to Full Evacuation!");
             }
@@ -333,19 +308,20 @@ $.ajax({
 
         $(':button').not('#send_message').click(function(e) {     // Won't run when message button is clicked
 
-            if (status_setter != null && status_setter != '' && from_location != null && to_location != null) {
+            // if (status_setter != null && status_setter != '' && from_location != null && to_location != null) {
+            if (from_location != null && to_location != null) {
 
                 $.ajax({
                     type: "POST",
                     url: "CodeRedStatus/",
                     data: { csrfmiddlewaretoken: '{{ csrf_token }}',
                             'code_red_status': status,
-                            'status_setter': status_setter,
+                            'status_setter': current_user,
                             'from_location': from_location,
                             'to_location': to_location
                           },
                     success: function () {
-                        console.log('Post success!');
+                        console.log('POST status success!');
                     }
                 });
             }
@@ -359,7 +335,7 @@ $.ajax({
       type: 'GET',
       url: 'CodeRedStatus/',
       data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-              'status_request': 'yes'
+              // 'status_request': 'yes'
             },
       // dataType: 'json',          // Apparently not needed
       success: function(response) {
@@ -389,16 +365,16 @@ $.ajax({
             $('#status_banner').removeClass('banner_yellow')
           }
 
-        if (response['code_red_status'] != last_status && response['reset_status'] == 'No') {
+        if (response['code_red_status'] != last_status) { // && response['reset_status'] == 'No') {
             last_status = response['code_red_status'];
 
             alert(response['status_setter'] + ' has set the status From ' + status + ' to ' + last_status);
             status = response['code_red_status'];
         }
-        else {
-            last_status = response['code_red_status'];
-            status = response['code_red_status'];
-        }
+        // else {
+        //     last_status = response['code_red_status'];
+        //     status = response['code_red_status'];
+        // }
         // console.log('New status: ' + status)
         // console.log('New last_status: ' + last_status)
         // console.log(' ')
@@ -418,8 +394,8 @@ $.ajax({
          // console.log(response['timestamp'].substring(11,19));
 
           if (!window.location.href.includes('chat') && response['message_1'] != message_1 && response['message_1'] != '') {
-            alert("Message from " + response['author_1'] + ' @ ' + response['timestamp'].substring(11,19) + ':\n\n' + response['message_1']);
-            message_1 = response['message_1']
+              alert("Message from " + response['author_1'] + ' @ ' + response['timestamp'].substring(11,19) + ':\n\n' + response['message_1']);
+              message_1 = response['message_1']
           }
         }
      });

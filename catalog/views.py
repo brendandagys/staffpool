@@ -27,9 +27,6 @@ def session_name(request):
     if request.method == 'GET':
         name = request.session.get('given_staff_name', 'Not Stated')
 
-        # if name == 'Not Stated':
-        #     request.session['given_staff_name'] = 'Not Stated'
-
         return JsonResponse({'given_staff_name': name})
 
 
