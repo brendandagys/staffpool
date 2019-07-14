@@ -16,17 +16,16 @@ from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses
 from catalog.forms import CafeteriaForm, East_LobbyForm, Town_CentreForm
 
 def session_name(request):
-
+    print('SESSION NAME VIEW FUNCTION RAN')
     if request.method == 'POST':
-        print('POST ran in view function')
-        print(request.POST['given_staff_name'])
+        print('Name POST: ' + request.POST['given_staff_name'])
         request.session['given_staff_name'] = request.POST['given_staff_name']
 
         return HttpResponse()
 
     if request.method == 'GET':
         name = request.session.get('given_staff_name', 'Not Stated')
-
+        print(name)
         return JsonResponse({'given_staff_name': name})
 
 

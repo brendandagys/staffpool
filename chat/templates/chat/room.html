@@ -13,9 +13,17 @@
         </div>
       </div>
     </div>
+
+  {% endblock %}
+
+  {% block script %}
 <script>
-    var current_user = '{{ current_user_id }}';
-    // var current_name = 'empty';
+
+    $(document).ready(function() {
+
+    // console.log(current_user);
+    current_user = '{{ current_user_id }}';
+    // console.log('Current user: ' + current_user);
     var last_timestamp = 'empty';
     var last_author = 'empty';
 
@@ -23,32 +31,101 @@
 
         $.ajax({
             type: 'GET',
-            url: 'Session/',
+            url: 'ChatSession/',
             data: { csrfmiddlewaretoken: '{{ csrf_token }}',
                     // 'session_request': 'yes' // Is this line only here because you need something?
                   },
             success: function(response) {
-                console.log('GET Staff name: ' + response['given_staff_name']);
+                console.log(response);
+                // console.log('GET Staff name 2: ' + response['given_staff_name']);
 
                 var given_staff_name_temp = response['given_staff_name'];
 
                 if (given_staff_name_temp !== 'Not Stated') {
-                  current_user = given_staff_name_temp;
+                    current_user = given_staff_name_temp;
+                    console.log('1: ' + current_user);
+                }
+                else {
+                   var chat_name_temp = prompt("Please enter the chat name you want to use:");
+
+                   if (chat_name_temp == null || chat_name_temp.trim() == '') {
+                     window.location.replace("{% url 'LIVE' %}");
+                   }
+                   else {
+                     current_user = chat_name_temp;
+
+                     $.ajax({
+                         type: "POST",
+                         url: "ChatSessions/",
+                         data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                                 'given_staff_name': current_user,
+                               },
+                         success: function () {
+                             // console.log('Posted provided name: ' + current_user);
+                         }
+                     });
+                   }
                 }
             }
         });
-    }
+      }
+    // console.log(current_user);
+    // current_user = 'ffff'
+    // if (current_user === 'Staff') {
+    //     var chat_name_temp = prompt("Please enter the chat name you'd like to use:");
+    //
+    //     if (chat_name_temp == null || chat_name_temp.trim() == '') {
+    //         window.location.replace("{% url 'LIVE' %}");
+    //     }
+    //     else {
+    //         current_user = chat_name_temp;
+    //
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "ChatSessions/",
+    //             data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+    //                     'given_staff_name': current_user,
+    //                   },
+    //             success: function () {
+    //                 // console.log('Posted provided name: ' + current_user);
+    //             }
+    //         });
+    //     }
+    // }}
+    // $.ajax({
+    //     type: 'GET',
+    //     url: 'Messages/',
+    //     data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+    //             // 'message_request': 'yes' // Is this line only here because you need something?
+    //           },
+    //     success: function(response) {
+    //         message_1 = response['message_1'];
+    //     }
+    // });
 
-    if (current_user === 'Staff') {
-        var chat_name_temp = prompt("Please enter the chat name you'd like to use:");
+    $.ajax({
+        type: 'GET',
+        url: 'CodeRedStatus/',
+        data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                // 'status_request': 'yes' // Is this line only here because you need something?
+              },
+        success: function(response) {
+            status = response['code_red_status']; // Needed?
+            last_status = response['code_red_status'];
 
-        if (chat_name_temp == null || chat_name_temp.trim() == '') {
-            window.location.replace("{% url 'LIVE' %}");
+            if (response['code_red_status'] == 'Normal') {
+                $('#status_banner').text('')
+            }
+            else if (response['code_red_status'] == 'Horizontal Evacuation') {
+                $('#status_banner').text('Horizontal Evacuation from ' + response['from_location'] + ' to ' + response['to_location'])
+                $('#status_banner').addClass('banner_yellow')
+              }
+            else if (response['code_red_status'] == 'Full Evacuation') {
+                $('#status_banner').text('Full Evacuation')
+                $('#status_banner').addClass('banner_red')
+            }
         }
-        else {
-            current_user = chat_name_temp;
-        }
-    }
+    });
 
     $.ajax({
         type: 'GET',
@@ -59,7 +136,7 @@
         success: function(response) {
 
             last_timestamp = response['timestamp'].substring(0,21);
-            console.log('Initial GET: ' + last_timestamp.substring(0,21));
+            console.log('Initial GET of last 10 messages: ' + last_timestamp.substring(0,21));
 
             message_1 = response['message_1'];
             message_2 = response['message_2'];
@@ -116,7 +193,7 @@
         }
     });
 
-    var myVar = setInterval(chat_update, 250);
+    var myVar = setInterval(chat_update, 12250);
     function chat_update() {
 
         $.ajax({
@@ -129,8 +206,8 @@
 
                 // console.log('Recurring GET: ' + response['timestamp'].substring(0,21))
                 // console.log('Response author: ' + response['author_1'])
-                // console.log('Current name: ' + current_name)
-                if (response['timestamp'].substring(0,21) !== last_timestamp && response['author_1'] !== current_name) {
+                // console.log('Current name: ' + current_user)
+                if (response['timestamp'].substring(0,21) !== last_timestamp && response['author_1'] !== current_user) {
 
                     document.querySelector('#chat-log').value += (response['author_1'].padEnd(12, ' ').toUpperCase() + response['message_1'] + '\n');
 
@@ -159,11 +236,11 @@
                 type: "POST",
                 url: "Messages/",
                 data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                        'author_1': current_name,
+                        'author_1': current_user,
                         'message_1': messageInputDom.value
                       },
                 success: function () {
-                    console.log('Message POST to database success.')
+                    console.log('Message by ' + current_user + ': POST to database success.')
                     }
                 });
 
@@ -179,15 +256,15 @@
                 }
             });
 
-        document.querySelector('#chat-log').value += (current_name.padEnd(12, ' ').toUpperCase() + messageInputDom.value + '\n');
+        document.querySelector('#chat-log').value += (current_user.padEnd(12, ' ').toUpperCase() + messageInputDom.value + '\n');
 
         var textarea = document.getElementById('chat-log');
         textarea.scrollTop = textarea.scrollHeight;
 
         messageInputDom.value = ''; // Clear input field
-    }
-};
-
+     }
+  };
+});
 </script>
 
 {% endblock %}

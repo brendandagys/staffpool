@@ -13,8 +13,8 @@ from chat.models import Messages
 # Create your views here.
 # chat/views.py
 
-def index(request):
-    return render(request, 'chat/index.html', {})
+# def index(request):
+#     return render(request, 'chat/index.html', {})
 
 # def room(request, room_name):
 @login_required
@@ -23,8 +23,24 @@ def room(request):
     # Get the last 10 messages and add to the context. Also, maybe import the staffpool models above?
 
     return render(request, 'chat/room.html', {
-        'room_name_json': mark_safe(json.dumps('group_chat'))
+        'room_name_json': mark_safe(json.dumps('group_chat')),
+        'current_user_id': request.user.get_username().capitalize(),
     })
+
+def chat_session_name(request):
+    print('CHAT SESSION NAME VIEW FUNCTION RAN')
+    if request.method == 'POST':
+        print('Name POST: ' + request.POST['given_staff_name'])
+        request.session['given_staff_name'] = request.POST['given_staff_name']
+
+        return HttpResponse()
+
+    if request.method == 'GET':
+        print('Method is GET')
+        name = request.session.get('given_staff_name', 'Not Stated')
+        print(name)
+        return JsonResponse({'given_staff_name': name})
+
 
 def messages(request):
 
@@ -75,7 +91,7 @@ def messages(request):
             if ((datetime.datetime.now() - last_10_messages_instance.timestamp).seconds/60 > 120):
                 reset_chats = 'Yes'
 
-            print('Reset chats: ' + reset_chats)
+            # print('Reset chats: ' + reset_chats)
 
             message_1 = last_10_messages_instance.message_1
             if message_1 is None or reset_chats == 'Yes':
@@ -203,7 +219,8 @@ def messages(request):
                              'author_9': author_9,
                              'author_10': author_10,
 
-                             'timestamp': timestamp
+                             'timestamp': timestamp,
+                             'current_user_id': request.user.get_username().capitalize(),
                              })
 
     elif request.method == 'POST':

@@ -22,14 +22,17 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from chat.views import messages
+from chat.views import messages, chat_session_name
 from catalog.views import homepage
+from catalog.views import session_name
 
 urlpatterns = [
+    re_path(r'.*ChatSession.*', chat_session_name, name='chat_session_name'),
     path('admin/', admin.site.urls, name='admin'),
     re_path(r'^.*Messages.*$', messages, name='messages'),
     # path('chat/', include('chat.urls')),
     re_path(r'^.*chat.*', include('chat.urls')),
+    re_path(r'^.*Session.*$', session_name, name='session_name'),
 
     path('', homepage, name='homepage'),
     path('messages/', include('chat.urls')),

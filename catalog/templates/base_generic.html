@@ -99,6 +99,8 @@
 </body>
 </html>
 
+{% block script %}
+
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -110,13 +112,7 @@ var from_location;
 var to_location;
 
 var current_user = '{{ current_user_id }}';
-// console.log(current_user);
-
-// var name_asked_for = 'Yes';
-//
-// if ('{{ current_user_id }}' === 'Staff') {
-//     name_asked_for = 'No';
-// }
+console.log(current_user);
 
 var message_1;
 // var author_1;
@@ -131,7 +127,8 @@ if (current_user === 'Staff') {
               // 'session_request': 'yes' // Is this line only here because you need something?
             },
       success: function(response) {
-          console.log('GET Staff name: ' + response['given_staff_name']);
+        // console.log(response);
+          console.log('GET Staff name 1: ' + response['given_staff_name']);
 
           var given_staff_name_temp = response['given_staff_name'];
 
@@ -284,7 +281,7 @@ $.ajax({
             }
 
             else {
-                alert("The status is already set to Horizontal Evacuation!");    
+                alert("The status is already set to Horizontal Evacuation!");
             }
         });
 
@@ -328,7 +325,7 @@ $.ajax({
         });
 
 
-  var myStatusVar = setInterval(status_update, 1000);
+  var myStatusVar = setInterval(status_update, 10000);
   function status_update() {
 
   $.ajax({
@@ -405,3 +402,5 @@ $.ajax({
 // });
 
 </script>
+
+{% endblock %}
