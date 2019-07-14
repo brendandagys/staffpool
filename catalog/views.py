@@ -43,16 +43,17 @@ def cafeteria_form(request):
     if request.method == 'POST' and 'c' in request.POST:
 
         print(request.POST.keys())
-        print(request.POST.get('reset', 'Couldn\'t find reset answer'))
+        print('Reset: ' + request.POST.get('reset', 'Couldn\'t find reset answer'))
 
         if Cafeteria.objects.last() is None:
             cafeteria_instance = Cafeteria()
 
         else:
 
-            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and request.POST.get('reset', '') != 'Yes' and
-               ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
-               ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
+                (request.POST.get('reset', '') != 'Yes') and
+                (((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+                ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) ))):
 
                 cafeteria_instance = Cafeteria.objects.all().order_by('-id')[:1][0]
 
@@ -87,11 +88,12 @@ def cafeteria_form(request):
 
     # If this is a GET (or any other method) create the default form.
     else:
-        print(request.GET)
+        print(request.GET.get('new_form_indicator', 'No'))
         try:
-            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and request.GET.get('new_form_indicator','') != 'Yes' and
-               ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
-               ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+            if ((Cafeteria.objects.last().c_date == timezone.now().date()) and
+                (request.GET.get('new_form_indicator','No') != 'Yes') and
+                (((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+                ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) ))):
 
                 c_time = Cafeteria.objects.last().c_time
                 c_coordinator = Cafeteria.objects.last().c_coordinator # Will return None if no match
@@ -107,6 +109,7 @@ def cafeteria_form(request):
 
                 show_form_button = 'Yes'
 
+                print('Pulled in old record')
             else:
                 c_time = str(datetime.datetime.now().time())[0:5]
                 c_coordinator = ''
@@ -120,6 +123,8 @@ def cafeteria_form(request):
                 c_num_staff = ''
                 c_explain = ''
 
+                print('no error but if statement failed: empty form')
+
         except:
             c_time = str(datetime.datetime.now().time())[0:5]
             c_coordinator = ''
@@ -132,6 +137,8 @@ def cafeteria_form(request):
             c_runners = ''
             c_num_staff = ''
             c_explain = ''
+
+            print('error and empty form')
 
         form_c = CafeteriaForm(initial={'c_date': timezone.now().date(),
                                         'c_time': c_time,
@@ -175,9 +182,10 @@ def east_lobby_form(request):
 
         else:
 
-            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and request.POST.get('reset', '') != 'Yes' and
-               ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
-               ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+            if ((East_Lobby.objects.last().c_date == timezone.now().date()) and
+                (request.POST.get('reset', '') != 'Yes') and
+                (((abs(int(East_Lobby.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+                ((abs(int(East_Lobby.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) ))):
 
                 east_lobby_instance = East_Lobby.objects.all().order_by('-id')[:1][0]
 
@@ -214,10 +222,11 @@ def east_lobby_form(request):
         print(request.GET)
         # print('Running East Lobby GET' + ': new_form_indicator = ' + request.GET.get('new_form_indicator', ''))
         try:
-            if ((East_Lobby.objects.last().e_date == timezone.now().date()) and request.GET.get('new_form_indicator','') != 'Yes' and
-               ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
-               ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
-                # print('this ran')
+            if ((East_Lobby.objects.last().c_date == timezone.now().date()) and
+                (request.GET.get('new_form_indicator','No') != 'Yes') and
+                (((abs(int(East_Lobby.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+                ((abs(int(East_Lobby.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) ))):
+
                 e_time = East_Lobby.objects.last().e_time
                 e_coordinator = East_Lobby.objects.last().e_coordinator # Will return None if no match
                 e_main_doors = East_Lobby.objects.last().e_main_doors
@@ -296,9 +305,10 @@ def town_centre_form(request):
 
         else:
 
-            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and request.POST.get('reset', '') != 'Yes' and
-               ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
-               ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+            if ((Town_Centre.objects.last().c_date == timezone.now().date()) and 
+                (request.POST.get('reset', '') != 'Yes') and
+                (((abs(int(Town_Centre.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+                ((abs(int(Town_Centre.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) ))):
 
                 town_centre_instance = Town_Centre.objects.all().order_by('-id')[:1][0]
 
@@ -334,9 +344,10 @@ def town_centre_form(request):
 
         try:
 
-            if ((Town_Centre.objects.last().t_date == timezone.now().date()) and request.GET.get('new_form_indicator','') != 'Yes' and
-               ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
-               ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) )):
+            if ((Town_Centre.objects.last().c_date == timezone.now().date()) and
+                (request.GET.get('new_form_indicator','No') != 'Yes') and
+                (((abs(int(Town_Centre.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
+                ((abs(int(Town_Centre.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) ))):
 
                 t_time = Town_Centre.objects.last().t_time
                 t_coordinator = Town_Centre.objects.last().t_coordinator # Will return None if no match
