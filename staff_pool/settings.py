@@ -79,7 +79,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 WSGI_APPLICATION = 'staff_pool.wsgi.application'
 
-Channels
+#Channels
 ASGI_APPLICATION = 'staff_pool.routing.application'
 
 CHANNEL_LAYERS = {
