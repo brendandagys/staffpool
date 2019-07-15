@@ -22,8 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v0*a68^ik@e$$76(xq+$(9mymrnmtnqltdwty=g8^r$lgjzuu1'
-# SECRET_KEY = os.environ.get('SECRET_KEY', 'fake_key')
+
+# SECRET_KEY = 'v0*a68^ik@e$$76(xq+$(9mymrnmtnqltdwty=g8^r$lgjzuu1'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fake_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,16 +81,16 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 WSGI_APPLICATION = 'staff_pool.wsgi.application'
 
 #Channels
-ASGI_APPLICATION = 'staff_pool.routing.application'
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': { #                             This will break localhost
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
-        },
-    },
-}
+# ASGI_APPLICATION = 'staff_pool.routing.application'
+#
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': { #                             This will break localhost
+#             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+#         },
+#     },
+# }
 
 # Added from Heroku docs to try and make it work...
 # CACHES = {
