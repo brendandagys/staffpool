@@ -22,7 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'fake_key')
+SECRET_KEY = 'v0*a68^ik@e$$76(xq+$(9mymrnmtnqltdwty=g8^r$lgjzuu1'
+# SECRET_KEY = os.environ.get('SECRET_KEY', 'fake_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,7 +79,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 WSGI_APPLICATION = 'staff_pool.wsgi.application'
 
-# Channels
+Channels
 ASGI_APPLICATION = 'staff_pool.routing.application'
 
 CHANNEL_LAYERS = {
@@ -91,12 +92,12 @@ CHANNEL_LAYERS = {
 }
 
 # Added from Heroku docs to try and make it work...
-CACHES = {
-    "default": {
-         "BACKEND": "redis_cache.RedisCache",
-         "LOCATION": os.environ.get('REDIS_URL'),
-    }
-}
+# CACHES = {
+#     "default": {
+#          "BACKEND": "redis_cache.RedisCache",
+#          "LOCATION": os.environ.get('REDIS_URL'),
+#     }
+# }
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -156,6 +157,6 @@ STATICFILES_DIRS = (
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = ''
+# LOGOUT_REDIRECT_URL = '/'
 
 django_heroku.settings(locals())
