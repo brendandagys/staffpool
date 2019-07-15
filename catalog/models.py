@@ -95,39 +95,66 @@ class Town_Centre(models.Model):
     #     return reverse('town_centre_detail', args=[str(self.id)])
 
 
-# class CodeBlue(models.Model):
-#     blue_date = models.DateField(verbose_name='Date', default=timezone.now().date()) # null and blank (required in forms) are False by default...
-#     blue_time = models.CharField(max_length = 100, verbose_name='Time (24hr.)', default=str(datetime.datetime.now().time())[0:5])
-#     blue_identified = models.CharField(max_length = 100, verbose_name='Staff Identified Need to Assess Responsiveness')
-#     blue_call_for_help = models.CharField(max_length = 100, verbose_name='Call For Help and Initiation Done')
-#     blue_cpr = models.CharField(max_length = 100, verbose_name='CPR Initiated 47 Seconds After Patient Unresponsive')
-#     blue_compressor_rotated = models.CharField(max_length = 100, verbose_name='Role of Compressor Was Rotated')
-#     blue_aed = models.CharField(max_length = 100, verbose_name='Crash Cart Arrived and AED Turned On')
-#     blue_compressions_continued = models.CharField(max_length = 100, verbose_name='Compressions Continued During Proper Pad Placement')
-#     blue_all_clear = models.CharField(max_length = 100, verbose_name='AED Operator Ensured \"All Clear\"')
-#     blue_bvm = models.CharField(max_length = 100, verbose_name='Airway Management and BVM Utilized')
-#     blue_went_well = models.TextField(null=True, blank=True, verbose_name='What Went Well')
-#
-#
-#     blue_no_bvm = models.CharField(max_length = 100, verbose_name='No BVM Available Prior to Crash Cart Arriving')
-#     blue_no_documentation = models.CharField(max_length = 100, verbose_name='Need for Documentation Not Immediately Identified')
-#     blue_no_depth = models.CharField(max_length = 100, verbose_name='Compressions Too Shallow')
-#     blue_no_lodge = models.CharField(max_length = 100, verbose_name='')
-#     blue_no_cart = models.CharField(max_length = 100, verbose_name='')
-#     blue_did_not_go_well = models.TextField(null=True, blank=True, verbose_name='What Didn\'t Go Well')
-#
-#
-#     blue_clarification = models.CharField(max_length = 100, verbose_name='')
-#     blue_system_issues = models.TextField(null=True, blank=True, verbose_name='System Issues')
-#
-#     blue_what_was_learned = models.TextField(null=True, blank=True, verbose_name='What Was Learned')
-#
-#     class Meta:
-#         verbose_name_plural = 'Code Blue'
-#         verbose_name = 'Code Blue'
-#
-#     def __str__(self):
-#         return 'Code Blue CHANGE ME'
+class IncidentCommander(models.Model):
+    i_date = models.DateField(null=True, blank=True, verbose_name='Date', default=timezone.now().date())
+    i_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=str(datetime.datetime.now().time())[0:5])
+    i_commander = models.CharField(max_length=100, null=True, blank=True, verbose_name='Incident Commander')
+    i_num_staff_c = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff at Cafeteria')
+    i_num_staff_e = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff at East Lobby')
+    i_num_staff_t = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff at Town Centre')
+    i_captain = models.CharField(max_length=100, null=True, blank=True, verbose_name='Area Captain')
+    i_signal_silence_time = models.CharField(max_length=100, null=True, blank=True, verbose_name='Time (24 hr.) of Signal Silence')
+    i_all_clear_time = models.CharField(max_length=100, null=True, blank=True, verbose_name='Time (24 hr.) of All Clear')
+    i_location_of_evacuation = models.CharField(max_length=100, null=True, blank=True, verbose_name='Location of Evacuation')
+    i_area_of_refuge = models.CharField(max_length=100, null=True, blank=True, verbose_name='Area of Refuge')
+    i_signed_fire_documentation = models.NullBooleanField(verbose_name='Signed Fire Department Documentation')
+
+    class Meta:
+        verbose_name_plural = 'Incident Command'
+        verbose_name = 'Incident Command'
+
+    def __str__(self):
+        if self.i_commander == '':
+            str_value = 'Undeclared Commander'
+        else:
+            str_value = self.i_commander
+
+        return ', '.join([str(object=self.i_date), str_value])
+
+
+class CodeBlue(models.Model):
+    blue_date = models.DateField(verbose_name='Date', default=timezone.now().date()) # null and blank (required in forms) are False by default...
+    blue_time = models.CharField(max_length = 100, verbose_name='Time (24hr.)', default=str(datetime.datetime.now().time())[0:5])
+    blue_identified = models.BooleanField(verbose_name='') CharField(max_length = 100, verbose_name='Staff Identified Need to Assess Responsiveness')
+    blue_call_for_help = models.BooleanField(verbose_name='Call For Help and Initiation Done')
+    blue_cpr = models.BooleanField(verbose_name='CPR Initiated 47 Seconds After Patient Unresponsive')
+    blue_compressor_rotated = models.BooleanField(verbose_name='Role of Compressor Was Rotated')
+    blue_aed = models.BooleanField(verbose_name='Crash Cart Arrived and AED Turned On')
+    blue_compressions_continued = models.BooleanField(verbose_name='Compressions Continued During Proper Pad Placement')
+    blue_all_clear = models.BooleanField(verbose_name='AED Operator Ensured \"All Clear\"')
+    blue_bvm = models.BooleanField(verbose_name='Airway Management and BVM Utilized')
+    blue_went_well = models.TextField(null=True, blank=True, verbose_name='What Went Well')
+
+
+    blue_no_bvm = models.BooleanField(verbose_name='No BVM Available Prior to Crash Cart Arriving')
+    blue_no_documentation = models.BooleanField(verbose_name='Need for Documentation Not Immediately Identified')
+    blue_no_depth = models.BooleanField(verbose_name='Compressions Too Shallow')
+    blue_no_lodge = models.BooleanField(verbose_name='Lodge That Would Bring Cart Not Involved')
+    blue_no_cart = models.BooleanField(verbose_name='First Responder Started Mouth-to-Mouth')
+    blue_did_not_go_well = models.TextField(null=True, blank=True, verbose_name='What Didn\'t Go Well')
+
+
+    blue_clarification = models.BooleanField(verbose_name='Clarification of location of Crash Cart and That AED to Be Used')
+    blue_system_issues = models.TextField(null=True, blank=True, verbose_name='System Issues')
+
+    blue_what_was_learned = models.TextField(null=True, blank=True, verbose_name='What Was Learned')
+
+    class Meta:
+        verbose_name_plural = 'Code Blue'
+        verbose_name = 'Code Blue'
+
+    def __str__(self):
+        return 'Code Blue: ' + str(self.blue_date)
 
 
 class CodeStatuses(models.Model):
