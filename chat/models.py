@@ -4,7 +4,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Messages(models.Model):
-    timestamp = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='Time of latest message')#, default=timezone.now)
+    timestamp = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='Time of latest message')
 
     message_1 = models.CharField(max_length=500, null=True, blank=True, verbose_name='Message 1', default='')
     message_2 = models.CharField(max_length=500, null=True, blank=True, verbose_name='Message 2', default='')

@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 
 from catalog import views as catalog_views
 from chat.views import messages
-from catalog.views import homepage, session_name, code_red_status
+from catalog.views import homepage, session_name, code_red_status, code_blue_form
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
@@ -34,6 +34,7 @@ urlpatterns = [
     re_path(r'^.*Messages.*$', messages, name='messages'),
     re_path(r'^.*CodeRedStatus.*$', code_red_status, name='code_red_status'),
 
+    path('CodeBlue/', code_blue_form, name='code_blue_form'),
     path('CodeRed/', catalog_views.LocationListView.as_view(), name='LIVE'),
     path('CodeRed/', include('catalog.urls')),
     re_path(r'^.*chat.*', include('chat.urls')),
