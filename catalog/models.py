@@ -6,7 +6,7 @@ import datetime
 # Create your models here.
 class Cafeteria(models.Model):
 
-    c_date = models.DateField(null=True, blank=False, verbose_name='Date', default=timezone.now().date())
+    c_date = models.DateField(null=True, blank=False, verbose_name='Date', default=str(datetime.datetime.now().date()))
     c_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=str(datetime.datetime.now().time())[0:5])
     c_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     c_main_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Main Doors')
@@ -37,7 +37,7 @@ class Cafeteria(models.Model):
 
 
 class East_Lobby(models.Model):
-    e_date = models.DateField(null=True, blank=True, verbose_name='Date', default=timezone.now().date())
+    e_date = models.DateField(null=True, blank=True, verbose_name='Date', default=datetime.datetime.now().date())
     e_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=str(datetime.datetime.now().time())[0:5])
     e_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     e_main_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Main Doors')
@@ -67,7 +67,7 @@ class East_Lobby(models.Model):
 
 
 class Town_Centre(models.Model):
-    t_date = models.DateField(null=True, blank=True, verbose_name='Date', default=timezone.now().date())
+    t_date = models.DateField(null=True, blank=True, verbose_name='Date', default=datetime.datetime.now().date())
     t_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=str(datetime.datetime.now().time())[0:5])
     t_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     t_horticultural = models.CharField(max_length=100, null=True, blank=True, verbose_name='Horticultural Entrance')
@@ -96,7 +96,7 @@ class Town_Centre(models.Model):
 
 
 class IncidentCommander(models.Model):
-    i_date = models.DateField(null=True, blank=True, verbose_name='Date', default=timezone.now().date())
+    i_date = models.DateField(null=True, blank=True, verbose_name='Date', default=datetime.datetime.now().date())
     i_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=str(datetime.datetime.now().time())[0:5])
     i_commander = models.CharField(max_length=100, null=True, blank=True, verbose_name='Incident Commander')
     i_num_staff_c = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff at Cafeteria')
@@ -123,9 +123,9 @@ class IncidentCommander(models.Model):
 
 
 class CodeBlue(models.Model):
-    blue_date = models.DateField(verbose_name='Date', default=timezone.now().date()) # null and blank (required in forms) are False by default...
-    blue_time = models.CharField(max_length = 100, verbose_name='Time (24hr.)', default=str(datetime.datetime.now().time())[0:5])
-    blue_identified = models.BooleanField(verbose_name='') CharField(max_length = 100, verbose_name='Staff Identified Need to Assess Responsiveness')
+    blue_date = models.DateField(verbose_name='Date', default=datetime.datetime.now().date()) # null and blank (required in forms) are False by default...
+    blue_time = models.CharField(max_length=100, verbose_name='Time (24hr.)', default=str(datetime.datetime.now().time())[0:5])
+    blue_identified = models.BooleanField(verbose_name='Staff Identified Need to Assess Responsiveness')
     blue_call_for_help = models.BooleanField(verbose_name='Call For Help and Initiation Done')
     blue_cpr = models.BooleanField(verbose_name='CPR Initiated 47 Seconds After Patient Unresponsive')
     blue_compressor_rotated = models.BooleanField(verbose_name='Role of Compressor Was Rotated')
