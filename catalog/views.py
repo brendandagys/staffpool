@@ -50,7 +50,7 @@ def cafeteria_form(request):
 
         else:
 
-            if ((Cafeteria.objects.last().c_date == datetime.datetime.now().date()) and
+            if ((Cafeteria.objects.last().c_date == datetime.date.today()) and
                 (request.POST.get('reset', '') != 'Yes') and
                 (((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                 ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) ))):
@@ -88,9 +88,9 @@ def cafeteria_form(request):
 
     # If this is a GET (or any other method) create the default form.
     else:
-        print(request.GET.get('new_form_indicator', 'No'))
+        # print(request.GET.get('new_form_indicator', 'No'))
         try:
-            if ((Cafeteria.objects.last().c_date == datetime.datetime.now().date()) and
+            if ((Cafeteria.objects.last().c_date == datetime.date.today()) and
                 (request.GET.get('new_form_indicator','No') != 'Yes') and
                 (((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 0)) or
                 ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(datetime.datetime.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(datetime.datetime.now().time())[3:5])) ))):
@@ -123,7 +123,7 @@ def cafeteria_form(request):
                 c_num_staff = ''
                 c_explain = ''
 
-                print('no error but if statement failed: empty form')
+                print('No error but if statement failed: empty form')
 
         except:
             c_time = str(datetime.datetime.now().time())[0:5]
@@ -138,9 +138,9 @@ def cafeteria_form(request):
             c_num_staff = ''
             c_explain = ''
 
-            print('error and empty form')
+            print('Error and empty form')
 
-        form_c = CafeteriaForm(initial={'c_date': datetime.datetime.now().date(),
+        form_c = CafeteriaForm(initial={'c_date': datetime.date.today(),
                                         'c_time': c_time,
                                         'c_coordinator': c_coordinator,
                                         'c_main_doors': c_main_doors,

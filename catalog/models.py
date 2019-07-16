@@ -6,8 +6,8 @@ import datetime
 # Create your models here.
 class Cafeteria(models.Model):
 
-    c_date = models.DateField(null=True, blank=False, verbose_name='Date', default=str(datetime.datetime.now().date()))
-    c_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=str(datetime.datetime.now().time())[0:5])
+    c_date = models.DateField(null=True, blank=False, verbose_name='Date', default=lambda: timezone.now().date())
+    c_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=lambda: str(timezone.now().time())[0:5])
     c_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     c_main_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Main Doors')
     c_south_patio_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='South Patio Doors')

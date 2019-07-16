@@ -8,10 +8,10 @@ from django.utils.safestring import mark_safe
 from catalog.models import Cafeteria, East_Lobby, Town_Centre
 
 class CafeteriaForm(forms.Form):
-    c_date = forms.DateField(label='Date:', disabled=True, initial=datetime.datetime.now().date(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
+    c_date = forms.DateField(label='Date:', disabled=True, initial=lambda: timezone.now().date(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                                                                                  'placeholder': 'Date (yyyy-mm-dd)...'}))
 
-    c_time = forms.CharField(required=False, label='Time (24 hr.)', disabled=True, initial=str(datetime.datetime.now().time())[0:5], widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm',
+    c_time = forms.CharField(required=False, label='Time (24 hr.)', disabled=True, initial=lambda: str(timezone.now().time())[0:5], widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm',
                                                                                                   'placeholder': 'Time...'}))
 
     c_coordinator = forms.CharField(required=False, label='Staff Pool Coordinator', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
