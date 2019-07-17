@@ -84,7 +84,7 @@ def cafeteria_form(request):
             cafeteria_instance.save()
 
         # redirect to a new URL:
-        return HttpResponseRedirect(reverse('LIVE') )
+        return HttpResponseRedirect(reverse('LIVE'))
 
     # If this is a GET (or any other method) create the default form.
     else:
@@ -215,7 +215,7 @@ def east_lobby_form(request):
             east_lobby_instance.save()
 
         # redirect to a new URL:
-        return HttpResponseRedirect(reverse('LIVE') )
+        return HttpResponseRedirect(reverse('LIVE'))
 
     # If this is a GET (or any other method) create the default form.
     else:
@@ -337,7 +337,7 @@ def town_centre_form(request):
             town_centre_instance.save()
 
         # redirect to a new URL:
-        return HttpResponseRedirect(reverse('LIVE') )
+        return HttpResponseRedirect(reverse('LIVE'))
 
     # If this is a GET (or any other method) create the default form.
     else:
@@ -689,36 +689,16 @@ def code_red_status(request):
 
         return HttpResponse()
 
-
+@login_required
 def code_blue_form(request):
 
     if request.method == 'POST':
         form_code_blue = Code_BlueForm(request.POST)
         form_code_blue.save()
 
+        return HttpResponseRedirect(reverse('homepage'))
+
     else:
         form_code_blue = Code_BlueForm()
         context = {'form_code_blue': form_code_blue}
         return render(request, 'code_blue_form.html', context=context)
-
-
-    # form_t = Town_CentreForm(initial={'t_date': datetime.date.today(),
-    #                                 't_time': t_time,
-    #                                 't_coordinator': t_coordinator,
-    #                                 't_horticultural': t_horticultural,
-    #                                 't_town_centre_main_street': t_town_centre_main_street,
-    #                                 't_monitor': t_monitor,
-    #                                 't_directors': t_directors,
-    #                                 't_runners': t_runners,
-    #                                 't_num_staff': t_num_staff,
-    #                                 't_explain': t_explain
-    #                                 })
-    #
-    # context = { 'num_events': num_events,
-    #         'form_t': form_t,
-    #         'show_form_button': show_form_button,
-    #         'current_user_id': request.user.get_username().capitalize(),
-    #       }
-    #
-    # # Render the HTML template index.html with the data in the context variable
-    # return render(request, 'town_centre_form.html', context=context)

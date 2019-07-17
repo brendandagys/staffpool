@@ -55,8 +55,9 @@ class Town_CentreAdmin(ImportExportModelAdmin):
 class CodeStatusesAdmin(admin.ModelAdmin):
     readonly_fields = ('code_timestamp',)
 
+
 @admin.register(CodeBlue)
-class CodeBlueAdmin(admin.ModelAdmin):
+class CodeBlueAdmin(ImportExportModelAdmin):
     resource_class = CodeBlueResource
     list_display = ('blue_date', 'blue_time')
     list_filter = ['blue_date']

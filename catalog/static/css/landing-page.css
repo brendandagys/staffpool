@@ -190,11 +190,11 @@ footer.footer {
     padding-right: 35px;
 }
 
-.tile_padding_blue {
+/* .tile_padding_blue {
     position: relative;
     padding-left: 35px;
     padding-right: 35px;
-}
+} */
 
 @media only screen and (max-width: 991px) {
     .tile_padding_blue {
