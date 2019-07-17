@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses
+from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses, CodeBlue
 
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
@@ -17,6 +17,10 @@ class East_LobbyResource(resources.ModelResource):
 class Town_CentreResource(resources.ModelResource):
     class Meta:
         model = Town_Centre
+
+class CodeBlueResource(resources.ModelResource):
+    class Meta:
+        model = CodeBlue
 
 @admin.register(Cafeteria)
 class CafeteriaAdmin(ImportExportModelAdmin):
@@ -39,12 +43,6 @@ class East_LobbyAdmin(ImportExportModelAdmin):
     list_display = ('e_date', 'e_coordinator')
     list_filter = ['e_date']
 
-    # This removes the 'select multiple and delete selected' functionality, becuase it crashed when used
-    # def get_actions(self, request):
-    #     actions = super().get_actions(request)
-    #     if 'delete_selected' in actions:
-    #         del actions['delete_selected']
-    #     return actions
 
 @admin.register(Town_Centre)
 class Town_CentreAdmin(ImportExportModelAdmin):
@@ -52,13 +50,13 @@ class Town_CentreAdmin(ImportExportModelAdmin):
     list_display = ('t_date', 't_coordinator')
     list_filter = ['t_date']
 
-    # This removes the 'select multiple and delete selected' functionality, becuase it crashed when used
-    # def get_actions(self, request):
-    #     actions = super().get_actions(request)
-    #     if 'delete_selected' in actions:
-    #         del actions['delete_selected']
-    #     return actions
 
 @admin.register(CodeStatuses)
-class CodeStatuses(admin.ModelAdmin):
+class CodeStatusesAdmin(admin.ModelAdmin):
     readonly_fields = ('code_timestamp',)
+
+@admin.register(CodeBlue)
+class CodeBlueAdmin(admin.ModelAdmin):
+    resource_class = CodeBlueResource
+    list_display = ('blue_date', 'blue_time')
+    list_filter = ['blue_date']

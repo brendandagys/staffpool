@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'chat',
     'import_export',
+    'crispy_forms',
     # 'channels',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -251,7 +251,14 @@ class Code_BlueForm(ModelForm):
         model = CodeBlue
         fields = '__all__'
 
-        
+    # def __init__(self, *args, **kwargs):
+    #     super(Code_BlueForm, self).__init__(*args, **kwargs)
+    #     for field in iter(self.fields):
+    #         self.fields[field].widget.attrs.update({
+    #             'class': 'form-control'
+    #     })
+
+
 # class Code_BlueForm(forms.Form):
 #     blue_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}))
 #     blue_time = forms.CharField(label='Time (24 hr.)', disabled=True, initial=lambda: str(timezone.now().time())[0:5], widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm'}))

@@ -466,3 +466,72 @@ textarea {
   width: 200px;
   margin: auto;
 }
+
+/* .code_blue_div {
+    text-align: center;
+} */
+
+/* input[type='checkbox'] {
+    position: relative;
+    margin-left: 100px;
+} */
+
+input[type="checkbox"]{
+cursor: pointer;
+-webkit-appearance: none;
+appearance: none;
+background: white;
+border-radius: 5px;
+box-sizing: border-box;
+position: relative;
+margin-left: 100px;
+box-sizing: content-box ;
+width: 30px;
+height: 30px;
+border-width: 0;
+transition: all .1s linear;
+}
+input[type="checkbox"]:checked{
+  background-color: #00ff00;
+}
+input[type="checkbox"]:focus{
+  outline: 0 none;
+  box-shadow: none;
+}
+
+#id_blue_date, #id_blue_time {
+    border-radius: 5px !important;
+    padding-left: 7px;
+}
+
+label[for^="id_blue"] {
+    text-align: center;
+}
+
+label[for="id_blue_went_well"] {
+    position: relative;
+    margin-top: 2rem;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+label[for="id_blue_did_not_go_well"] {
+    position: relative;
+    margin-top: 2rem;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+label[for="id_blue_system_issues"] {
+    position: relative;
+    margin-top: 2rem;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+label[for="id_blue_what_was_learned"] {
+    position: relative;
+    margin-top: 2rem;
+    width: 100%;
+    text-transform: uppercase;
+}
