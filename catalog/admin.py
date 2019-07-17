@@ -1,10 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses, CodeBlue
+from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses, IncidentCommander, CodeBlue
 
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
+
 
 class CafeteriaResource(resources.ModelResource):
     class Meta:
@@ -18,9 +19,14 @@ class Town_CentreResource(resources.ModelResource):
     class Meta:
         model = Town_Centre
 
+class IncidentCommanderResource(resources.ModelResource):
+    class Meta:
+        model = IncidentCommander
+
 class CodeBlueResource(resources.ModelResource):
     class Meta:
         model = CodeBlue
+
 
 @admin.register(Cafeteria)
 class CafeteriaAdmin(ImportExportModelAdmin):
@@ -54,6 +60,13 @@ class Town_CentreAdmin(ImportExportModelAdmin):
 @admin.register(CodeStatuses)
 class CodeStatusesAdmin(admin.ModelAdmin):
     readonly_fields = ('code_timestamp',)
+
+
+@admin.register(IncidentCommander)
+class IncidentCommanderAdmin(ImportExportModelAdmin):
+    resource_class = IncidentCommanderResource
+    list_display = ('i_date', 'i_time')
+    list_filter = ['i_date']
 
 
 @admin.register(CodeBlue)

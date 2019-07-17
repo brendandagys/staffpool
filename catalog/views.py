@@ -12,8 +12,8 @@ from django.urls import reverse
 from django.utils import timezone
 
 # Create your views here.
-from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses, CodeBlue
-from catalog.forms import CafeteriaForm, East_LobbyForm, Town_CentreForm, Code_BlueForm
+from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses, IncidentCommander, CodeBlue
+from catalog.forms import CafeteriaForm, East_LobbyForm, Town_CentreForm, IncidentCommanderForm, Code_BlueForm
 
 def session_name(request):
     print('SESSION NAME VIEW FUNCTION RAN')
@@ -32,9 +32,9 @@ def session_name(request):
 def homepage(request):
     return render(request, 'homepage.html')
 
+
 @login_required
 def cafeteria_form(request):
-    '''View function for home page of site.'''
 
     show_form_button = 'No'
 
@@ -167,7 +167,6 @@ def cafeteria_form(request):
 
 @login_required
 def east_lobby_form(request):
-    '''View function for home page of site.'''
 
     show_form_button = 'No'
 
@@ -290,7 +289,6 @@ def east_lobby_form(request):
 
 @login_required
 def town_centre_form(request):
-    '''View function for home page of site.'''
 
     show_form_button = 'No'
 
@@ -689,6 +687,22 @@ def code_red_status(request):
 
         return HttpResponse()
 
+
+# @login_required
+# def incident_commander_form(request):
+#
+#     if request.method == 'POST':
+#         form_incident_commander = IncidentCommanderForm(request.POST)
+#         form_incident_commander.save()
+#
+#         return HttpResponseRedirect(reverse('homepage'))
+#
+#     else:
+#         form_incident_commander = IncidentCommanderForm()
+#         context = {'form_incident_commander': form_incident_commander}
+#         return render(request, 'incident_commander_form.html', context=context)
+
+
 @login_required
 def code_blue_form(request):
 
@@ -702,3 +716,129 @@ def code_blue_form(request):
         form_code_blue = Code_BlueForm()
         context = {'form_code_blue': form_code_blue}
         return render(request, 'code_blue_form.html', context=context)
+
+
+@login_required
+def incident_commander_form(request):
+
+    show_form_button = 'No'
+
+    num_events = IncidentCommander.objects.all().count() # All is implied by default
+
+    if request.method == 'POST' and 'i' in request.POST:
+
+        print(request.POST.get('reset', 'ooook'))
+
+        if IncidentCommander.objects.last() is None:
+            incident_commander_instance = IncidentCommander()
+
+        else:
+
+            if ((IncidentCommander.objects.last().t_date == datetime.date.today()) and
+                (request.POST.get('reset', '') != 'Yes') and
+                (((abs(int(IncidentCommander.objects.last().i_time[0:2]) - int(str(timezone.now().time())[0:2])) == 0)) or
+                ((abs(int(IncidentCommander.objects.last().i_time[0:2]) - int(str(timezone.now().time())[0:2])) == 1) and (int(IncidentCommander.objects.last().i_time[3:5]) > int(str(timezone.now().time())[3:5])) ))):
+
+                incident_commander_instance = IncidentCommander.objects.all().order_by('-id')[:1][0]
+
+            else:
+                incident_commander_instance = IncidentCommander()
+
+        # Create a form instance and populate it with data from the request (binding):
+        form_incident_commander = IncidentCommanderForm(request.POST)
+        # print(form_i.errors)
+
+        # Check if the form is valid:
+        if form_incident_commander.is_valid():
+
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            incident_commander_instance.i_date = form_incident_commander.cleaned_data['i_date']
+            incident_commander_instance.i_time = form_incident_commander.cleaned_data['i_time']
+            incident_commander_instance.i_commander = form_incident_commander.cleaned_data['i_commander'].strip()
+            incident_commander_instance.i_num_staff_c = form_incident_commander.cleaned_data['i_num_staff_c'].strip()
+            incident_commander_instance.i_num_staff_e = form_incident_commander.cleaned_data['i_num_staff_e'].strip()
+            incident_commander_instance.i_num_staff_t = form_incident_commander.cleaned_data['i_num_staff_t'].strip()
+            incident_commander_instance.i_captain = form_incident_commander.cleaned_data['i_captain'].strip()
+            incident_commander_instance.i_signal_silence_time = form_incident_commander.cleaned_data['i_signal_silence_time'].strip()
+            incident_commander_instance.i_all_clear_time = form_incident_commander.cleaned_data['i_all_clear_time'].strip()
+            incident_commander_instance.i_location_of_evacuation = form_incident_commander.cleaned_data['i_location_of_evacuation'].strip()
+            incident_commander_instance.i_area_of_refuge = form_incident_commander.cleaned_data['i_area_of_refuge'].strip()
+            incident_commander_instance.i_signed_fire_documentation = form_incident_commander.cleaned_data['i_signed_fire_documentation']
+
+            incident_commander_instance.save()
+
+        # redirect to a new URL:
+        return HttpResponseRedirect(reverse('LIVE'))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+
+        try:
+
+            if ((IncidentCommander.objects.last().i_date == datetime.date.today()) and
+                (request.GET.get('new_form_indicator','No') != 'Yes') and
+                (((abs(int(IncidentCommander.objects.last().i_time[0:2]) - int(str(timezone.now().time())[0:2])) == 0)) or
+                ((abs(int(IncidentCommander.objects.last().i_time[0:2]) - int(str(timezone.now().time())[0:2])) == 1) and (int(IncidentCommander.objects.last().i_time[3:5]) > int(str(timezone.now().time())[3:5])) ))):
+
+                i_time = IncidentCommander.objects.last().i_time
+                i_commander = IncidentCommander.objects.last().i_commander # Will return None if no match
+                i_num_staff_c = IncidentCommander.objects.last().i_num_staff_c
+                i_num_staff_e = IncidentCommander.objects.last().i_num_staff_e
+                i_num_staff_t = IncidentCommander.objects.last().i_num_staff_t
+                i_captain = IncidentCommander.objects.last().i_captain
+                i_signal_silence_time = IncidentCommander.objects.last().i_signal_silence_time
+                i_all_clear_time = IncidentCommander.objects.last().i_all_clear_time
+                i_location_of_evacuation = IncidentCommander.objects.last().i_location_of_evacuation
+                i_area_of_refuge = IncidentCommander.objects.last().i_area_of_refuge
+                i_signed_fire_documentation = IncidentCommander.objects.last().i_signed_fire_documentation
+
+                show_form_button = 'Yes'
+
+            else:
+                i_time = str(timezone.now().time())[0:5]
+                i_commander = ''
+                i_num_staff_c = ''
+                i_num_staff_e = ''
+                i_num_staff_t = ''
+                i_captain = ''
+                i_signal_silence_time = ''
+                i_all_clear_time = ''
+                i_location_of_evacuation = ''
+                i_area_of_refuge = ''
+                i_signed_fire_documentation = ''
+
+        except:
+            i_time = str(timezone.now().time())[0:5]
+            i_commander = ''
+            i_num_staff_c = ''
+            i_num_staff_e = ''
+            i_num_staff_t = ''
+            i_captain = ''
+            i_signal_silence_time = ''
+            i_all_clear_time = ''
+            i_location_of_evacuation = ''
+            i_area_of_refuge = ''
+            i_signed_fire_documentation = ''
+
+        form_incident_commander = IncidentCommanderForm(initial={'i_date': datetime.date.today(),
+                                        'i_time': i_time,
+                                        'i_commander': i_commander,
+                                        'i_num_staff_c': i_num_staff_c,
+                                        'i_num_staff_e': i_num_staff_e,
+                                        'i_num_staff_t': i_num_staff_t,
+                                        'i_captain': i_captain,
+                                        'i_signal_silence_time': i_signal_silence_time,
+                                        'i_all_clear_time': i_all_clear_time,
+                                        'i_location_of_evacuation': i_location_of_evacuation,
+                                        'i_area_of_refuge': i_area_of_refuge,
+                                        'i_signed_fire_documentation': i_signed_fire_documentation,
+                                        })
+
+    context = { 'num_events': num_events,
+                'form_incident_commander': form_incident_commander,
+                'show_form_button': show_form_button,
+                'current_user_id': request.user.get_username().capitalize(),
+              }
+
+    # Render the HTML template index.html with the data in the context variable
+    return render(request, 'incident_commander_form.html', context=context)

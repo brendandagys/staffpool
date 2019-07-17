@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
-from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeBlue
+from catalog.models import Cafeteria, East_Lobby, Town_Centre, IncidentCommander, CodeBlue
 
 class CafeteriaForm(forms.Form):
     c_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
@@ -246,98 +246,13 @@ class Town_CentreForm(forms.Form):
         return data
 
 
+class IncidentCommanderForm(ModelForm):
+    class Meta:
+        model = IncidentCommander
+        fields = '__all__'
+
+
 class Code_BlueForm(ModelForm):
     class Meta:
         model = CodeBlue
         fields = '__all__'
-
-    # def __init__(self, *args, **kwargs):
-    #     super(Code_BlueForm, self).__init__(*args, **kwargs)
-    #     for field in iter(self.fields):
-    #         self.fields[field].widget.attrs.update({
-    #             'class': 'form-control'
-    #     })
-
-
-# class Code_BlueForm(forms.Form):
-#     blue_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}))
-#     blue_time = forms.CharField(label='Time (24 hr.)', disabled=True, initial=lambda: str(timezone.now().time())[0:5], widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm'}))
-#     blue_identified = forms.BooleanField(label=mark_safe())
-#     blue_call_for_help = forms.BooleanField(label=mark_safe())
-#     blue_cpr = forms.BooleanField(label=mark_safe())
-#     blue_compressor_rotated = forms.BooleanField(label=mark_safe())
-#     blue_aed = forms.BooleanField(label=mark_safe())
-#     blue_compressions_continued = forms.BooleanField(label=mark_safe())
-#     blue_all_clear = forms.BooleanField(label=mark_safe())
-#     blue_bvm = forms.BooleanField(label=mark_safe())
-#     blue_went_well = forms.TextInput()
-#
-#     blue_ = forms.BooleanField(label=mark_safe())
-#     blue_ = forms.BooleanField(label=mark_safe())
-#     blue_ = forms.BooleanField(label=mark_safe())
-#     blue_ = forms.BooleanField(label=mark_safe())
-#     blue_ = forms.BooleanField(label=mark_safe())
-#
-#
-#     t_coordinator = forms.CharField(required=False, label='Staff Pool Coordinator', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
-#                                                                                                                          'placeholder': 'Name...'}))
-#
-#     t_horticultural = forms.CharField(required=False, label='Horticultural Entrance', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
-#                                                                                                                          'placeholder': 'Name...'}))
-#
-#     t_town_centre_main_street = forms.CharField(required=False, label='Town Centre/Main Street', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
-#                                                                                                                          'placeholder': 'Name...'}))
-#
-#     t_monitor = forms.CharField(required=False, label='Telephone Monitor', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
-#                                                                                                                          'placeholder': 'Name...'}))
-#
-#     t_directors = forms.CharField(required=False, label='Patient/Visitor Director(s)', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
-#                                                                                                                          'placeholder': 'Name(s)...'}))
-#
-#     t_runners = forms.CharField(required=False, label='Command Centre Runner(s)', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
-#                                                                                                                          'placeholder': 'Name(s)...'}))
-#
-#     t_num_staff = forms.CharField(required=False, label='Number of Staff Present', widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
-#                                                                                                                  'placeholder': 'Count...'}))
-#
-#     t_explain = forms.NullBooleanField(label=mark_safe('Staff Pool participants told</br>to listen for new instructions</br> and check back in with the</br>Pool Coordinator on return'))
-#
-#     def clean_t_date(self):
-#         data = self.cleaned_data['t_date']
-#         return data
-#
-#     def clean_t_time(self):
-#         data = self.cleaned_data['t_time']
-#         return data
-#
-#     def clean_t_coordinator(self):
-#         data = self.cleaned_data['t_coordinator']
-#         return data
-#
-#     def clean_t_horticultural(self):
-#         data = self.cleaned_data['t_horticultural']
-#         return data
-#
-#     def clean_t_town_centre_main_street(self):
-#         data = self.cleaned_data['t_town_centre_main_street']
-#         return data
-#
-#     def clean_t_monitor(self):
-#         data = self.cleaned_data['t_monitor']
-#         return data
-#
-#     def clean_t_directors(self):
-#         data = self.cleaned_data['t_directors']
-#         return data
-#
-#     def clean_t_runners(self):
-#         data = self.cleaned_data['t_runners']
-#         return data
-#
-#     def clean_t_num_staff(self):
-#         data = self.cleaned_data['t_num_staff']
-#         return data
-#
-#     def clean_t_explain(self):
-#         data = self.cleaned_data['t_explain']
-#         return data

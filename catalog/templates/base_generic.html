@@ -36,6 +36,8 @@
           <li><a href="{% url 'east_lobby_form' %}"><b>East Lobby Form</b></a></li>
           <li><a href="{% url 'town_centre_form' %}"><b>Town Centre Form</b></a></li>
               </br>
+          <li><a href="{% url 'incident_command_form' %}"><b>Incident Command</b></a></li>
+              </br>
 
           <!-- <li class="tracker"><a href="{% url 'LIVE' %}"><b><span style="color: red"><img src="{% static "live.png" %}" />LIVE TRACKER</span></b></a></li> -->
           <li class=" shrink_live tracker"><a class="live" href="{% url 'LIVE' %}"><img src="{% static "live.png" %}" /></a></li>
@@ -62,7 +64,7 @@
 {% endblock %}
 
 {% block set_statuses %}
-    {% if user.is_authenticated and user.get_username == 'brendan' or user.get_username == 'jeremy' or user.get_username == 'eileen' or user.get_username == 'angele' %}
+    {% if user.is_authenticated and user.get_username == 'brendan' or user.get_username == 'command' or user.get_username == 'jeremy' or user.get_username == 'eileen' or user.get_username == 'angele' %}
 
     <div id="status_list">
         <input id="status_normal" class="status_button btn btn-success" type="button" value="Normal" name="upgrade_button"> </br>
@@ -325,7 +327,7 @@ $.ajax({
         });
 
 
-  var myStatusVar = setInterval(status_update, 21000);
+  var myStatusVar = setInterval(status_update, 1000);
   function status_update() {
 
   $.ajax({

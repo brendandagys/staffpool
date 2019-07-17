@@ -1,0 +1,115 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="center_content my_header">
+
+</br><h1 class="">NBRHC Staff Pool</h1>
+  <h4><span class="indicator">Incident Command</span> Submission Form</h4>
+  <p><em>Please enter the response details below:</em></p> </br>
+</div>
+
+{% if show_form_button == 'Yes' %}
+    <div>
+        <input id="new_form_button" class="new_form_button btn btn-secondary" type="button" value="Generate a New Form" name="new_form_button"> </br>
+    </div>
+{% endif %}
+
+<div>
+
+  <form class="trim_form" id="incident_commander_html" action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form_incident_commander }}
+    <!-- {{ form.errors}} -->
+</table> </br>
+    <input class="btn btn-primary" type="submit" value="Update" name="c">
+</form>
+
+    <!-- </div> -->
+
+    </br></br>
+    <p class="center_other_content past_data">Number of past Incident Command submissions:<br/>
+        <strong id="past_size">{{num_events}}</strong></p>
+
+</div>
+
+<!-- <p class="hide">...</p> -->
+
+<script type="text/javascript">
+
+var form_is_reset = 'No';
+var reset_once = 'No';
+var reset = 'No'
+
+$(document).ready(function(){
+        // $('#incident_commander_html :input').not('#id_i_date').on('blur', function(e) {
+        $(document).on('blur', '#incident_commander_html', function(e) {
+            console.log('Form is reset: ' + form_is_reset);
+            console.log('Reset once: ' + reset_once);
+            e.preventDefault()
+
+            if (form_is_reset == 'Yes' && reset_once == 'No') {
+                reset = 'Yes';
+                reset_once = 'Yes';
+            }
+            else {
+                reset = 'No';
+            }
+
+            console.log('Form is reset AFTER: ' + form_is_reset);
+            console.log('Reset once AFTER: ' + reset_once);
+
+            $.ajax({
+                type: "POST",
+                url: "",
+                // dataType: 'JSON'
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'reset': reset,
+                    'i': 'dummy',
+                    'i_date': $('#id_i_date').val(),
+                    'i_time': $('#id_i_time').val(),
+                    'i_commander': $('#id_i_commander').val(),
+                    'i_num_staff_c': $('#id_i_num_staff_c').val(),
+                    'i_num_staff_e': $('#id_i_num_staff_e').val(),
+                    'i_num_staff_t': $('#id_i_num_staff_t').val(),
+                    'i_captain': $('#id_i_captain').val(),
+                    'i_signal_silence_time': $('#id_i_signal_silence_time').val(),
+                    'i_all_clear_time': $('#id_i_all_clear_time').val(),
+                    'i_location_of_evacuation': $('#id_i_location_of_evacuation').val(),
+                    'i_area_of_refuge': $('#id_i_area_of_refuge').val(),
+                    'i_signed_fire_documentation': $('#id_i_signed_fire_documentation').val()
+                },
+                success: function () {
+                    console.log('Incident Command POST success')
+                }
+            });
+            return false;
+      });
+
+$('#new_form_button').click(function(e) {     // Won't run when message button is clicked
+
+     form_is_reset = 'Yes';
+
+     console.log('Form is reset on CLICK: ' + form_is_reset);
+     console.log('Reset once on CLICK: ' + reset_once);
+
+      $.ajax({
+          type: "GET",
+          url: "",
+          data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+                  'new_form_indicator': 'Yes',
+                },
+          success: function (new_form) {
+
+              $('#incident_commander_html').replaceWith($(new_form).find('#incident_commander_html'));
+
+              console.log('New form success!');
+          }});
+      });
+});
+
+</script>
+
+{% endblock %}

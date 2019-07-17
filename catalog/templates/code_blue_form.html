@@ -40,7 +40,7 @@
                 <!-- </table> -->
               <!-- {{ form.errors}} -->
           </br>
-              <input class="btn btn-primary" type="submit" value="Submit" name="code_blue">
+              <input id="code_blue_submit" class="btn btn-primary" type="submit" value="Submit" name="code_blue">
           </form>
 
         </div>
@@ -49,3 +49,9 @@
   </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    $('#code_blue_submit').click(function(e) {
+        alert("Thank you for your submission. Have a nice day!");
+    })
+</script>
