@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import redis
+# import redis
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'chat',
     'import_export',
-    'crispy_forms',
+    # 'crispy_forms',
     # 'channels',
 ]
 
@@ -110,7 +110,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'CONN_MAX_AGE': 0, # Added for concurrency issue with PostgreSQL and Heroku/Django
+        # 'CONN_MAX_AGE': 0, # Added for concurrency issue with PostgreSQL and Heroku/Django
     }
 }
 
@@ -161,6 +161,6 @@ STATICFILES_DIRS = (
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 django_heroku.settings(locals())
