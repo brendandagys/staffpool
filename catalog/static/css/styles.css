@@ -158,7 +158,7 @@ input[type="password"] {
     left: 2.25rem;
 }
 
-input[type="submit"]:not(.login_button):not(#code_blue_submit) {
+input[type="submit"]:not(.login_button):not(#code_blue_submit):not(#code_pink_submit) {
     position: relative;
     margin: 2rem;
     /* top: 20rem; */
@@ -167,6 +167,12 @@ input[type="submit"]:not(.login_button):not(#code_blue_submit) {
 }
 
 input[id="code_blue_submit"] {
+    transform: scale(2,2);
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+input[id="code_pink_submit"] {
     transform: scale(2,2);
     margin-top: 0.5rem;
     margin-bottom: 2rem;
@@ -235,6 +241,11 @@ input[id="code_blue_submit"] {
 }
 
 .trim_form_code_blue {
+    width: 50%;
+    margin: auto;
+}
+
+.trim_form_code_pink {
     width: 50%;
     margin: auto;
 }
@@ -342,6 +353,17 @@ h3.grab {
 }
 
 a[id="home_link_blue"] {
+    position:relative;
+    top: 16.5px;
+    left: 21.5px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #3498db;
+    color: white;
+    font-size: 1.5rem;
+}
+
+a[id="home_link_pink"] {
     position:relative;
     top: 16.5px;
     left: 21.5px;
@@ -504,6 +526,10 @@ textarea {
     text-align: center;
 }
 
+.code_pink_div {
+    text-align: center;
+}
+
 /* input[type='checkbox'] {
     position: relative;
     margin-left: 100px;
@@ -551,6 +577,30 @@ label[for="id_blue_time"] {
 }
 
 #id_blue_date, #id_blue_time {
+    margin: auto;
+    text-align: center;
+}
+
+
+textarea[id^="id_pink"] {
+    font-size: 12px;
+}
+
+label[for^="id_pink"] {
+    width: 100%;
+    margin-top: 0.3rem;
+    color: green;
+}
+
+label[for="id_pink_date"] {
+    width: 211px;
+}
+
+label[for="id_pink_time"] {
+    width: 211px;
+}
+
+#id_pink_date, #id_pink_time {
     margin: auto;
     text-align: center;
 }

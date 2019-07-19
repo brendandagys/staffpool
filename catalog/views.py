@@ -12,8 +12,8 @@ from django.urls import reverse
 from django.utils import timezone
 
 # Create your views here.
-from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses, IncidentCommander, CodeBlue
-from catalog.forms import CafeteriaForm, East_LobbyForm, Town_CentreForm, IncidentCommanderForm, Code_BlueForm
+from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses, IncidentCommander, CodeBlue, CodePink
+from catalog.forms import CafeteriaForm, East_LobbyForm, Town_CentreForm, IncidentCommanderForm, Code_BlueForm, Code_PinkForm
 
 def session_name(request):
     print('SESSION NAME VIEW FUNCTION RAN')
@@ -687,21 +687,7 @@ def code_red_status(request):
 
         return HttpResponse()
 
-
-# @login_required
-# def incident_commander_form(request):
-#
-#     if request.method == 'POST':
-#         form_incident_commander = IncidentCommanderForm(request.POST)
-#         form_incident_commander.save()
-#
-#         return HttpResponseRedirect(reverse('homepage'))
-#
-#     else:
-#         form_incident_commander = IncidentCommanderForm()
-#         context = {'form_incident_commander': form_incident_commander}
-#         return render(request, 'incident_commander_form.html', context=context)
-
+# ======================================================================================================================
 
 @login_required
 def code_blue_form(request):
@@ -720,7 +706,7 @@ def code_blue_form(request):
             code_blue_instance.blue_date = form_code_blue.cleaned_data['blue_date']
             code_blue_instance.blue_time = form_code_blue.cleaned_data['blue_time']
             code_blue_instance.blue_what_went_well = form_code_blue.cleaned_data['blue_what_went_well'].strip()
-            code_blue_instance.blue_what_did_not_go_well.i_num_staff_c = form_code_blue.cleaned_data['blue_what_did_not_go_well'].strip()
+            code_blue_instance.blue_what_did_not_go_well = form_code_blue.cleaned_data['blue_what_did_not_go_well'].strip()
             code_blue_instance.blue_system_issues = form_code_blue.cleaned_data['blue_system_issues'].strip()
             code_blue_instance.blue_what_was_learned = form_code_blue.cleaned_data['blue_what_was_learned'].strip()
             code_blue_instance.blue_who_will_follow_up = form_code_blue.cleaned_data['blue_who_will_follow_up'].strip()
@@ -748,6 +734,58 @@ def code_blue_form(request):
 
         # Render the HTML template index.html with the data in the context variable
         return render(request, 'code_blue_form.html', context=context)
+
+
+# ======================================================================================================================
+
+@login_required
+def code_pink_form(request):
+
+    if request.method == 'POST':
+
+        code_pink_instance = IncidentCommander()
+
+        # Create a form instance and populate it with data from the request (binding):
+        form_pink_blue = Code_PinkForm(request.POST)
+
+        # Check if the form is valid:
+        if form_code_pink.is_valid():
+
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            code_pink_instance.pink_date = form_code_pink.cleaned_data['pink_date']
+            code_pink_instance.pink_time = form_code_pink.cleaned_data['pink_time']
+            code_pink_instance.pink_what_went_well = form_code_pink.cleaned_data['pink_what_went_well'].strip()
+            code_pink_instance.pink_what_did_not_go_well = form_code_pink.cleaned_data['pink_what_did_not_go_well'].strip()
+            code_pink_instance.pink_system_issues = form_code_pink.cleaned_data['pink_system_issues'].strip()
+            code_pink_instance.pink_what_was_learned = form_code_pink.cleaned_data['pink_what_was_learned'].strip()
+            code_pink_instance.pink_who_will_follow_up = form_code_pink.cleaned_data['pink_who_will_follow_up'].strip()
+
+            code_pink_instance.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('homepage'))
+
+    # GET
+    else:
+
+        form_code_pink = Code_PinkForm(initial={'pink_date': datetime.date.today(),
+            'pink_time': str(timezone.now().time())[0:5],
+            'pink_what_went_well': '',
+            'pink_what_did_not_go_well': '',
+            'pink_system_issues': '',
+            'pink_what_was_learned': '',
+            'pink_who_will_follow_up': '',
+        })
+
+        context = { 'form_code_pink': form_code_pink,
+                    'current_user_id': request.user.get_username().capitalize(),
+                  }
+
+        # Render the HTML template index.html with the data in the context variable
+        return render(request, 'code_pink_form.html', context=context)
+
+
+# ======================================================================================================================
 
 @login_required
 def incident_commander_form(request):

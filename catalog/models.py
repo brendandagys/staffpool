@@ -125,31 +125,11 @@ class IncidentCommander(models.Model):
 class CodeBlue(models.Model):
     blue_date = models.DateField(verbose_name='Date', default=lambda: datetime.date.today()) # null and blank (required in forms) are False by default...
     blue_time = models.CharField(max_length=100, verbose_name='Time (24hr.)', default=lambda: str(timezone.now().time())[0:5])
-    # blue_identified = models.BooleanField(verbose_name='Staff Identified Need to Assess Responsiveness')
-    # blue_call_for_help = models.BooleanField(verbose_name='Call For Help and Initiation Done')
-    # blue_cpr = models.BooleanField(verbose_name='CPR Initiated 47 Seconds After Patient Unresponsive')
-    # blue_compressor_rotated = models.BooleanField(verbose_name='Role of Compressor Was Rotated')
-    # blue_aed = models.BooleanField(verbose_name='Crash Cart Arrived and AED Turned On')
-    # blue_compressions_continued = models.BooleanField(verbose_name='Compressions Continued During Proper Pad Placement')
-    # blue_all_clear = models.BooleanField(verbose_name='AED Operator Ensured \"All Clear\"')
-    # blue_bvm = models.BooleanField(verbose_name='Airway Management and BVM Utilized')
     blue_what_went_well = models.TextField(null=True, blank=True, verbose_name='What Went Well')
-
-
-    # blue_no_bvm = models.BooleanField(verbose_name='No BVM Available Prior to Crash Cart Arriving')
-    # blue_no_documentation = models.BooleanField(verbose_name='Need for Documentation Not Immediately Identified')
-    # blue_no_depth = models.BooleanField(verbose_name='Compressions Too Shallow')
-    # blue_no_lodge = models.BooleanField(verbose_name='Lodge That Would Bring Cart Not Involved')
-    # blue_no_cart = models.BooleanField(verbose_name='First Responder Started Mouth-to-Mouth')
     blue_did_not_go_well = models.TextField(null=True, blank=True, verbose_name='What Didn\'t Go Well')
-
-
-    # blue_clarification = models.BooleanField(verbose_name='Clarification of location of Crash Cart and That AED to Be Used')
     blue_system_issues = models.TextField(null=True, blank=True, verbose_name='System Issues')
-
     blue_what_was_learned = models.TextField(null=True, blank=True, verbose_name='What Was Learned/Recommendations/Goals')
     blue_who_will_follow_up = models.TextField(null=True, blank=True, verbose_name='Who Will Follow Up/Communicate')
-
 
     class Meta:
         verbose_name_plural = 'Code Blue'
@@ -157,6 +137,23 @@ class CodeBlue(models.Model):
 
     def __str__(self):
         return 'Code Blue: ' + str(self.blue_date)
+
+
+class CodePink(models.Model):
+    pink_date = models.DateField(verbose_name='Date', default=lambda: datetime.date.today()) # null and blank (required in forms) are False by default...
+    pink_time = models.CharField(max_length=100, verbose_name='Time (24hr.)', default=lambda: str(timezone.now().time())[0:5])
+    pink_what_went_well = models.TextField(null=True, blank=True, verbose_name='What Went Well')
+    pink_did_not_go_well = models.TextField(null=True, blank=True, verbose_name='What Didn\'t Go Well')
+    pink_system_issues = models.TextField(null=True, blank=True, verbose_name='System Issues')
+    pink_what_was_learned = models.TextField(null=True, blank=True, verbose_name='What Was Learned/Recommendations/Goals')
+    pink_who_will_follow_up = models.TextField(null=True, blank=True, verbose_name='Who Will Follow Up/Communicate')
+
+    class Meta:
+        verbose_name_plural = 'Code Pink'
+        verbose_name = 'Code Pink'
+
+    def __str__(self):
+        return 'Code Pink: ' + str(self.pink_date)
 
 
 class CodeStatuses(models.Model):

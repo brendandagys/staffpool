@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
-from catalog.models import Cafeteria, East_Lobby, Town_Centre, IncidentCommander, CodeBlue
+from catalog.models import Cafeteria, East_Lobby, Town_Centre, IncidentCommander, CodeBlue, CodePink
 
 class CafeteriaForm(forms.Form):
     c_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
@@ -380,4 +380,51 @@ class Code_BlueForm(forms.Form):
 
     def clean_blue_what_was_learned(self):
         data = self.cleaned_data['blue_what_was_learned']
+        return data
+
+
+class Code_PinkForm(forms.Form):
+    pink_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(),
+                    widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Date (yyyy-mm-dd)...'}))
+
+    pink_time = forms.CharField(required=False, label='Time (24 hr.)', disabled=True, initial=lambda: str(timezone.now().time())[0:5],
+                    widget=forms.TimeInput(attrs={'class': 'form-control', 'placeholder': 'Time...'}))
+
+    pink_what_went_well = forms.CharField(required=False, label='What went well?',
+                            widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    pink_what_did_not_go_well = forms.CharField(required=False, label='What didn\'t go well? What would we do differently next time?',
+                                    widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    pink_system_issues = forms.CharField(required=False, label='Any system issues, such as equipment, processes, information flow?',
+                            widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    pink_what_was_learned = forms.CharField(required=False, label='What was learned? Any recommendations or goals for next time?',
+                                widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    pink_who_will_follow_up = forms.CharField(required=False, label='Who will follow up? How will we communicate back to the team?',
+                                widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    def clean_pink_date(self):
+        data = self.cleaned_data['pink_date']
+        return data
+
+    def clean_pink_time(self):
+        data = self.cleaned_data['pink_time']
+        return data
+
+    def clean_pink_what_went_well(self):
+        data = self.cleaned_data['pink_what_went_well']
+        return data
+
+    def clean_pink_what_did_not_go_well(self):
+        data = self.cleaned_data['pink_what_did_not_go_well']
+        return data
+
+    def clean_pink_system_issues(self):
+        data = self.cleaned_data['pink_system_issues']
+        return data
+
+    def clean_pink_what_was_learned(self):
+        data = self.cleaned_data['pink_what_was_learned']
         return data

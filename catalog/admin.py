@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses, IncidentCommander, CodeBlue
+from catalog.models import Cafeteria, East_Lobby, Town_Centre, CodeStatuses, IncidentCommander, CodeBlue, CodePink
 
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
@@ -27,6 +27,9 @@ class CodeBlueResource(resources.ModelResource):
     class Meta:
         model = CodeBlue
 
+class CodePinkResource(resources.ModelResource):
+    class Meta:
+        model = CodePink
 
 @admin.register(Cafeteria)
 class CafeteriaAdmin(ImportExportModelAdmin):
@@ -74,3 +77,10 @@ class CodeBlueAdmin(ImportExportModelAdmin):
     resource_class = CodeBlueResource
     list_display = ('blue_date', 'blue_time')
     list_filter = ['blue_date']
+
+
+@admin.register(CodePink)
+class CodePinkAdmin(ImportExportModelAdmin):
+    resource_class = CodePinkResource
+    list_display = ('pink_date', 'pink_time')
+    list_filter = ['pink_date']
