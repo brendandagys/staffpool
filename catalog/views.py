@@ -707,16 +707,47 @@ def code_red_status(request):
 def code_blue_form(request):
 
     if request.method == 'POST':
+
+        code_blue_instance = IncidentCommander()
+
+        # Create a form instance and populate it with data from the request (binding):
         form_code_blue = Code_BlueForm(request.POST)
-        form_code_blue.save()
 
-        return HttpResponseRedirect(reverse('homepage'))
+        # Check if the form is valid:
+        if form_code_blue.is_valid():
 
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            code_blue_instance.blue_date = form_code_blue.cleaned_data['blue_date']
+            code_blue_instance.blue_time = form_code_blue.cleaned_data['blue_time']
+            code_blue_instance.blue_what_went_well = form_code_blue.cleaned_data['blue_what_went_well'].strip()
+            code_blue_instance.blue_what_did_not_go_well.i_num_staff_c = form_code_blue.cleaned_data['blue_what_did_not_go_well'].strip()
+            code_blue_instance.blue_system_issues = form_code_blue.cleaned_data['blue_system_issues'].strip()
+            code_blue_instance.blue_what_was_learned = form_code_blue.cleaned_data['blue_what_was_learned'].strip()
+            code_blue_instance.blue_who_will_follow_up = form_code_blue.cleaned_data['blue_who_will_follow_up'].strip()
+
+            code_blue_instance.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('homepage'))
+
+    # GET
     else:
-        form_code_blue = Code_BlueForm()
-        context = {'form_code_blue': form_code_blue}
-        return render(request, 'code_blue_form.html', context=context)
 
+        form_code_blue = Code_BlueForm(initial={'blue_date': datetime.date.today(),
+            'blue_time': str(timezone.now().time())[0:5],
+            'blue_what_went_well': '',
+            'blue_what_did_not_go_well': '',
+            'blue_system_issues': '',
+            'blue_what_was_learned': '',
+            'blue_who_will_follow_up': '',
+        })
+
+        context = { 'form_code_blue': form_code_blue,
+                    'current_user_id': request.user.get_username().capitalize(),
+                  }
+
+        # Render the HTML template index.html with the data in the context variable
+        return render(request, 'code_blue_form.html', context=context)
 
 @login_required
 def incident_commander_form(request):

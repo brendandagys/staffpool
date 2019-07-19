@@ -1,7 +1,7 @@
 import datetime
 
 from django import forms
-from django.forms import ModelForm
+# from django.forms import ModelForm
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -246,13 +246,138 @@ class Town_CentreForm(forms.Form):
         return data
 
 
-class IncidentCommanderForm(ModelForm):
-    class Meta:
-        model = IncidentCommander
-        fields = '__all__'
+class IncidentCommanderForm(forms.Form):
+    i_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(),
+                widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Date (yyyy-mm-dd)...'}))
+
+    i_time = forms.CharField(required=False, label='Time (24 hr.)', disabled=True, initial=lambda: str(timezone.now().time())[0:5],
+                widget=forms.TimeInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Time...'}))
+
+    i_commander = forms.CharField(required=False, label='Incident Commander',
+                        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Name...'}))
+
+    i_num_staff_c = forms.CharField(required=False, label='# of Staff at Cafeteria',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Count...'}))
+
+    i_num_staff_e = forms.CharField(required=False, label='# of Staff at East Lobby',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Count...'}))
+
+    i_num_staff_t = forms.CharField(required=False, label='# of Staff at Town Centre',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Count...'}))
+
+    i_captain = forms.CharField(required=False, label='Area Captain',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Name...'}))
+
+    i_signal_silence_time = forms.CharField(required=False, label='Time of Signal Silence',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter a time...'}))
+
+    i_all_clear_time = forms.CharField(required=False, label='Time of All Clear',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter a time...'}))
+
+    i_location_of_evacuation = forms.CharField(required=False, label='Location of Evacuation',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter a location...'}))
+
+    i_area_of_refuge = forms.CharField(required=False, label='Area of Refuge',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter a location...'}))
+
+    i_signed_fire_documentation = forms.NullBooleanField(label=mark_safe('Signed off on appropriate municipal fire department documentation'))
+
+    def clean_i_date(self):
+        data = self.cleaned_data['i_date']
+        return data
+
+    def clean_i_time(self):
+        data = self.cleaned_data['i_time']
+        return data
+
+    def clean_i_commander(self):
+        data = self.cleaned_data['i_commander']
+        return data
+
+    def clean_i_num_staff_c(self):
+        data = self.cleaned_data['i_num_staff_c']
+        return data
+
+    def clean_i_num_staff_e(self):
+        data = self.cleaned_data['i_num_staff_e']
+        return data
+
+    def clean_i_num_staff_t(self):
+        data = self.cleaned_data['i_num_staff_t']
+        return data
+
+    def clean_i_captain(self):
+        data = self.cleaned_data['i_captain']
+        return data
+
+    def clean_i_signal_silence_time(self):
+        data = self.cleaned_data['i_signal_silence_time']
+        return data
+
+    def clean_i_all_clear_time(self):
+        data = self.cleaned_data['i_all_clear_time']
+        return data
+
+    def clean_i_location_of_evacuation(self):
+        data = self.cleaned_data['i_location_of_evacuation']
+        return data
+
+    def clean_i_area_of_refuge(self):
+        data = self.cleaned_data['i_area_of_refuge']
+        return data
+
+    def clean_i_signed_fire_documentation(self):
+        data = self.cleaned_data['i_signed_fire_documentation']
+        return data
 
 
-class Code_BlueForm(ModelForm):
-    class Meta:
-        model = CodeBlue
-        fields = '__all__'
+    # class Meta:
+    #     model = IncidentCommander
+    #     fields = '__all__'
+
+
+class Code_BlueForm(forms.Form):
+    blue_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(),
+                    widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Date (yyyy-mm-dd)...'}))
+
+    blue_time = forms.CharField(required=False, label='Time (24 hr.)', disabled=True, initial=lambda: str(timezone.now().time())[0:5],
+                    widget=forms.TimeInput(attrs={'class': 'form-control', 'placeholder': 'Time...'}))
+
+    blue_what_went_well = forms.CharField(required=False, label='What went well?',
+                            widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    blue_what_did_not_go_well = forms.CharField(required=False, label='What didn\'t go well? What would we do differently next time?',
+                                    widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    blue_system_issues = forms.CharField(required=False, label='Any system issues, such as equipment, processes, information flow?',
+                            widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    blue_what_was_learned = forms.CharField(required=False, label='What was learned? Any recommendations or goals for next time?',
+                                widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    blue_who_will_follow_up = forms.CharField(required=False, label='Who will follow up? How will we communicate back to the team?',
+                                widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    def clean_blue_date(self):
+        data = self.cleaned_data['blue_date']
+        return data
+
+    def clean_blue_time(self):
+        data = self.cleaned_data['blue_time']
+        return data
+
+    def clean_blue_what_went_well(self):
+        data = self.cleaned_data['blue_what_went_well']
+        return data
+
+    def clean_blue_what_did_not_go_well(self):
+        data = self.cleaned_data['blue_what_did_not_go_well']
+        return data
+
+    def clean_blue_system_issues(self):
+        data = self.cleaned_data['blue_system_issues']
+        return data
+
+    def clean_blue_what_was_learned(self):
+        data = self.cleaned_data['blue_what_was_learned']
+        return data

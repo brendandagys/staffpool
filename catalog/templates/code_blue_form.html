@@ -23,9 +23,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-12">
-
+          <div class="other_home_link">
+              <a id="home_link_blue" href="{% url 'homepage' %}"><b>HOME PAGE</b></a>
+          </div>
           <div class="center_content my_header">
-
           </br><h1 class="">NBRHC Code Submission Tool</h1>
             <h4><span class="indicator">Code Blue</span> Submission Form</h4>
             <p><em>Please fill out the details below:</em></p> </br>
@@ -33,14 +34,14 @@
 
           <div class="code_blue_div">
 
-          <form class="trim_form" id="code_blue_form_html" action="" method="post">
+          <form class="trim_form_code_blue" id="code_blue_form_html" action="" method="post">
               {% csrf_token %}
                 <!-- <table> -->
                     {{ form_code_blue }}
                 <!-- </table> -->
               <!-- {{ form.errors}} -->
           </br>
-              <input id="code_blue_submit" class="btn btn-primary" type="submit" value="Submit" name="code_blue">
+              <input id="code_blue_submit" class="trim_form_code_blue btn btn-primary" type="submit" value="Submit" name="code_blue">
           </form>
 
         </div>

@@ -144,7 +144,7 @@ input[type="password"] {
     width: 13rem;
 }
 
-#id_c_date, #id_e_date, #id_t_date, #id_c_time, #id_e_time, #id_t_time {
+#id_c_date, #id_e_date, #id_t_date, #id_c_time, #id_e_time, #id_t_time, #id_i_date, #id_i_time {
     color: red;
     width: 6.3rem;
 }
@@ -153,17 +153,23 @@ input[type="password"] {
     width: 8rem;
 } */
 
-#id_c_explain, #id_e_explain, #id_t_explain {
+#id_c_explain, #id_e_explain, #id_t_explain, #id_i_signed_fire_documentation {
     position: relative;
     left: 2.25rem;
 }
 
-input[type="submit"]:not(.login_button) {
+input[type="submit"]:not(.login_button):not(#code_blue_submit) {
     position: relative;
     margin: 2rem;
     /* top: 20rem; */
     left: 9.5rem;
     transform: scale(2,2);
+}
+
+input[id="code_blue_submit"] {
+    transform: scale(2,2);
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .main_div {
@@ -225,6 +231,11 @@ input[type="submit"]:not(.login_button) {
 
 .trim_form {
     width: 430px;;
+    margin: auto;
+}
+
+.trim_form_code_blue {
+    width: 50%;
     margin: auto;
 }
 
@@ -328,6 +339,28 @@ h3.grab {
     background-color: #3498db;
     color: white;
     font-size: 1.5rem;
+}
+
+a[id="home_link_blue"] {
+    position:relative;
+    top: 16.5px;
+    left: 21.5px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #3498db;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.other_home_link {
+    background-color: #d3d3d3;
+    position: relative;
+    top: 35px;
+    left: 23px;
+    border-radius: 10px;
+    width: 200px;
+    height: 70px;
+    margin-bottom: 2rem;
 }
 
 /* .about_page_image {
@@ -467,16 +500,16 @@ textarea {
   margin: auto;
 }
 
-/* .code_blue_div {
+.code_blue_div {
     text-align: center;
-} */
+}
 
 /* input[type='checkbox'] {
     position: relative;
     margin-left: 100px;
 } */
 
-input[type="checkbox"]{
+/* input[type="checkbox"]{
 cursor: pointer;
 -webkit-appearance: none;
 appearance: none;
@@ -497,25 +530,49 @@ input[type="checkbox"]:checked{
 input[type="checkbox"]:focus{
   outline: 0 none;
   box-shadow: none;
-}
+} */
 
-#id_blue_date, #id_blue_time {
-    border-radius: 5px !important;
-    padding-left: 7px;
+textarea[id^="id_blue"] {
+    font-size: 12px;
 }
 
 label[for^="id_blue"] {
+    width: 100%;
+    margin-top: 0.3rem;
+    color: green;
+}
+
+label[for="id_blue_date"] {
+    width: 211px;
+}
+
+label[for="id_blue_time"] {
+    width: 211px;
+}
+
+#id_blue_date, #id_blue_time {
+    margin: auto;
     text-align: center;
 }
 
-label[for="id_blue_went_well"] {
+
+/* #id_blue_date, #id_blue_time {
+    border-radius: 5px !important;
+    padding-left: 7px;
+} */
+
+/* label[for^="id_blue"] {
+    text-align: center;
+}
+
+label[for="id_blue_what_went_well"] {
     position: relative;
     margin-top: 2rem;
     width: 100%;
     text-transform: uppercase;
 }
 
-label[for="id_blue_did_not_go_well"] {
+label[for="id_blue_what_did_not_go_well"] {
     position: relative;
     margin-top: 2rem;
     width: 100%;
@@ -534,4 +591,4 @@ label[for="id_blue_what_was_learned"] {
     margin-top: 2rem;
     width: 100%;
     text-transform: uppercase;
-}
+} */
