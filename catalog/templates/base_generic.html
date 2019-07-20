@@ -64,7 +64,7 @@
 {% endblock %}
 
 {% block set_statuses %}
-    {% if user.is_authenticated and user.get_username == 'brendan' or user.get_username == 'command' or user.get_username == 'jeremy' or user.get_username == 'eileen' or user.get_username == 'angele' %}
+    {% if user.is_authenticated and user.get_username == 'brendan' or user.get_username == 'sara' or user.get_username == 'command' or user.get_username == 'jeremy' or user.get_username == 'eileen' or user.get_username == 'angele' %}
 
     <div id="status_list">
         <input id="status_normal" class="status_button btn btn-success" type="button" value="Normal" name="upgrade_button"> </br>
@@ -327,7 +327,7 @@ $.ajax({
         });
 
 
-  var myStatusVar = setInterval(status_update, 2000);
+  var myStatusVar = setInterval(status_update, 1000);
   function status_update() {
 
   $.ajax({

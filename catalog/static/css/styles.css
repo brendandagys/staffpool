@@ -605,6 +605,10 @@ label[for="id_pink_time"] {
     text-align: center;
 }
 
+.login-link {
+  margin-top: 0.5rem;
+  margin-bottom: -0.95rem;
+}
 
 /* #id_blue_date, #id_blue_time {
     border-radius: 5px !important;

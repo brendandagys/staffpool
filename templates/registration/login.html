@@ -1,5 +1,13 @@
 {% extends "base_generic.html" %}
 
+{% block sidebar %}
+
+  <ul class="background sidebar-nav">
+    <li class="login-link"><a id="home_link" class="home_link" href="{% url 'homepage' %}"><b>HOME PAGE</b></a></li> </br>
+  </ul>
+{% endblock %}
+
+
 {% block content %}
 
 <div class="row">

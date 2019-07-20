@@ -691,10 +691,9 @@ def code_red_status(request):
 
 @login_required
 def code_blue_form(request):
-
     if request.method == 'POST':
-
-        code_blue_instance = IncidentCommander()
+        
+        code_blue_instance = CodeBlue()
 
         # Create a form instance and populate it with data from the request (binding):
         form_code_blue = Code_BlueForm(request.POST)
@@ -743,10 +742,10 @@ def code_pink_form(request):
 
     if request.method == 'POST':
 
-        code_pink_instance = IncidentCommander()
+        code_pink_instance = CodePink()
 
         # Create a form instance and populate it with data from the request (binding):
-        form_pink_blue = Code_PinkForm(request.POST)
+        form_code_pink = Code_PinkForm(request.POST)
 
         # Check if the form is valid:
         if form_code_pink.is_valid():

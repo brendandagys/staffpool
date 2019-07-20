@@ -3,11 +3,17 @@ from django.urls import reverse
 from django.utils import timezone
 import datetime
 
+def current_date():
+    return datetime.date.today()
+
+def current_time():
+    return str(timezone.now().time())[0:5]
+
 # Create your models here.
 class Cafeteria(models.Model):
 
-    c_date = models.DateField(null=True, blank=False, verbose_name='Date', default=lambda: datetime.date.today())
-    c_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=lambda: str(timezone.now().time())[0:5])
+    c_date = models.DateField(null=True, blank=False, verbose_name='Date', default=current_date)
+    c_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=current_time)
     c_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     c_main_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Main Doors')
     c_south_patio_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='South Patio Doors')
@@ -37,8 +43,8 @@ class Cafeteria(models.Model):
 
 
 class East_Lobby(models.Model):
-    e_date = models.DateField(null=True, blank=True, verbose_name='Date', default=lambda: datetime.date.today())
-    e_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=lambda: str(timezone.now().time())[0:5])
+    e_date = models.DateField(null=True, blank=True, verbose_name='Date', default=current_date)
+    e_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=current_time)
     e_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     e_main_doors = models.CharField(max_length=100, null=True, blank=True, verbose_name='Main Doors')
     e_lab_entrance = models.CharField(max_length=100, null=True, blank=True, verbose_name='Lab Entrance')
@@ -67,8 +73,8 @@ class East_Lobby(models.Model):
 
 
 class Town_Centre(models.Model):
-    t_date = models.DateField(null=True, blank=True, verbose_name='Date', default=lambda: datetime.date.today())
-    t_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=lambda: str(timezone.now().time())[0:5])
+    t_date = models.DateField(null=True, blank=True, verbose_name='Date', default=current_date)
+    t_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=current_time)
     t_coordinator = models.CharField(max_length=100, null=True, blank=True, verbose_name='Staff Pool Coordinator')
     t_horticultural = models.CharField(max_length=100, null=True, blank=True, verbose_name='Horticultural Entrance')
     t_town_centre_main_street = models.CharField(max_length=100, null=True, blank=True, verbose_name='Town Centre/Main Street')
@@ -96,8 +102,8 @@ class Town_Centre(models.Model):
 
 
 class IncidentCommander(models.Model):
-    i_date = models.DateField(null=True, blank=True, verbose_name='Date', default=lambda: datetime.date.today())
-    i_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=lambda: str(timezone.now().time())[0:5])
+    i_date = models.DateField(null=True, blank=True, verbose_name='Date', default=current_date)
+    i_time = models.CharField(max_length=100, null=True, blank=False, verbose_name='Time (24 hr.)', default=current_time)
     i_commander = models.CharField(max_length=100, null=True, blank=True, verbose_name='Incident Commander')
     i_num_staff_c = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff at Cafeteria')
     i_num_staff_e = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff at East Lobby')
@@ -123,10 +129,10 @@ class IncidentCommander(models.Model):
 
 
 class CodeBlue(models.Model):
-    blue_date = models.DateField(verbose_name='Date', default=lambda: datetime.date.today()) # null and blank (required in forms) are False by default...
-    blue_time = models.CharField(max_length=100, verbose_name='Time (24hr.)', default=lambda: str(timezone.now().time())[0:5])
+    blue_date = models.DateField(verbose_name='Date', default=current_date) # null and blank (required in forms) are False by default...
+    blue_time = models.CharField(max_length=100, verbose_name='Time (24hr.)', default=current_time)
     blue_what_went_well = models.TextField(null=True, blank=True, verbose_name='What Went Well')
-    blue_did_not_go_well = models.TextField(null=True, blank=True, verbose_name='What Didn\'t Go Well')
+    blue_what_did_not_go_well = models.TextField(null=True, blank=True, verbose_name='What Didn\'t Go Well')
     blue_system_issues = models.TextField(null=True, blank=True, verbose_name='System Issues')
     blue_what_was_learned = models.TextField(null=True, blank=True, verbose_name='What Was Learned/Recommendations/Goals')
     blue_who_will_follow_up = models.TextField(null=True, blank=True, verbose_name='Who Will Follow Up/Communicate')
@@ -140,10 +146,10 @@ class CodeBlue(models.Model):
 
 
 class CodePink(models.Model):
-    pink_date = models.DateField(verbose_name='Date', default=lambda: datetime.date.today()) # null and blank (required in forms) are False by default...
-    pink_time = models.CharField(max_length=100, verbose_name='Time (24hr.)', default=lambda: str(timezone.now().time())[0:5])
+    pink_date = models.DateField(verbose_name='Date', default=current_date) # null and blank (required in forms) are False by default...
+    pink_time = models.CharField(max_length=100, verbose_name='Time (24hr.)', default=current_time)
     pink_what_went_well = models.TextField(null=True, blank=True, verbose_name='What Went Well')
-    pink_did_not_go_well = models.TextField(null=True, blank=True, verbose_name='What Didn\'t Go Well')
+    pink_what_did_not_go_well = models.TextField(null=True, blank=True, verbose_name='What Didn\'t Go Well')
     pink_system_issues = models.TextField(null=True, blank=True, verbose_name='System Issues')
     pink_what_was_learned = models.TextField(null=True, blank=True, verbose_name='What Was Learned/Recommendations/Goals')
     pink_who_will_follow_up = models.TextField(null=True, blank=True, verbose_name='Who Will Follow Up/Communicate')
