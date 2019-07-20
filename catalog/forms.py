@@ -44,6 +44,9 @@ class CafeteriaForm(forms.Form):
 
     c_explain = forms.NullBooleanField(label=mark_safe('Staff Pool participants told</br>to listen for new instructions</br> and check back in with the</br>Pool Coordinator on return'))#, widget=forms.CheckboxInput(attrs={'class': 'form-check-lg'}))
 
+    c_mock = forms.NullBooleanField(label='Mock Drill')
+
+
     def clean_c_date(self):
         data = self.cleaned_data['c_date']
         return data
@@ -96,6 +99,10 @@ class CafeteriaForm(forms.Form):
         data = self.cleaned_data['c_explain']
         return data
 
+    def clean_c_mock(self):
+        data = self.cleaned_data['c_mock']
+        return data
+
 
 class East_LobbyForm(forms.Form):
     e_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
@@ -129,6 +136,9 @@ class East_LobbyForm(forms.Form):
                                                                                                                  'placeholder': 'Count...'}))
 
     e_explain = forms.NullBooleanField(label=mark_safe('Staff Pool participants told</br>to listen for new instructions</br> and check back in with the</br>Pool Coordinator on return'))
+
+    e_mock = forms.NullBooleanField(label='Mock Drill')
+
 
     def clean_e_date(self):
         data = self.cleaned_data['e_date']
@@ -174,6 +184,10 @@ class East_LobbyForm(forms.Form):
         data = self.cleaned_data['e_explain']
         return data
 
+    def clean_e_mock(self):
+        data = self.cleaned_data['e_mock']
+        return data
+
 
 class Town_CentreForm(forms.Form):
     t_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(), widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
@@ -204,6 +218,9 @@ class Town_CentreForm(forms.Form):
                                                                                                                  'placeholder': 'Count...'}))
 
     t_explain = forms.NullBooleanField(label=mark_safe('Staff Pool participants told</br>to listen for new instructions</br> and check back in with the</br>Pool Coordinator on return'))
+
+    t_mock = forms.NullBooleanField(label='Mock Drill')
+
 
     def clean_t_date(self):
         data = self.cleaned_data['t_date']
@@ -245,6 +262,10 @@ class Town_CentreForm(forms.Form):
         data = self.cleaned_data['t_explain']
         return data
 
+    def clean_t_mock(self):
+        data = self.cleaned_data['t_mock']
+        return data
+
 
 class IncidentCommanderForm(forms.Form):
     i_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(),
@@ -281,6 +302,9 @@ class IncidentCommanderForm(forms.Form):
             widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter a location...'}))
 
     i_signed_fire_documentation = forms.NullBooleanField(label=mark_safe('Signed off on appropriate municipal fire department documentation'))
+
+    i_mock = forms.NullBooleanField(label='Mock Drill')
+
 
     def clean_i_date(self):
         data = self.cleaned_data['i_date']
@@ -330,10 +354,9 @@ class IncidentCommanderForm(forms.Form):
         data = self.cleaned_data['i_signed_fire_documentation']
         return data
 
-
-    # class Meta:
-    #     model = IncidentCommander
-    #     fields = '__all__'
+    def clean_i_mock(self):
+        data = self.cleaned_data['i_mock']
+        return data
 
 
 class Code_BlueForm(forms.Form):
@@ -357,6 +380,9 @@ class Code_BlueForm(forms.Form):
 
     blue_who_will_follow_up = forms.CharField(required=False, label='Who will follow up? How will we communicate back to the team?',
                                 widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
+
+    blue_mock = forms.NullBooleanField(label='Mock Drill')
+
 
     def clean_blue_date(self):
         data = self.cleaned_data['blue_date']
@@ -382,6 +408,10 @@ class Code_BlueForm(forms.Form):
         data = self.cleaned_data['blue_what_was_learned']
         return data
 
+    def clean_blue_mock(self):
+        data = self.cleaned_data['blue_mock']
+        return data
+
 
 class Code_PinkForm(forms.Form):
     pink_date = forms.DateField(label='Date:', disabled=True, initial=lambda: datetime.date.today(),
@@ -405,6 +435,9 @@ class Code_PinkForm(forms.Form):
     pink_who_will_follow_up = forms.CharField(required=False, label='Who will follow up? How will we communicate back to the team?',
                                 widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '15', 'placeholder': 'Please answer here...'}))
 
+    pink_mock = forms.NullBooleanField(label='Mock Drill')
+
+
     def clean_pink_date(self):
         data = self.cleaned_data['pink_date']
         return data
@@ -427,4 +460,8 @@ class Code_PinkForm(forms.Form):
 
     def clean_pink_what_was_learned(self):
         data = self.cleaned_data['pink_what_was_learned']
+        return data
+
+    def clean_pink_mock(self):
+        data = self.cleaned_data['pink_mock']
         return data

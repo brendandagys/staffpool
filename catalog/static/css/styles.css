@@ -158,6 +158,11 @@ input[type="password"] {
     left: 2.25rem;
 }
 
+#id_c_mock, #id_e_mock, #id_t_mock, #id_i_mock {
+    position: relative;
+    left: 2.25rem;
+}
+
 input[type="submit"]:not(.login_button):not(#code_blue_submit):not(#code_pink_submit) {
     position: relative;
     margin: 2rem;
@@ -168,13 +173,13 @@ input[type="submit"]:not(.login_button):not(#code_blue_submit):not(#code_pink_su
 
 input[id="code_blue_submit"] {
     transform: scale(2,2);
-    margin-top: 0.5rem;
+    margin-top: 5rem;
     margin-bottom: 2rem;
 }
 
 input[id="code_pink_submit"] {
     transform: scale(2,2);
-    margin-top: 0.5rem;
+    margin-top: 5rem;
     margin-bottom: 2rem;
 }
 
@@ -581,7 +586,6 @@ label[for="id_blue_time"] {
     text-align: center;
 }
 
-
 textarea[id^="id_pink"] {
     font-size: 12px;
 }
@@ -603,6 +607,7 @@ label[for="id_pink_time"] {
 #id_pink_date, #id_pink_time {
     margin: auto;
     text-align: center;
+    color: #FF1493;
 }
 
 .login-link {

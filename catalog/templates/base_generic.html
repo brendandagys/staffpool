@@ -109,28 +109,22 @@ $(document).ready(function() {
 
 var status;
 var last_status;
-// var status_setter;
 var from_location;
 var to_location;
 
+var message_1;
+
 var current_user = '{{ current_user_id }}';
 console.log(current_user);
-
-var message_1;
-// var author_1;
-// var timestamp;
 
 if (current_user === 'Staff') {
 
   $.ajax({
       type: 'GET',
       url: 'Session/',
-      data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-              // 'session_request': 'yes' // Is this line only here because you need something?
-            },
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
       success: function(response) {
-        // console.log(response);
-          console.log('GET Staff name 1: ' + response['given_staff_name']);
+          console.log('GET staff name from session: ' + response['given_staff_name']);
 
           var given_staff_name_temp = response['given_staff_name'];
 
@@ -144,9 +138,7 @@ if (current_user === 'Staff') {
 $.ajax({
     type: 'GET',
     url: 'Messages/',
-    data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-            // 'message_request': 'yes' // Is this line only here because you need something?
-          },
+    data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
     success: function(response) {
         message_1 = response['message_1'];
     }
@@ -155,9 +147,7 @@ $.ajax({
 $.ajax({
     type: 'GET',
     url: 'CodeRedStatus/',
-    data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-            // 'status_request': 'yes' // Is this line only here because you need something?
-          },
+    data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
     success: function(response) {
         status = response['code_red_status']; // Needed?
         last_status = response['code_red_status'];
@@ -207,7 +197,6 @@ $.ajax({
               var message = prompt("Message:");
 
               if (message == null) {
-                console.log('Clicked Cancel on message dialog: ' + current_user);
                 return;
               }
               else if (message.trim() == '') {
@@ -215,6 +204,8 @@ $.ajax({
                   return;
               }
               else if (message != null) {
+
+                    message_1 = message;
 
                     $.ajax({
                         type: "POST",
@@ -224,19 +215,16 @@ $.ajax({
                                 'message_1': message
                               },
                         success: function () {
-                            message_1 = message;
+                            // message_1 = message;
                             console.log('Message by ' + current_user + ' sent: ' + message_1);
                         }
                     });
                 }
-           // }}
         });
 
         $('#status_normal').click(function(e) {
             if (status != 'Normal') {
 
-                // Only if they don't click Cancel and give some text if clicking OK
-                // if ((current_user != null) && (status_setter != '')) {
                 status = $('#status_normal').val();
                 last_status = $('#status_normal').val();
                 from_location = '';
@@ -264,7 +252,6 @@ $.ajax({
 
                         if (to_location != null && to_location != '') {
 
-                            // if (status_setter != null && from_location != null && to_location != null) {
                             status = $('#status_horizontal').val();
                             last_status = $('#status_horizontal').val();
 
@@ -305,9 +292,8 @@ $.ajax({
             }
         });
 
-        $(':button').not('#send_message').click(function(e) {     // Won't run when message button is clicked
+        $(':button').not('#send_message,#new_form_button').click(function(e) {     // Won't run when message button is clicked
 
-            // if (status_setter != null && status_setter != '' && from_location != null && to_location != null) {
             if (from_location != null && to_location != null) {
 
                 $.ajax({
@@ -323,7 +309,7 @@ $.ajax({
                         console.log('POST status success!');
                     }
                 });
-            }
+             }
         });
 
 
@@ -333,22 +319,8 @@ $.ajax({
   $.ajax({
       type: 'GET',
       url: 'CodeRedStatus/',
-      data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-              // 'status_request': 'yes'
-            },
-      // dataType: 'json',          // Apparently not needed
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
       success: function(response) {
-          // alert('The status has been changed to ' + response['json_data'])
-
-          // console.log('START')
-          // console.log('Existing status: ' + status)
-          // console.log('Existing last_status: ' + last_status)
-          // console.log('From GET: ' + response['reset_status'])
-          // console.log('From GET: ' + response['code_red_status'])
-          // console.log('From GET: ' + response['status_setter'])
-          // console.log('END')
-          // console.log(response['from_location'])
-          // console.log(response['to_location'])
 
           if (response['code_red_status'] == 'Normal') {
             $('#status_banner').text('')
@@ -364,13 +336,14 @@ $.ajax({
             $('#status_banner').removeClass('banner_yellow')
           }
 
-        if (response['code_red_status'] != last_status) { // && response['reset_status'] == 'No') {
+        if (response['code_red_status'] != last_status && response['status_setter'] != current_user) {
+
             last_status = response['code_red_status'];
 
             alert(response['status_setter'] + ' has set the status From ' + status + ' to ' + last_status);
             status = response['code_red_status'];
         }
-    }
+     }
   });
 
   $.ajax({
@@ -381,11 +354,8 @@ $.ajax({
             },
       success: function(response) {
 
-         // console.log(response['author_1']);
-         // console.log(response['message_1']);
-         // console.log(response['timestamp'].substring(11,19));
+          if (!window.location.href.includes('chat') && response['message_1'] != message_1 && response['message_1'] != '' && response['author_1'] != current_user) {
 
-          if (!window.location.href.includes('chat') && response['message_1'] != message_1 && response['message_1'] != '') {
               alert("Message from " + response['author_1'] + ' @ ' + response['timestamp'].substring(11,19) + ':\n\n' + response['message_1']);
               message_1 = response['message_1']
           }
@@ -393,8 +363,6 @@ $.ajax({
      });
    };
 });
-
-// });
 
 </script>
 

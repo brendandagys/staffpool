@@ -24,6 +24,7 @@ class Cafeteria(models.Model):
     c_runners = models.CharField(max_length=100, null=True, blank=True, verbose_name='Command Centre Runner(s)')
     c_num_staff = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff Present')
     c_explain = models.NullBooleanField(verbose_name='Explained to Participants')
+    c_mock = models.NullBooleanField(verbose_name='Mock')
 
     class Meta:
         verbose_name_plural = 'Cafeteria'
@@ -54,6 +55,7 @@ class East_Lobby(models.Model):
     e_runners = models.CharField(max_length=100, null=True, blank=True, verbose_name='Command Centre Runner(s)')
     e_num_staff = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff Present')
     e_explain = models.NullBooleanField(verbose_name='Explained to Participants')
+    e_mock = models.NullBooleanField(verbose_name='Mock')
 
     class Meta:
         verbose_name_plural = 'East Lobby'
@@ -83,6 +85,7 @@ class Town_Centre(models.Model):
     t_runners = models.CharField(max_length=100, null=True, blank=True, verbose_name='Command Centre Runner(s)')
     t_num_staff = models.CharField(max_length=100, null=True, blank=True, verbose_name='Number of Staff Present')
     t_explain = models.NullBooleanField(verbose_name='Explained to Participants')
+    t_mock = models.NullBooleanField(verbose_name='Mock')
 
     class Meta:
         verbose_name_plural = 'Town Centre'
@@ -114,6 +117,7 @@ class IncidentCommander(models.Model):
     i_location_of_evacuation = models.CharField(max_length=100, null=True, blank=True, verbose_name='Location of Evacuation')
     i_area_of_refuge = models.CharField(max_length=100, null=True, blank=True, verbose_name='Area of Refuge')
     i_signed_fire_documentation = models.NullBooleanField(verbose_name='Signed Fire Department Documentation')
+    i_mock = models.NullBooleanField(verbose_name='Mock')
 
     class Meta:
         verbose_name_plural = 'Incident Command'
@@ -136,6 +140,7 @@ class CodeBlue(models.Model):
     blue_system_issues = models.TextField(null=True, blank=True, verbose_name='System Issues')
     blue_what_was_learned = models.TextField(null=True, blank=True, verbose_name='What Was Learned/Recommendations/Goals')
     blue_who_will_follow_up = models.TextField(null=True, blank=True, verbose_name='Who Will Follow Up/Communicate')
+    blue_mock = models.NullBooleanField(verbose_name='Mock')
 
     class Meta:
         verbose_name_plural = 'Code Blue'
@@ -153,6 +158,7 @@ class CodePink(models.Model):
     pink_system_issues = models.TextField(null=True, blank=True, verbose_name='System Issues')
     pink_what_was_learned = models.TextField(null=True, blank=True, verbose_name='What Was Learned/Recommendations/Goals')
     pink_who_will_follow_up = models.TextField(null=True, blank=True, verbose_name='Who Will Follow Up/Communicate')
+    pink_mock = models.NullBooleanField(verbose_name='Mock')
 
     class Meta:
         verbose_name_plural = 'Code Pink'

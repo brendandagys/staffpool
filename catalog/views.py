@@ -80,6 +80,7 @@ def cafeteria_form(request):
             cafeteria_instance.c_runners = form_c.cleaned_data['c_runners'].strip()
             cafeteria_instance.c_num_staff = form_c.cleaned_data['c_num_staff'].strip()
             cafeteria_instance.c_explain = form_c.cleaned_data['c_explain']
+            cafeteria_instance.c_mock = form_c.cleaned_data['c_mock']
 
             cafeteria_instance.save()
 
@@ -106,6 +107,7 @@ def cafeteria_form(request):
                 c_runners = Cafeteria.objects.last().c_runners
                 c_num_staff = Cafeteria.objects.last().c_num_staff
                 c_explain = Cafeteria.objects.last().c_explain
+                c_mock = Cafeteria.objects.last().c_mock
 
                 show_form_button = 'Yes'
 
@@ -122,6 +124,7 @@ def cafeteria_form(request):
                 c_runners = ''
                 c_num_staff = ''
                 c_explain = ''
+                c_mock = ''
 
                 print('No error but if statement failed: empty form')
 
@@ -137,6 +140,7 @@ def cafeteria_form(request):
             c_runners = ''
             c_num_staff = ''
             c_explain = ''
+            c_mock = ''
 
             print('Error and empty form')
 
@@ -151,7 +155,8 @@ def cafeteria_form(request):
                                         'c_directors': c_directors,
                                         'c_runners': c_runners,
                                         'c_num_staff': c_num_staff,
-                                        'c_explain': c_explain
+                                        'c_explain': c_explain,
+                                        'c_mock': c_mock,
                                         })
 
     context = { 'num_events': num_events,
@@ -210,6 +215,7 @@ def east_lobby_form(request):
             east_lobby_instance.e_runners = form_e.cleaned_data['e_runners'].strip()
             east_lobby_instance.e_num_staff = form_e.cleaned_data['e_num_staff'].strip()
             east_lobby_instance.e_explain = form_e.cleaned_data['e_explain']
+            east_lobby_instance.e_mock = form_e.cleaned_data['e_mock']
 
             east_lobby_instance.save()
 
@@ -236,6 +242,7 @@ def east_lobby_form(request):
                 e_runners = East_Lobby.objects.last().e_runners
                 e_num_staff = East_Lobby.objects.last().e_num_staff
                 e_explain = East_Lobby.objects.last().e_explain
+                e_mock = East_Lobby.objects.last().e_mock
 
                 show_form_button = 'Yes'
 
@@ -250,6 +257,7 @@ def east_lobby_form(request):
                 e_runners = ''
                 e_num_staff = ''
                 e_explain = ''
+                e_mock = ''
 
         except:
             e_time = str(timezone.now().time())[0:5]
@@ -262,6 +270,7 @@ def east_lobby_form(request):
             e_runners = ''
             e_num_staff = ''
             e_explain = ''
+            e_mock = ''
 
         form_e = East_LobbyForm(initial={'e_date': datetime.date.today(),
                                         'e_time': e_time,
@@ -273,7 +282,8 @@ def east_lobby_form(request):
                                         'e_directors': e_directors,
                                         'e_runners': e_runners,
                                         'e_num_staff': e_num_staff,
-                                        'e_explain': e_explain
+                                        'e_explain': e_explain,
+                                        'e_mock': e_mock,
                                         })
 
     context = { 'num_events': num_events,
@@ -331,6 +341,7 @@ def town_centre_form(request):
             town_centre_instance.t_runners = form_t.cleaned_data['t_runners'].strip()
             town_centre_instance.t_num_staff = form_t.cleaned_data['t_num_staff'].strip()
             town_centre_instance.t_explain = form_t.cleaned_data['t_explain']
+            town_centre_instance.t_mock = form_t.cleaned_date['t_mock']
 
             town_centre_instance.save()
 
@@ -356,6 +367,7 @@ def town_centre_form(request):
                 t_runners = Town_Centre.objects.last().t_runners
                 t_num_staff = Town_Centre.objects.last().t_num_staff
                 t_explain = Town_Centre.objects.last().t_explain
+                t_mock = Town_Centre.objects.last().t_mock
 
                 show_form_button = 'Yes'
 
@@ -369,6 +381,7 @@ def town_centre_form(request):
                 t_runners = ''
                 t_num_staff = ''
                 t_explain = ''
+                t_mock = ''
 
         except:
             t_time = str(timezone.now().time())[0:5]
@@ -380,6 +393,7 @@ def town_centre_form(request):
             t_runners = ''
             t_num_staff = ''
             t_explain = ''
+            t_mock = ''
 
         form_t = Town_CentreForm(initial={'t_date': datetime.date.today(),
                                         't_time': t_time,
@@ -390,7 +404,8 @@ def town_centre_form(request):
                                         't_directors': t_directors,
                                         't_runners': t_runners,
                                         't_num_staff': t_num_staff,
-                                        't_explain': t_explain
+                                        't_explain': t_explain,
+                                        't_mock': t_mock,
                                         })
 
     context = { 'num_events': num_events,
@@ -692,7 +707,7 @@ def code_red_status(request):
 @login_required
 def code_blue_form(request):
     if request.method == 'POST':
-        
+
         code_blue_instance = CodeBlue()
 
         # Create a form instance and populate it with data from the request (binding):
@@ -709,6 +724,7 @@ def code_blue_form(request):
             code_blue_instance.blue_system_issues = form_code_blue.cleaned_data['blue_system_issues'].strip()
             code_blue_instance.blue_what_was_learned = form_code_blue.cleaned_data['blue_what_was_learned'].strip()
             code_blue_instance.blue_who_will_follow_up = form_code_blue.cleaned_data['blue_who_will_follow_up'].strip()
+            code_blue_instance.blue_mock = form_code_blue.cleaned_data['blue_mock']
 
             code_blue_instance.save()
 
@@ -725,6 +741,7 @@ def code_blue_form(request):
             'blue_system_issues': '',
             'blue_what_was_learned': '',
             'blue_who_will_follow_up': '',
+            'blue_mock': '',
         })
 
         context = { 'form_code_blue': form_code_blue,
@@ -758,6 +775,7 @@ def code_pink_form(request):
             code_pink_instance.pink_system_issues = form_code_pink.cleaned_data['pink_system_issues'].strip()
             code_pink_instance.pink_what_was_learned = form_code_pink.cleaned_data['pink_what_was_learned'].strip()
             code_pink_instance.pink_who_will_follow_up = form_code_pink.cleaned_data['pink_who_will_follow_up'].strip()
+            code_pink_instance.pink_mock = form_code_pink.cleaned_data['pink_mock']
 
             code_pink_instance.save()
 
@@ -774,6 +792,7 @@ def code_pink_form(request):
             'pink_system_issues': '',
             'pink_what_was_learned': '',
             'pink_who_will_follow_up': '',
+            'pink_mock': '',
         })
 
         context = { 'form_code_pink': form_code_pink,
@@ -832,6 +851,7 @@ def incident_commander_form(request):
             incident_commander_instance.i_location_of_evacuation = form_incident_commander.cleaned_data['i_location_of_evacuation'].strip()
             incident_commander_instance.i_area_of_refuge = form_incident_commander.cleaned_data['i_area_of_refuge'].strip()
             incident_commander_instance.i_signed_fire_documentation = form_incident_commander.cleaned_data['i_signed_fire_documentation']
+            incident_commander_instance.i_mock = form_incident_commander.cleaned_data['i_mock']
 
             incident_commander_instance.save()
 
@@ -859,6 +879,7 @@ def incident_commander_form(request):
                 i_location_of_evacuation = IncidentCommander.objects.last().i_location_of_evacuation
                 i_area_of_refuge = IncidentCommander.objects.last().i_area_of_refuge
                 i_signed_fire_documentation = IncidentCommander.objects.last().i_signed_fire_documentation
+                i_mock = IncidentCommander.objects.last().i_mock
 
                 show_form_button = 'Yes'
 
@@ -874,6 +895,7 @@ def incident_commander_form(request):
                 i_location_of_evacuation = ''
                 i_area_of_refuge = ''
                 i_signed_fire_documentation = ''
+                i_mock = ''
 
         except:
             i_time = str(timezone.now().time())[0:5]
@@ -887,6 +909,7 @@ def incident_commander_form(request):
             i_location_of_evacuation = ''
             i_area_of_refuge = ''
             i_signed_fire_documentation = ''
+            i_mock = ''
 
         form_incident_commander = IncidentCommanderForm(initial={'i_date': datetime.date.today(),
                                         'i_time': i_time,
@@ -900,6 +923,7 @@ def incident_commander_form(request):
                                         'i_location_of_evacuation': i_location_of_evacuation,
                                         'i_area_of_refuge': i_area_of_refuge,
                                         'i_signed_fire_documentation': i_signed_fire_documentation,
+                                        'i_mock': i_mock,
                                         })
 
     context = { 'num_events': num_events,
