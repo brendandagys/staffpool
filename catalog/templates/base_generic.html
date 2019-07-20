@@ -336,7 +336,7 @@ $.ajax({
             $('#status_banner').removeClass('banner_yellow')
           }
 
-        if (response['code_red_status'] != last_status && response['status_setter'] != current_user) {
+        if (response['code_red_status'] != last_status && response['status_setter'] != current_user && response['status_setter'] != 'Unspecified') {
 
             last_status = response['code_red_status'];
 
