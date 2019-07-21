@@ -322,7 +322,7 @@ $.ajax({
       data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
       success: function(response) {
           if (response['status_setter'] != current_user) {
-            
+
               if (response['code_red_status'] == 'Normal') {
                 $('#status_banner').text('')
               }

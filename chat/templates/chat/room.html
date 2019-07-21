@@ -23,7 +23,6 @@
 
     var status;
     var last_status;
-    // var status_setter;
     var from_location;
     var to_location;
 
@@ -78,14 +77,10 @@
     $.ajax({
         type: 'GET',
         url: 'CodeRedStatus/',
-        data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                // 'status_request': 'yes' // Is this line only here because you need something?
-              },
+        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
         success: function(response) {
             status = response['code_red_status']; // Needed?
             last_status = response['code_red_status'];
-
-            console.log('Initial status: ' + status);
 
             if (response['code_red_status'] == 'Normal') {
                 $('#status_banner').text('')
@@ -199,7 +194,6 @@
           var message = prompt("Message:");
 
           if (message == null) {
-            console.log('Clicked Cancel on message dialog: ' + current_user);
             return;
           }
           else if (message.trim() == '') {
@@ -207,6 +201,8 @@
               return;
           }
           else if (message != null) {
+
+                message_1 = message;
 
                 $.ajax({
                     type: "POST",
@@ -216,7 +212,6 @@
                             'message_1': message
                           },
                     success: function () {
-                        message_1 = message;
 
                         document.querySelector('#chat-log').value += (current_user.padEnd(12, ' ').toUpperCase() + message_1 + '\n');
 
@@ -227,14 +222,11 @@
                     }
                 });
             }
-       // }}
     });
 
     $('#status_normal').click(function(e) {
         if (status != 'Normal') {
 
-            // Only if they don't click Cancel and give some text if clicking OK
-            // if ((current_user != null) && (status_setter != '')) {
             status = $('#status_normal').val();
             last_status = $('#status_normal').val();
             from_location = '';
@@ -262,7 +254,6 @@
 
                     if (to_location != null && to_location != '') {
 
-                        // if (status_setter != null && from_location != null && to_location != null) {
                         status = $('#status_horizontal').val();
                         last_status = $('#status_horizontal').val();
 
@@ -305,7 +296,6 @@
 
     $(':button').not('#send_message').click(function(e) {     // Won't run when message button is clicked
 
-        // if (status_setter != null && status_setter != '' && from_location != null && to_location != null) {
         if (from_location != null && to_location != null) {
 
             $.ajax({
@@ -331,42 +321,35 @@
     $.ajax({
         type: 'GET',
         url: 'CodeRedStatus/',
-        data: { csrfmiddlewaretoken: '{{ csrf_token }}',
-                // 'status_request': 'yes'
-              },
-        // dataType: 'json',          // Apparently not needed
+        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
         success: function(response) {
+            if (response['status_setter'] != current_user) {
 
-            if (response['code_red_status'] == 'Normal') {
-              $('#status_banner').text('')
-            }
-            else if (response['code_red_status'] == 'Horizontal Evacuation') {
-              $('#status_banner').text('Horizontal Evacuation from ' + response['from_location'] + ' to ' + response['to_location'])
-              $('#status_banner').addClass('banner_yellow')
-              $('#status_banner').removeClass('banner_red')
-              }
-            else if (response['code_red_status'] == 'Full Evacuation') {
-              $('#status_banner').text('Full Evacuation')
-              $('#status_banner').addClass('banner_red')
-              $('#status_banner').removeClass('banner_yellow')
-            }
+                if (response['code_red_status'] == 'Normal') {
+                  $('#status_banner').text('')
+                }
+                else if (response['code_red_status'] == 'Horizontal Evacuation') {
+                  $('#status_banner').text('Horizontal Evacuation from ' + response['from_location'] + ' to ' + response['to_location'])
+                  $('#status_banner').addClass('banner_yellow')
+                  $('#status_banner').removeClass('banner_red')
+                  }
+                else if (response['code_red_status'] == 'Full Evacuation') {
+                  $('#status_banner').text('Full Evacuation')
+                  $('#status_banner').addClass('banner_red')
+                  $('#status_banner').removeClass('banner_yellow')
+                }
+          }
 
-          if (response['code_red_status'] != last_status) { // && response['reset_status'] == 'No') {
+          if (response['code_red_status'] != last_status && response['status_setter'] != current_user && response['status_setter'] != 'Unspecified' && response['status_setter'] != null) {
+
               last_status = response['code_red_status'];
 
               alert(response['status_setter'] + ' has set the status From ' + status + ' to ' + last_status);
               status = response['code_red_status'];
           }
-          // else {
-          //     last_status = response['code_red_status'];
-          //     status = response['code_red_status'];
-          // }
-          // console.log('New status: ' + status)
-          // console.log('New last_status: ' + last_status)
-          // console.log(' ')
       }
     });
-}
+};
 
     var myVar = setInterval(chat_update, 250);
     function chat_update() {
