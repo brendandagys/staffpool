@@ -341,7 +341,7 @@ def town_centre_form(request):
             town_centre_instance.t_runners = form_t.cleaned_data['t_runners'].strip()
             town_centre_instance.t_num_staff = form_t.cleaned_data['t_num_staff'].strip()
             town_centre_instance.t_explain = form_t.cleaned_data['t_explain']
-            town_centre_instance.t_mock = form_t.cleaned_date['t_mock']
+            town_centre_instance.t_mock = form_t.cleaned_data['t_mock']
 
             town_centre_instance.save()
 
