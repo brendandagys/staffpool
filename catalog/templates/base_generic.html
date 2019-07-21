@@ -321,19 +321,21 @@ $.ajax({
       url: 'CodeRedStatus/',
       data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
       success: function(response) {
-
-          if (response['code_red_status'] == 'Normal') {
-            $('#status_banner').text('')
-          }
-          else if (response['code_red_status'] == 'Horizontal Evacuation') {
-            $('#status_banner').text('Horizontal Evacuation from ' + response['from_location'] + ' to ' + response['to_location'])
-            $('#status_banner').addClass('banner_yellow')
-            $('#status_banner').removeClass('banner_red')
-            }
-          else if (response['code_red_status'] == 'Full Evacuation') {
-            $('#status_banner').text('Full Evacuation')
-            $('#status_banner').addClass('banner_red')
-            $('#status_banner').removeClass('banner_yellow')
+          if (response['status_setter'] != current_user) {
+            
+              if (response['code_red_status'] == 'Normal') {
+                $('#status_banner').text('')
+              }
+              else if (response['code_red_status'] == 'Horizontal Evacuation') {
+                $('#status_banner').text('Horizontal Evacuation from ' + response['from_location'] + ' to ' + response['to_location'])
+                $('#status_banner').addClass('banner_yellow')
+                $('#status_banner').removeClass('banner_red')
+                }
+              else if (response['code_red_status'] == 'Full Evacuation') {
+                $('#status_banner').text('Full Evacuation')
+                $('#status_banner').addClass('banner_red')
+                $('#status_banner').removeClass('banner_yellow')
+              }
           }
 
         if (response['code_red_status'] != last_status && response['status_setter'] != current_user && response['status_setter'] != 'Unspecified' && response['status_setter'] != null) {
