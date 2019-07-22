@@ -1,7 +1,7 @@
 import datetime
 
 import json
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -806,6 +806,67 @@ def code_pink_form(request):
 # ======================================================================================================================
 
 @login_required
+def staff_count_update(request):
+
+    if request.method == 'GET' and 'cafeteria' in request.GET:
+
+        try:
+
+            if ((Cafeteria.objects.last().c_date == datetime.date.today()) and
+                (((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(timezone.now().time())[0:2])) == 0)) or
+                ((abs(int(Cafeteria.objects.last().c_time[0:2]) - int(str(timezone.now().time())[0:2])) == 1) and (int(Cafeteria.objects.last().c_time[3:5]) > int(str(timezone.now().time())[3:5])) ))):
+
+                c_num_staff = Cafeteria.objects.last().c_num_staff
+
+
+            else:
+                c_num_staff = ''
+
+        except:
+            c_num_staff = ''
+
+        return JsonResponse({'c_num_staff': c_num_staff})
+
+    elif request.method == 'GET' and 'east_lobby' in request.GET:
+
+        try:
+
+            if ((East_Lobby.objects.last().e_date == datetime.date.today()) and
+                (((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(timezone.now().time())[0:2])) == 0)) or
+                ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(timezone.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(timezone.now().time())[3:5])) ))):
+
+                e_num_staff = East_Lobby.objects.last().e_num_staff
+
+
+            else:
+                e_num_staff = ''
+
+        except:
+            e_num_staff = ''
+
+        return JsonResponse({'e_num_staff': e_num_staff})
+
+    elif request.method == 'GET' and 'town_centre' in request.GET:
+
+        try:
+
+            if ((Town_Centre.objects.last().t_date == datetime.date.today()) and
+                (((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(timezone.now().time())[0:2])) == 0)) or
+                ((abs(int(Town_Centre.objects.last().t_time[0:2]) - int(str(timezone.now().time())[0:2])) == 1) and (int(Town_Centre.objects.last().t_time[3:5]) > int(str(timezone.now().time())[3:5])) ))):
+
+                t_num_staff = Town_Centre.objects.last().t_num_staff
+
+
+            else:
+                t_num_staff = ''
+
+        except:
+            t_num_staff = ''
+
+        return JsonResponse({'t_num_staff': t_num_staff})
+
+
+@login_required
 def incident_commander_form(request):
 
     show_form_button = 'No'
@@ -821,7 +882,7 @@ def incident_commander_form(request):
 
         else:
 
-            if ((IncidentCommander.objects.last().t_date == datetime.date.today()) and
+            if ((IncidentCommander.objects.last().i_date == datetime.date.today()) and
                 (request.POST.get('reset', '') != 'Yes') and
                 (((abs(int(IncidentCommander.objects.last().i_time[0:2]) - int(str(timezone.now().time())[0:2])) == 0)) or
                 ((abs(int(IncidentCommander.objects.last().i_time[0:2]) - int(str(timezone.now().time())[0:2])) == 1) and (int(IncidentCommander.objects.last().i_time[3:5]) > int(str(timezone.now().time())[3:5])) ))):

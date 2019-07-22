@@ -109,6 +109,42 @@ $('#new_form_button').click(function(e) {     // Won't run when message button i
               console.log('New form success!');
           }});
       });
+
+var myStatusVar = setInterval(count_update, 1000);
+function count_update() {
+
+    $.ajax({
+      type: 'GET',
+      url: "StaffCountUpdate/",
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+              'cafeteria': 'c' },
+      success: function(response) {
+          $('#id_i_num_staff_c').val(response['c_num_staff']);
+      }
+    });
+
+    $.ajax({
+      type: 'GET',
+      url: "StaffCountUpdate/",
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+              'east_lobby': 'e' },
+      success: function(response) {
+          $('#id_i_num_staff_e').val(response['e_num_staff']);
+      }
+    });
+
+    $.ajax({
+      type: 'GET',
+      url: "StaffCountUpdate/",
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}',
+              'town_centre': 't' },
+      success: function(response) {
+          $('#id_i_num_staff_t').val(response['t_num_staff']);
+      }
+    });
+
+  }
+
 });
 
 </script>

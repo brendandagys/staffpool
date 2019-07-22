@@ -277,14 +277,14 @@ class IncidentCommanderForm(forms.Form):
     i_commander = forms.CharField(required=False, label='Incident Commander',
                         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Name...'}))
 
-    i_num_staff_c = forms.CharField(required=False, label='# of Staff at Cafeteria',
-            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Count...'}))
+    i_num_staff_c = forms.CharField(required=False, disabled=True, label='# of Staff at Cafeteria',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': ''}))
 
-    i_num_staff_e = forms.CharField(required=False, label='# of Staff at East Lobby',
-            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Count...'}))
+    i_num_staff_e = forms.CharField(required=False, disabled=True, label='# of Staff at East Lobby',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': ''}))
 
-    i_num_staff_t = forms.CharField(required=False, label='# of Staff at Town Centre',
-            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Count...'}))
+    i_num_staff_t = forms.CharField(required=False, disabled=True, label='# of Staff at Town Centre',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': ''}))
 
     i_captain = forms.CharField(required=False, label='Area Captain',
             widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Name...'}))
