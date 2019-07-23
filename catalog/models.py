@@ -168,10 +168,6 @@ class CodePink(models.Model):
         return 'Code Pink: ' + str(self.pink_date)
 
 
-# class Commands(models.Model):
-#     command_signal_silence = models.CharField(max_length = 100, verbose_name = 'Time of Signal Silence')
-#     command_all_clear = models.
-
 class CodeStatuses(models.Model):
     code_timestamp = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='Time of Status Change')#, default=timezone.now()
     code_red_status = models.CharField(max_length=100, null=True, blank=True, verbose_name='Code Red Status', default='Normal')

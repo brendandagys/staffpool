@@ -114,6 +114,9 @@ var to_location;
 
 var message_1;
 
+var signal_silence_bool;
+var all_clear_bool;
+
 var current_user = '{{ current_user_id }}';
 console.log(current_user);
 
@@ -143,6 +146,18 @@ $.ajax({
         message_1 = response['message_1'];
     }
 });
+
+$.ajax({
+    type: 'GET',
+    url: 'CommandUpdates/',
+    data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+    success: function(response) {
+        signal_silence_bool = response['signal_silence_bool'];
+        all_clear_bool = response['all_clear_bool'];
+        console.log('Signal silence: ' + signal_silence_bool);
+        console.log('All clear: ' + all_clear_bool);
+        }
+   });
 
 $.ajax({
     type: 'GET',
@@ -363,6 +378,38 @@ $.ajax({
           }
         }
      });
+
+
+     $.ajax({
+         type: 'GET',
+         url: 'CommandUpdates/',
+         data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+         success: function(response) {
+
+            console.log('Signal silence: ' + response['signal_silence_bool']);
+            console.log('All clear: ' + response['all_clear_bool']);
+
+             if (!window.location.href.includes('IncidentCommand') && response['signal_silence_bool'] != signal_silence_bool) {
+
+                 if (response['signal_silence_bool'] !== 'No') {
+                     alert('Command has declared Signal Silence!');
+                 }
+
+                 signal_silence_bool = response['signal_silence_bool']
+             }
+
+             if (!window.location.href.includes('IncidentCommand') && response['all_clear_bool'] != all_clear_bool) {
+
+                 if (response['all_clear_bool'] !== 'No') {
+                     alert('Command has declared ALL CLEAR!');
+                 }
+
+                 all_clear_bool = response['all_clear_bool']
+             }
+
+           }
+        });
+
    };
 });
 

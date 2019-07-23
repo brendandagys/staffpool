@@ -818,7 +818,6 @@ def staff_count_update(request):
 
                 c_num_staff = Cafeteria.objects.last().c_num_staff
 
-
             else:
                 c_num_staff = ''
 
@@ -836,7 +835,6 @@ def staff_count_update(request):
                 ((abs(int(East_Lobby.objects.last().e_time[0:2]) - int(str(timezone.now().time())[0:2])) == 1) and (int(East_Lobby.objects.last().e_time[3:5]) > int(str(timezone.now().time())[3:5])) ))):
 
                 e_num_staff = East_Lobby.objects.last().e_num_staff
-
 
             else:
                 e_num_staff = ''
@@ -856,7 +854,6 @@ def staff_count_update(request):
 
                 t_num_staff = Town_Centre.objects.last().t_num_staff
 
-
             else:
                 t_num_staff = ''
 
@@ -865,6 +862,29 @@ def staff_count_update(request):
 
         return JsonResponse({'t_num_staff': t_num_staff})
 
+
+@login_required
+def command_updates(request):
+
+    signal_silence_bool = 'No'
+    all_clear_bool = 'No'
+
+    try:
+
+        if ((IncidentCommander.objects.last().i_date == datetime.date.today()) and
+            (((abs(int(IncidentCommander.objects.last().i_time[0:2]) - int(str(timezone.now().time())[0:2])) == 0)) or
+            ((abs(int(IncidentCommander.objects.last().i_time[0:2]) - int(str(timezone.now().time())[0:2])) == 1) and (int(IncidentCommander.objects.last().i_time[3:5]) > int(str(timezone.now().time())[3:5])) ))):
+
+            if IncidentCommander.objects.last().i_signal_silence_time is not None and IncidentCommander.objects.last().i_signal_silence_time.strip() != '':
+                signal_silence_bool = 'Yes'
+
+            if IncidentCommander.objects.last().i_all_clear_time is not None and IncidentCommander.objects.last().i_all_clear_time.strip() != '':
+                all_clear_bool = 'Yes'
+
+    except:
+        pass
+
+    return JsonResponse({'signal_silence_bool': signal_silence_bool, 'all_clear_bool': all_clear_bool})
 
 @login_required
 def incident_commander_form(request):

@@ -15,7 +15,7 @@
     </div>
 {% endif %}
 
-<div>
+<div id="to_raise_if_no_new_form_button">
 
   <form class="trim_form" id="incident_commander_html" action="" method="post">
     {% csrf_token %}
@@ -47,6 +47,10 @@ var reset = 'No'
 
 $(document).ready(function(){
 
+        if ('{{ show_form_button }}' == 'No') {
+            $('#to_raise_if_no_new_form_button').css('margin-top', '-78px');
+        }
+
         if ('{{ show_signal_silence_alert_button }}' === 'No') {
             $('#set_signal_silence').css('visibility', 'hidden');
         }
@@ -56,8 +60,8 @@ $(document).ready(function(){
         }
 
         $(document).on('blur', '#incident_commander_html', function(e) {
-            console.log('Form is reset: ' + form_is_reset);
-            console.log('Reset once: ' + reset_once);
+            // console.log('Form is reset: ' + form_is_reset);
+            // console.log('Reset once: ' + reset_once);
             e.preventDefault()
 
             if (form_is_reset == 'Yes' && reset_once == 'No') {
@@ -68,8 +72,8 @@ $(document).ready(function(){
                 reset = 'No';
             }
 
-            console.log('Form is reset AFTER: ' + form_is_reset);
-            console.log('Reset once AFTER: ' + reset_once);
+            // console.log('Form is reset AFTER: ' + form_is_reset);
+            // console.log('Reset once AFTER: ' + reset_once);
 
             $.ajax({
                 type: "POST",
@@ -196,7 +200,11 @@ function count_update() {
       data: { csrfmiddlewaretoken: '{{ csrf_token }}',
               'cafeteria': 'c' },
       success: function(response) {
+
           $('#id_i_num_staff_c').val(response['c_num_staff']);
+
+          $('#id_i_num_staff_c').focus()
+          $('#id_i_num_staff_c').blur()
       }
     });
 
@@ -206,7 +214,11 @@ function count_update() {
       data: { csrfmiddlewaretoken: '{{ csrf_token }}',
               'east_lobby': 'e' },
       success: function(response) {
+
           $('#id_i_num_staff_e').val(response['e_num_staff']);
+
+          $('#id_i_num_staff_e').focus()
+          $('#id_i_num_staff_e').blur()
       }
     });
 
@@ -216,8 +228,12 @@ function count_update() {
       data: { csrfmiddlewaretoken: '{{ csrf_token }}',
               'town_centre': 't' },
       success: function(response) {
-          $('#id_i_num_staff_t').val(response['t_num_staff']);
-      }
+
+              $('#id_i_num_staff_t').val(response['t_num_staff']);
+
+              $('#id_i_num_staff_t').focus()
+              $('#id_i_num_staff_t').blur()
+          }
     });
 
   }
