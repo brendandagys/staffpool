@@ -386,8 +386,8 @@ $.ajax({
          data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
          success: function(response) {
 
-            console.log('Signal silence: ' + response['signal_silence_bool']);
-            console.log('All clear: ' + response['all_clear_bool']);
+            // console.log('Signal silence: ' + response['signal_silence_bool']);
+            // console.log('All clear: ' + response['all_clear_bool']);
 
              if (!window.location.href.includes('IncidentCommand') && response['signal_silence_bool'] != signal_silence_bool) {
 
