@@ -875,8 +875,6 @@ def incident_commander_form(request):
 
     if request.method == 'POST' and 'i' in request.POST:
 
-        print(request.POST.get('reset', 'ooook'))
-
         if IncidentCommander.objects.last() is None:
             incident_commander_instance = IncidentCommander()
 
@@ -922,6 +920,9 @@ def incident_commander_form(request):
     # If this is a GET (or any other method) create the default form.
     else:
 
+        show_signal_silence_alert_button = 'Yes'
+        show_all_clear_alert_button = 'Yes'
+
         try:
 
             if ((IncidentCommander.objects.last().i_date == datetime.date.today()) and
@@ -943,6 +944,12 @@ def incident_commander_form(request):
                 i_mock = IncidentCommander.objects.last().i_mock
 
                 show_form_button = 'Yes'
+
+                if i_signal_silence_time is not None and i_signal_silence_time.strip() != '':
+                    show_signal_silence_alert_button = 'No'
+
+                if i_all_clear_time is not None and i_all_clear_time.strip() != '':
+                    show_all_clear_alert_button = 'No'
 
             else:
                 i_time = str(timezone.now().time())[0:5]
@@ -990,6 +997,8 @@ def incident_commander_form(request):
     context = { 'num_events': num_events,
                 'form_incident_commander': form_incident_commander,
                 'show_form_button': show_form_button,
+                'show_signal_silence_alert_button': show_signal_silence_alert_button,
+                'show_all_clear_alert_button': show_all_clear_alert_button,
                 'current_user_id': request.user.get_username().capitalize(),
               }
 

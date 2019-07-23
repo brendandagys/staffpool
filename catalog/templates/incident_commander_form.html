@@ -11,7 +11,7 @@
 
 {% if show_form_button == 'Yes' %}
     <div>
-        <input id="new_form_button" class="new_form_button btn btn-secondary" type="button" value="Generate a New Form" name="new_form_button"> </br>
+        <input id="new_form_button" class="i_new_form_button new_form_button btn btn-secondary" type="button" value="Generate a New Form" name="new_form_button"> </br>
     </div>
 {% endif %}
 
@@ -19,14 +19,17 @@
 
   <form class="trim_form" id="incident_commander_html" action="" method="post">
     {% csrf_token %}
-    <table>
-    {{ form_incident_commander }}
-    <!-- {{ form.errors}} -->
-</table> </br>
+    <table class="move_i_form_up">
+
+        <input id="set_signal_silence" class="i_button btn btn-success" type="button" value="Send Signal Silence Alert" name="set_signal_silence"> </br>
+        <input id="set_all_clear" class="i_button btn btn-success" type="button" value="Send All Clear Alert" name="set_all_clear">
+
+        {{ form_incident_commander }}
+        <!-- {{ form.errors}} -->
+    </table> </br>
+
     <input class="btn btn-primary" type="submit" value="Update" name="c">
 </form>
-
-    <!-- </div> -->
 
     </br></br>
     <p class="center_other_content past_data">Number of past Incident Command submissions:<br/>
@@ -43,7 +46,15 @@ var reset_once = 'No';
 var reset = 'No'
 
 $(document).ready(function(){
-        // $('#incident_commander_html :input').not('#id_i_date').on('blur', function(e) {
+
+        if ('{{ show_signal_silence_alert_button }}' === 'No') {
+            $('#set_signal_silence').css('visibility', 'hidden');
+        }
+
+        if ('{{ show_all_clear_alert_button }}' === 'No') {
+            $('#set_all_clear').css('visibility', 'hidden');
+        }
+
         $(document).on('blur', '#incident_commander_html', function(e) {
             console.log('Form is reset: ' + form_is_reset);
             console.log('Reset once: ' + reset_once);
@@ -109,6 +120,72 @@ $('#new_form_button').click(function(e) {     // Won't run when message button i
               console.log('New form success!');
           }});
       });
+
+$(document).on('click', '#set_signal_silence', function(e) {
+
+    var current_time = new Date();
+    var hour = current_time.getHours().toString();
+    var minute = current_time.getMinutes().toString();
+    if (hour.length == 1) {
+        hour = '0' + hour;
+    }
+    if (minute.length == 1) {
+        minute = '0' + minute;
+    }
+
+    $('#id_i_signal_silence_time').val(hour + ':' + minute);
+    $('#set_signal_silence').css('visibility', 'hidden');
+});
+
+
+$(document).on('click', '#set_all_clear', function(e) {
+
+    var current_time_ac = new Date();
+    var hour = current_time_ac.getHours().toString();
+    var minute = current_time_ac.getMinutes().toString();
+    if (hour.length == 1) {
+        hour = '0' + hour;
+    }
+    if (minute.length == 1) {
+        minute = '0' + minute;
+    }
+
+    $('#id_i_all_clear_time').val(hour + ':' + minute);
+    $('#set_all_clear').css('visibility', 'hidden');
+});
+
+
+$(document).on('click', '#set_signal_silence,#set_all_clear', function(e) {
+
+    $.ajax({
+        type: "POST",
+        url: "",
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            'reset': reset,
+            'i': 'dummy',
+            'i_date': $('#id_i_date').val(),
+            'i_time': $('#id_i_time').val(),
+            'i_commander': $('#id_i_commander').val(),
+            'i_num_staff_c': $('#id_i_num_staff_c').val(),
+            'i_num_staff_e': $('#id_i_num_staff_e').val(),
+            'i_num_staff_t': $('#id_i_num_staff_t').val(),
+            'i_captain': $('#id_i_captain').val(),
+            'i_signal_silence_time': $('#id_i_signal_silence_time').val(),
+            'i_all_clear_time': $('#id_i_all_clear_time').val(),
+            'i_location_of_evacuation': $('#id_i_location_of_evacuation').val(),
+            'i_area_of_refuge': $('#id_i_area_of_refuge').val(),
+            'i_signed_fire_documentation': $('#id_i_signed_fire_documentation').val(),
+            'i_mock': $('#i_mock').val(),
+        },
+        success: function () {
+            console.log('Incident Command POST success')
+        }
+    });
+
+});
+
+
 
 var myStatusVar = setInterval(count_update, 1000);
 function count_update() {

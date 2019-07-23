@@ -31,7 +31,7 @@ class Cafeteria(models.Model):
         verbose_name = 'Cafeteria'
 
     def __str__(self):
-        if ((self.c_coordinator is None) or (self.c_coordinator == '') or (self.c_coordinator == 'None')): # Last two unnecessary?
+        if self.c_coordinator == '' or self.c_coordinator is None :
             str_value = 'Undeclared Coordinator'
         else:
             str_value = self.c_coordinator
@@ -62,7 +62,7 @@ class East_Lobby(models.Model):
         verbose_name = 'East Lobby'
 
     def __str__(self):
-        if self.e_coordinator == '':
+        if self.e_coordinator == '' or self.e_coordinator is None:
             str_value = 'Undeclared Coordinator'
         else:
             str_value = self.e_coordinator
@@ -92,7 +92,7 @@ class Town_Centre(models.Model):
         verbose_name = 'Town Centre'
 
     def __str__(self):
-        if self.t_coordinator == '':
+        if self.t_coordinator == '' or self.t_coordinator is None:
             str_value = 'Undeclared Coordinator'
         else:
             str_value = self.t_coordinator
@@ -124,12 +124,12 @@ class IncidentCommander(models.Model):
         verbose_name = 'Incident Command'
 
     def __str__(self):
-        if self.i_commander == '':
+        if self.i_commander == '' or self.i_commander is None:
             str_value = 'Undeclared Commander'
         else:
             str_value = self.i_commander
 
-        return ', '.join([str(object=self.i_date), str_value])
+        return ', '.join([str(self.i_date), str_value])
 
 
 class CodeBlue(models.Model):
@@ -167,6 +167,10 @@ class CodePink(models.Model):
     def __str__(self):
         return 'Code Pink: ' + str(self.pink_date)
 
+
+# class Commands(models.Model):
+#     command_signal_silence = models.CharField(max_length = 100, verbose_name = 'Time of Signal Silence')
+#     command_all_clear = models.
 
 class CodeStatuses(models.Model):
     code_timestamp = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='Time of Status Change')#, default=timezone.now()

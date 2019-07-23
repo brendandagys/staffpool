@@ -277,23 +277,23 @@ class IncidentCommanderForm(forms.Form):
     i_commander = forms.CharField(required=False, label='Incident Commander',
                         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Name...'}))
 
-    i_num_staff_c = forms.CharField(required=False, disabled=True, label='# of Staff at Cafeteria',
-            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': ''}))
+    i_num_staff_c = forms.CharField(required=False, label='# of Staff at Cafeteria',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'readonly': 'readonly', 'placeholder': ''}))
 
-    i_num_staff_e = forms.CharField(required=False, disabled=True, label='# of Staff at East Lobby',
-            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': ''}))
+    i_num_staff_e = forms.CharField(required=False, label='# of Staff at East Lobby',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'readonly': 'readonly', 'placeholder': ''}))
 
-    i_num_staff_t = forms.CharField(required=False, disabled=True, label='# of Staff at Town Centre',
-            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': ''}))
+    i_num_staff_t = forms.CharField(required=False, label='# of Staff at Town Centre',
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'readonly': 'readonly', 'placeholder': ''}))
 
     i_captain = forms.CharField(required=False, label='Area Captain',
             widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Name...'}))
 
     i_signal_silence_time = forms.CharField(required=False, label='Time of Signal Silence',
-            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter a time...'}))
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'readonly': 'readonly', 'placeholder': 'Enter a time...'}))
 
     i_all_clear_time = forms.CharField(required=False, label='Time of All Clear',
-            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter a time...'}))
+            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'readonly': 'readonly', 'placeholder': 'Enter a time...'}))
 
     i_location_of_evacuation = forms.CharField(required=False, label='Location of Evacuation',
             widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter a location...'}))

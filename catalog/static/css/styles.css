@@ -615,6 +615,23 @@ label[for="id_pink_time"] {
   margin-bottom: -0.95rem;
 }
 
+#set_signal_silence {
+    position: relative;
+    left: 217px;
+    top: 373px;
+}
+
+#set_all_clear {
+    position: relative;
+    left: 217px;
+    top: 377px;
+    width: 207.38px;
+}
+
+.i_new_form_button {
+    margin-bottom: -63px;
+}
+
 /* #id_blue_date, #id_blue_time {
     border-radius: 5px !important;
     padding-left: 7px;
