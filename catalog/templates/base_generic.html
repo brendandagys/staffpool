@@ -353,7 +353,7 @@ $.ajax({
               }
           }
 
-        if (response['code_red_status'] != last_status && response['status_setter'] != current_user && response['status_setter'] != 'Unspecified' && response['status_setter'] != null) {
+        if (response['code_red_status'] != last_status && response['status_setter'] != current_user && response['status_setter'] != 'Unspecified' && response['status_setter'] != 'undeclared' && response['status_setter'] != null) {
 
             last_status = response['code_red_status'];
 
