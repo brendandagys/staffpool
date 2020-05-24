@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from django.views.generic import RedirectView
+# from django.views.generic import RedirectView
 from . import views
 from chat import views as chat_views
 # import chat.views.messages
