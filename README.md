@@ -1,4 +1,4 @@
-# staffpool
+# Emergency Response Communication Hub
 A Web app to track Code responses
 
 This is a tool that I built to track staff assignments during Code responses.
