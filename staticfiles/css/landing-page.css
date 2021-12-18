@@ -32,7 +32,7 @@ img {
 header.masthead {
   position: relative;
   /* background-color: #343a40; */
-  background: url('../banner.jpg') no-repeat center center;
+  background: url('../banner.png') no-repeat center center;
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
@@ -41,7 +41,7 @@ header.masthead {
 .call-to-action {
   position: relative;
   /* background-color: #343a40; */
-  background-image: url('../banner.jpg') no-repeat center center;
+  background-image: url('../banner.png') no-repeat center center;
   background-size: cover;
   padding-top: 7rem;
   padding-bottom: 7rem;

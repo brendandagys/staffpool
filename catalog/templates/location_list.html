@@ -6,9 +6,9 @@
 
   <ul class="background sidebar-nav">
     <li><a id="home_link" href="{% url 'homepage' %}"><b>HOME PAGE</b></a></li> </br>
-    <li><a href="{% url 'cafeteria_form' %}"><b>Cafeteria Form</b></a></li>
-    <li><a href="{% url 'east_lobby_form' %}"><b>East Lobby Form</b></a></li>
-    <li><a href="{% url 'town_centre_form' %}"><b>Town Centre Form</b></a></li>
+    <li><a href="{% url 'cafeteria_form' %}"><b>Form 1</b></a></li>
+    <li><a href="{% url 'east_lobby_form' %}"><b>Form 2</b></a></li>
+    <li><a href="{% url 'town_centre_form' %}"><b>Form 3</b></a></li>
         </br>
     <li><a href="{% url 'incident_command_form' %}"><b>Incident Command</b></a></li>
         </br>
@@ -81,9 +81,9 @@
         <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list left_align" id="c1">{{cafeteria.c_time}}</span></b></p>
         <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list left_align" id="c2">{{cafeteria.c_coordinator}}</b></span></b></p>
         <p class="labels"><span class="fixed_width">Main Doors:</span><b><span class="site_color_list left_align" id="c3">{{cafeteria.c_main_doors}}</span></b></p>
-        <p class="labels"><span class="fixed_width">South Patio Doors:</span><b><span class="site_color_list left_align" id="c4">{{cafeteria.c_south_patio_doors}}</span></b></p>
-        <p class="labels"><span class="fixed_width">North Patio Doors (1):</span><b><span class="site_color_list left_align" id="c5">{{cafeteria.c_north_patio_doors_1}}</span></b></p>
-        <p class="labels"><span class="fixed_width">North Patio Doors (2):</span><b><span class="site_color_list left_align" id="c6">{{cafeteria.c_north_patio_doors_2}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Doors 1:</span><b><span class="site_color_list left_align" id="c4">{{cafeteria.c_south_patio_doors}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Doors 2:</span><b><span class="site_color_list left_align" id="c5">{{cafeteria.c_north_patio_doors_1}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Doors 3:</span><b><span class="site_color_list left_align" id="c6">{{cafeteria.c_north_patio_doors_2}}</span></b></p>
         <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list left_align" id="c7">{{cafeteria.c_monitor}}</span></b></p>
         <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list left_align" id="c8">{{cafeteria.c_directors}}</span></b></p>
         <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list left_align" id="c9">{{cafeteria.c_runners}}</span></b></p>
@@ -97,9 +97,9 @@
         <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list" id="c1"></span></b></p>
         <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list" id="c2"></b></span></b></p>
         <p class="labels"><span class="fixed_width">Main Doors:</span><b><span class="site_color_list" id="c3"></span></b></p>
-        <p class="labels"><span class="fixed_width">South Patio Doors:</span><b><span class="site_color_list" id="c4"></span></b></p>
-        <p class="labels"><span class="fixed_width">North Patio Doors (1):</span><b><span class="site_color_list" id="c5"></span></b></p>
-        <p class="labels"><span class="fixed_width">North Patio Doors (2):</span><b><span class="site_color_list" id="c6"></span></b></p>
+        <p class="labels"><span class="fixed_width">Doors 1:</span><b><span class="site_color_list" id="c4"></span></b></p>
+        <p class="labels"><span class="fixed_width">Doors 2:</span><b><span class="site_color_list" id="c5"></span></b></p>
+        <p class="labels"><span class="fixed_width">Doors 3:</span><b><span class="site_color_list" id="c6"></span></b></p>
         <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="c7"></span></b></p>
         <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="c8"></span></b></p>
         <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="c9"></span></b></p>
@@ -122,8 +122,8 @@
       <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list left_align" id="e1">{{east_lobby.e_time}}</span></b></p>
       <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list left_align" id="e2">{{east_lobby.e_coordinator}}</b></span></b></p>
       <p class="labels"><span class="fixed_width">Main Doors:</span><b><span class="site_color_list left_align" id="e3">{{east_lobby.e_main_doors}}</span></b></p>
-      <p class="labels"><span class="fixed_width">Lab Entrance:</span><b><span class="site_color_list left_align" id="e4">{{east_lobby.e_lab_entrance}}</span></b></p>
-      <p class="labels"><span class="fixed_width">ED Entrance:</span><b><span class="site_color_list left_align" id="e5">{{east_lobby.e_ed_entrance}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Entrance 1:</span><b><span class="site_color_list left_align" id="e4">{{east_lobby.e_lab_entrance}}</span></b></p>
+      <p class="labels"><span class="fixed_width">Entrance 2:</span><b><span class="site_color_list left_align" id="e5">{{east_lobby.e_ed_entrance}}</span></b></p>
       <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list left_align" id="e6">{{east_lobby.e_monitor}}</span></b></p>
       <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list left_align" id="e7">{{east_lobby.e_directors}}</span></b></p>
       <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list left_align" id="e8">{{east_lobby.e_runners}}</span></b></p>
@@ -137,8 +137,8 @@
     <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list" id="e1"></span></b></p>
     <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list" id="e2"></b></span></b></p>
     <p class="labels"><span class="fixed_width">Main Doors:</span><b><span class="site_color_list" id="e3"></span></b></p>
-    <p class="labels"><span class="fixed_width">Lab Entrance:</span><b><span class="site_color_list" id="e4"></span></b></p>
-    <p class="labels"><span class="fixed_width">ED Entrance:</span><b><span class="site_color_list" id="e5"></span></b></p>
+    <p class="labels"><span class="fixed_width">Entrance 1:</span><b><span class="site_color_list" id="e4"></span></b></p>
+    <p class="labels"><span class="fixed_width">Entrance 2:</span><b><span class="site_color_list" id="e5"></span></b></p>
     <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="e6"></span></b></p>
     <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="e7"></span></b></p>
     <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="e8"></span></b></p>
@@ -160,8 +160,8 @@
 
         <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list left_align" id="t1">{{town_centre.t_time}}</span></b></p>
         <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list left_align" id="t2">{{town_centre.t_coordinator}}</b></span></b></p>
-        <p class="labels"><span class="fixed_width">Horticultural Entrance:</span><b><span class="site_color_list left_align" id="t3">{{town_centre.t_horticultural}}</span></b></p>
-        <p class="labels"><span class="fixed_width">Town Centre/Main Street:</span><b><span class="site_color_list left_align" id="t4">{{town_centre.t_town_centre_main_street}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Entrance 1:</span><b><span class="site_color_list left_align" id="t3">{{town_centre.t_horticultural}}</span></b></p>
+        <p class="labels"><span class="fixed_width">Entrance 2:</span><b><span class="site_color_list left_align" id="t4">{{town_centre.t_town_centre_main_street}}</span></b></p>
         <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list left_align" id="t5">{{town_centre.t_monitor}}</span></b></p>
         <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list left_align" id="t6">{{town_centre.t_directors}}</span></b></p>
         <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list left_align" id="t7">{{town_centre.t_runners}}</span></b></p>
@@ -174,8 +174,8 @@
 
         <p class="labels"><span class="fixed_width">Time (24 hr.):</span><b><span class="site_color_list" id="t1"></span></b></p>
         <p class="labels"><span class="fixed_width">Staff Pool Coordinator:</span><b><span class="site_color_list" id="t2"></b></span></b></p>
-        <p class="labels"><span class="fixed_width">Horticultural Entrance:</span><b><span class="site_color_list" id="t3"></span></b></p>
-        <p class="labels"><span class="fixed_width">Town Centre/Main Street:</span><b><span class="site_color_list" id="t4"></span></b></p>
+        <p class="labels"><span class="fixed_width">Entrance 1:</span><b><span class="site_color_list" id="t3"></span></b></p>
+        <p class="labels"><span class="fixed_width">Entrance 2:</span><b><span class="site_color_list" id="t4"></span></b></p>
         <p class="labels"><span class="fixed_width">Telephone Monitor:</span><b><span class="site_color_list" id="t5"></span></b></p>
         <p class="labels"><span class="fixed_width">Patient/Visitor Director(s):</span><b><span class="site_color_list" id="t6"></span></b></p>
         <p class="labels"><span class="fixed_width">Command Centre Runner(s):</span><b><span class="site_color_list" id="t7"></span></b></p>
@@ -187,7 +187,7 @@
 </div> </div>
 
     <script>
-      var myVar = setInterval(results_update, 1000);
+      var myVar = setInterval(results_update, 10000);
       function results_update() {
 
       $.ajax({

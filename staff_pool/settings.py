@@ -16,7 +16,7 @@ import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -25,14 +25,17 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fake_key')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['staffpool.herokuapp.com']
+# ALLOWED_HOSTS = ['staffpool.herokuapp.com']
+ALLOWED_HOSTS = '*'
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth', # Core authentication framework and its default models.
-    'django.contrib.contenttypes', # Django content type system (allows permissions to be associated with models).
+    # Core authentication framework and its default models.
+    'django.contrib.auth',
+    # Django content type system (allows permissions to be associated with models).
+    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -47,10 +50,12 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware', # Manages sessions across requests
+    # Manages sessions across requests
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware', # Associates users with requests using sessions.
+    # Associates users with requests using sessions.
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -79,7 +84,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 WSGI_APPLICATION = 'staff_pool.wsgi.application'
 
-#Channels
+# Channels
 # ASGI_APPLICATION = 'staff_pool.routing.application'
 #
 # CHANNEL_LAYERS = {
@@ -151,9 +156,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Just added because push to Heroku wasn't working
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'), # Changed this from static to staticfiles to make manage.py collectstatic work for export
-)
+# STATICFILES_DIRS = (
+#     # Changed this from static to staticfiles to make manage.py collectstatic work for export
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'

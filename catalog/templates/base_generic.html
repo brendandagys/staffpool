@@ -5,7 +5,7 @@
   <!-- <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.4.1.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  {% block title %}<title>NBRHC Staff Pool</title>{% endblock %}
+  {% block title %}<title>Staff Pool</title>{% endblock %}
 
   <meta charset="utf-8">
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
@@ -17,13 +17,12 @@
 </head>
 
 <!-- {% load static %} -->
-<body background="{% static "nbrhc-3.jpg" %}">
+<body background="{% static 'bokeh.jpg' %}">
 
     {% block banner %}
         <p id="status_banner" class="status_banner blinking"></p>
     {% endblock %}
 
-<!-- <body style="background-repeat: round;" background="{% static "nbrhc-2.jpg" %}"> -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12 col-md-3 col-lg-3">
@@ -32,9 +31,9 @@
 
         <ul class="background sidebar-nav">
           <li><a id="home_link" class="home_link" href="{% url 'homepage' %}"><b>HOME PAGE</b></a></li> </br>
-          <li><a href="{% url 'cafeteria_form' %}"><b>Cafeteria Form</b></a></li>
-          <li><a href="{% url 'east_lobby_form' %}"><b>East Lobby Form</b></a></li>
-          <li><a href="{% url 'town_centre_form' %}"><b>Town Centre Form</b></a></li>
+          <li><a href="{% url 'cafeteria_form' %}"><b>Form 1</b></a></li>
+          <li><a href="{% url 'east_lobby_form' %}"><b>Form 2</b></a></li>
+          <li><a href="{% url 'town_centre_form' %}"><b>Form 3</b></a></li>
               </br>
           <li><a href="{% url 'incident_command_form' %}"><b>Incident Command</b></a></li>
               </br>
@@ -64,7 +63,7 @@
 {% endblock %}
 
 {% block set_statuses %}
-    {% if user.is_authenticated and user.get_username == 'brendan' or user.get_username == 'sara' or user.get_username == 'command' or user.get_username == 'jeremy' or user.get_username == 'eileen' or user.get_username == 'angele' %}
+    {% if user.is_authenticated and user.get_username == 'brendan' %}
 
     <div id="status_list">
         <input id="status_normal" class="status_button btn btn-success" type="button" value="Normal" name="upgrade_button"> </br>
@@ -329,7 +328,7 @@ $.ajax({
         });
 
 
-  var myStatusVar = setInterval(status_update, 1000);
+  var myStatusVar = setInterval(status_update, 10000);
   function status_update() {
 
   $.ajax({

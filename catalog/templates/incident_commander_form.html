@@ -4,8 +4,8 @@
 
 <div class="center_content my_header">
 
-</br><h1 class="">NBRHC Staff Pool</h1>
-  <h4><span class="indicator">Incident Command</span> Submission Form</h4>
+</br><h1 class="">Staff Pool</h1>
+  <h4>Submission Form</h4>
   <p><em>Please enter the response details below:</em></p> </br>
 </div>
 
@@ -25,7 +25,7 @@
         <input id="set_all_clear" class="i_button btn btn-success" type="button" value="Send All Clear Alert" name="set_all_clear">
 
         {{ form_incident_commander }}
-        <!-- {{ form.errors}} -->
+
     </table> </br>
 
     <input class="btn btn-primary" type="submit" value="Update" name="c">
@@ -36,8 +36,6 @@
         <strong id="past_size">{{num_events}}</strong></p>
 
 </div>
-
-<!-- <p class="hide">...</p> -->
 
 <script type="text/javascript">
 
@@ -191,7 +189,7 @@ $(document).on('click', '#set_signal_silence,#set_all_clear', function(e) {
 
 
 
-var myStatusVar = setInterval(count_update, 1000);
+var myStatusVar = setInterval(count_update, 10000);
 function count_update() {
 
     $.ajax({

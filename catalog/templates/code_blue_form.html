@@ -5,7 +5,7 @@
   <!-- <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.4.1.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  {% block title %}<title>NBRHC Staff Pool</title>{% endblock %}
+  {% block title %}<title>Staff Pool</title>{% endblock %}
 
   <meta charset="utf-8">
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
@@ -17,9 +17,8 @@
 </head>
 
 <!-- {% load static %} -->
-<body background="{% static "nbrhc-3.jpg" %}">
+<body background="{% static 'bokeh.jpg' %}">
 
-<!-- <body style="background-repeat: round;" background="{% static "nbrhc-2.jpg" %}"> -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-12">
@@ -27,7 +26,7 @@
               <a id="home_link_blue" href="{% url 'homepage' %}"><b>HOME PAGE</b></a>
           </div>
           <div class="center_content my_header">
-          </br><h1 class="">NBRHC Code Submission Tool</h1>
+          </br><h1 class="">Code Submission Tool</h1>
             <h4><span class="indicator">Code Blue</span> Submission Form</h4>
             <p><em>Please fill out the details below:</em></p> </br>
           </div>
